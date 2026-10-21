@@ -12,7 +12,7 @@ a chapter; it does not add new rules.
 AI Principles Review (visual identity **MIND//LAB**) is a static, chapter-based study app for the
 university course *Artificial Intelligence: Principles and Techniques* (ARTI 401). Students pick a
 chapter, answer exactly 20 multiple-choice questions, submit, and review a scored, explained
-breakdown. Quiz content is written during development from the instructor's lecture PDFs; nothing
+breakdown. Quiz content is written during development from the course lecture PDFs; nothing
 AI-related runs at quiz time.
 
 ## 2. Architecture
@@ -157,7 +157,7 @@ Registration: import + append in `src/data/chapters/index.ts`. That is the **onl
 ## 10. Copyright-aware content
 
 Quiz questions and explanations must be **original wording** that tests understanding. Do not
-reproduce lecture text, textbook passages, diagrams or extended instructor examples. Short
+reproduce lecture text, textbook passages, diagrams or extended lecture-specific examples. Short
 technical terms, standard notation, and brief references to well-known textbook examples
 (e.g. "the Romania map", "the Wumpus world") are acceptable. Prefer original scenarios. If
 generated content seems to track the source too closely, rewrite it or flag it in the

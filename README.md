@@ -139,8 +139,8 @@ course materials are tracked by Git.
 - **Quiz content is derived, not copied.** Questions and explanations are original wording
   written to test understanding of the lecture material. They do not reproduce slide text,
   diagrams or extended examples. Derived educational content can still carry copyright
-  considerations, so treat this repository as a personal study aid unless the instructor
-  agrees to wider distribution.
+  considerations, so treat this repository as a personal study aid unless the rights holders
+  agree to wider distribution.
 - Well-known textbook examples (e.g. the Romania route map, the Wumpus world) are referenced
   by name only.
 
@@ -170,7 +170,7 @@ screen (both themes) under `docs/screenshots/` and link them here.
 
 ## Attribution and licensing
 
-Application code © Ali Feras Alghanim. Lecture materials belong to their respective authors and
-the course instructor and are not part of this repository. Some decks reference *Artificial
+Application code © Ali Feras Alghanim. Lecture materials belong to their respective authors
+and are not part of this repository. Some decks reference *Artificial
 Intelligence: A Modern Approach* (Russell & Norvig); no textbook content is reproduced. No
 open-source licence has been chosen yet; add a `LICENSE` file before publishing more widely.
