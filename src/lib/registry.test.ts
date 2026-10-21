@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { ChapterRegistryError, validateRegistry } from './registry';
+import { ChapterRegistryError, findMissingChapterNumbers, validateRegistry } from './registry';
 import type { ChapterInput } from './schema';
 
 function makeChapter(overrides: Partial<ChapterInput> = {}, number = 1): ChapterInput {
@@ -33,6 +33,22 @@ function expectInvalid(raw: unknown[], pattern: RegExp) {
   }
   throw new Error('expected registry to be rejected');
 }
+
+describe('findMissingChapterNumbers', () => {
+  it('finds gaps below the highest chapter number, in any input order', () => {
+    expect(findMissingChapterNumbers([8, 1, 2, 3, 4, 5, 7])).toEqual([6]);
+    expect(findMissingChapterNumbers([1, 4, 9])).toEqual([2, 3, 5, 6, 7, 8]);
+  });
+
+  it('reports no gaps for contiguous or empty numbering', () => {
+    expect(findMissingChapterNumbers([1, 2, 3])).toEqual([]);
+    expect(findMissingChapterNumbers([])).toEqual([]);
+  });
+
+  it('closes a gap once the missing chapter is added', () => {
+    expect(findMissingChapterNumbers([1, 2, 3, 4, 5, 6, 7, 8])).toEqual([]);
+  });
+});
 
 describe('validateRegistry', () => {
   it('accepts valid chapters and sorts them by number', () => {

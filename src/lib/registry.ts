@@ -10,6 +10,19 @@ export class ChapterRegistryError extends Error {
 }
 
 /**
+ * Chapter numbers between 1 and the highest registered number that have no chapter,
+ * e.g. [1, 2, 5] → [3, 4]. Derived from the data, so gaps close automatically when filled.
+ */
+export function findMissingChapterNumbers(numbers: readonly number[]): number[] {
+  if (numbers.length === 0) return [];
+  const present = new Set(numbers);
+  const highest = Math.max(...numbers);
+  const missing: number[] = [];
+  for (let n = 1; n < highest; n++) if (!present.has(n)) missing.push(n);
+  return missing;
+}
+
+/**
  * Validates raw chapter data and returns chapters sorted by number.
  * Throws a ChapterRegistryError listing every problem; invalid data is never accepted.
  */

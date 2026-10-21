@@ -5,7 +5,8 @@ import { App } from '../app/App';
 import { chapterPath } from '../app/router';
 import { siteConfig } from '../config/site';
 import { THEME_STORAGE_KEY } from '../hooks/useTheme';
-import { chapters } from '../lib/chapters';
+import { chapters, missingChapterNumbers } from '../lib/chapters';
+import { missingChaptersNote } from '../lib/format';
 import { OPTION_LETTERS } from '../lib/quiz';
 import type { Chapter } from '../lib/schema';
 
@@ -46,6 +47,30 @@ describe('home page', () => {
       expect(link).toHaveAttribute('href', chapterPath(chapter.id));
     }
     expect(within(list).getAllByText('20')).toHaveLength(chapters.length);
+  });
+
+  it('lists chapters in ascending numerical order', () => {
+    renderAt('/');
+    const list = screen.getByRole('list', { name: 'Chapters' });
+    const rendered = within(list)
+      .getAllByRole('link')
+      .map((link) => Number(/^Chapter (\d+):/.exec(link.textContent ?? '')?.[1]));
+    expect(rendered).toEqual([...rendered].sort((a, b) => a - b));
+    expect(rendered).toEqual(chapters.map((c) => c.number));
+    expect(new Set(rendered).size).toBe(rendered.length);
+  });
+
+  it('notes numbering gaps without adding placeholder chapters', () => {
+    renderAt('/');
+    const note = missingChaptersNote(missingChapterNumbers);
+    if (note) expect(screen.getByText(note)).toBeInTheDocument();
+    else expect(screen.queryByText(/not available in this review set/)).not.toBeInTheDocument();
+
+    const list = screen.getByRole('list', { name: 'Chapters' });
+    expect(within(list).getAllByRole('listitem')).toHaveLength(chapters.length);
+    for (const n of missingChapterNumbers) {
+      expect(within(list).queryByText(new RegExp(`^Chapter ${n}:`))).not.toBeInTheDocument();
+    }
   });
 
   it('opens a chapter from the library', async () => {

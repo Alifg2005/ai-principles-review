@@ -36,6 +36,17 @@ export function difficultyBreakdown(chapter: Chapter): Record<Difficulty, number
   return counts;
 }
 
+/**
+ * Student-facing note for numbering gaps: [6] → "Chapter 6 is not available in this review set."
+ * Returns null when there are no gaps.
+ */
+export function missingChaptersNote(missing: readonly number[]): string | null {
+  if (missing.length === 0) return null;
+  if (missing.length === 1) return `Chapter ${missing[0]} is not available in this review set.`;
+  const list = `${missing.slice(0, -1).join(', ')} and ${missing[missing.length - 1]}`;
+  return `Chapters ${list} are not available in this review set.`;
+}
+
 export function verdict(percentage: number): string {
   if (percentage >= 90) return 'Excellent command of this chapter.';
   if (percentage >= 70) return 'A solid grasp. Review the questions you missed.';

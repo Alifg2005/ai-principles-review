@@ -1,17 +1,19 @@
-import { ArrowDown, ArrowRight, TriangleAlert } from 'lucide-react';
+import { ArrowDown, ArrowRight, Info, TriangleAlert } from 'lucide-react';
 import { Link } from '../app/Link';
 import { chapterPath } from '../app/router';
 import { ChapterRow } from '../components/ChapterRow';
 import { NeuralFigure } from '../components/NeuralFigure';
 import { siteConfig } from '../config/site';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
-import { chapters, registryError, totalQuestions } from '../lib/chapters';
+import { chapters, missingChapterNumbers, registryError, totalQuestions } from '../lib/chapters';
+import { missingChaptersNote } from '../lib/format';
 import { pad2 } from '../lib/quiz';
 
 export function HomePage() {
   useDocumentTitle();
   const { course, author } = siteConfig;
   const first = chapters[0];
+  const gapNote = missingChaptersNote(missingChapterNumbers);
 
   return (
     <>
@@ -83,10 +85,18 @@ export function HomePage() {
               Chapter library
             </h2>
           </div>
-          <p className="max-w-sm text-sm text-muted md:text-right" aria-live="polite">
-            <span className="font-mono text-ink">{chapters.length}</span>{' '}
-            {chapters.length === 1 ? 'chapter' : 'chapters'} available. Pick one to start a fresh twenty-question review.
-          </p>
+          <div className="max-w-sm space-y-2 md:text-right">
+            <p className="text-sm text-muted" aria-live="polite">
+              <span className="font-mono text-ink">{chapters.length}</span>{' '}
+              {chapters.length === 1 ? 'chapter' : 'chapters'} available. Pick one to start a fresh twenty-question review.
+            </p>
+            {gapNote && (
+              <p className="flex items-start gap-1.5 font-mono text-xs text-muted md:justify-end">
+                <Info className="mt-px size-3.5 shrink-0 text-accent" aria-hidden="true" />
+                {gapNote}
+              </p>
+            )}
+          </div>
         </div>
 
         {registryError ? (
