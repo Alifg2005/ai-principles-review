@@ -2,7 +2,7 @@
   "name": "ai-principles-review",
   "private": true,
   "version": "1.0.0",
-  "description": "An interactive study experience for reviewing AI Principles through chapter-based quizzes grounded in the instructor's course materials.",
+  "description": "An interactive study experience for reviewing AI Principles through chapter-based quizzes grounded in the course lecture materials.",
   "type": "module",
   "engines": {
     "node": "^22.22.2 || ^24.15.0 || >=26.0.0"

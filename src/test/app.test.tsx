@@ -32,10 +32,11 @@ async function answerAll(user: ReturnType<typeof userEvent.setup>, chapter: Chap
 describe('home page', () => {
   it('shows course details and a chapter library generated from the registry', () => {
     renderAt('/');
-    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/machinery of thought/i);
+    expect(screen.getByRole('heading', { level: 1 })).toHaveTextContent(/review ai principles/i);
     expect(screen.getByText(siteConfig.course.title)).toBeInTheDocument();
     expect(screen.getAllByText(siteConfig.author!).length).toBeGreaterThan(0);
-    expect(screen.getAllByText(siteConfig.instructor!).length).toBeGreaterThan(0);
+    // No instructor is named anywhere in the interface.
+    expect(document.body).not.toHaveTextContent(/instructor/i);
 
     const list = screen.getByRole('list', { name: 'Chapters' });
     const items = within(list).getAllByRole('listitem');

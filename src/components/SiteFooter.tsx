@@ -2,7 +2,7 @@ import { siteConfig } from '../config/site';
 import { BrandMark } from './SiteHeader';
 
 export function SiteFooter() {
-  const { course, author, instructor } = siteConfig;
+  const { course, author } = siteConfig;
   return (
     <footer className="mt-24 border-t border-line">
       <div className="mx-auto grid max-w-6xl gap-6 px-4 py-10 text-sm text-muted sm:px-6 md:grid-cols-[1fr_auto] md:items-end">
@@ -21,12 +21,6 @@ export function SiteFooter() {
           {author && (
             <>
               Built by <span className="text-ink">{author}</span>
-              <br />
-            </>
-          )}
-          {instructor && (
-            <>
-              Course instructor: <span className="text-ink">{instructor}</span>
             </>
           )}
         </p>

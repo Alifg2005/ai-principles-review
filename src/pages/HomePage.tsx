@@ -10,7 +10,7 @@ import { pad2 } from '../lib/quiz';
 
 export function HomePage() {
   useDocumentTitle();
-  const { course, author, instructor } = siteConfig;
+  const { course, author } = siteConfig;
   const first = chapters[0];
 
   return (
@@ -49,12 +49,6 @@ export function HomePage() {
                 <div>
                   <dt className="eyebrow">Prepared by</dt>
                   <dd className="mt-1 text-ink">{author}</dd>
-                </div>
-              )}
-              {instructor && (
-                <div>
-                  <dt className="eyebrow">Instructor</dt>
-                  <dd className="mt-1 text-ink">{instructor}</dd>
                 </div>
               )}
             </dl>

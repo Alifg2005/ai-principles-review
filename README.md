@@ -1,10 +1,10 @@
 # AI Principles Review · MIND//LAB
 
 An interactive study experience for reviewing AI Principles through chapter-based quizzes grounded
-in the instructor's course materials.
+in the course lecture materials.
 
 Built for **ARTI 401 · Artificial Intelligence: Principles and Techniques**.
-Prepared by **Ali Feras Alghanim**. Course instructor: **Dr. Omer Awad Mohammed Bakhet**.
+Prepared by **Ali Feras Alghanim**.
 
 ---
 

@@ -21,7 +21,7 @@ AI-related runs at quiz time.
 src/
 ├── app/            App shell, minimal History-API router (router.ts) and <Link>
 ├── components/     Reusable presentational components (header, footer, rows, motifs, ring…)
-├── config/site.ts  ALL editable personal/academic info (author, instructor, course)
+├── config/site.ts  ALL editable personal/academic info (author, course)
 ├── data/chapters/  One file per chapter + index.ts (THE canonical registry) + registry.test.ts
 ├── hooks/          useTheme, useDocumentTitle
 ├── lib/            schema.ts (zod), registry.ts (validation), chapters.ts (loaded data),
