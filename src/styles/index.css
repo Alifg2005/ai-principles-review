@@ -1,0 +1,157 @@
+@import 'tailwindcss';
+
+/*
+ * MIND//LAB design tokens.
+ * All colour decisions flow from these variables; components never use raw hex.
+ */
+:root {
+  --bg: #f4f0e6;
+  --surface: #fbf8f1;
+  --surface-2: #ece6d8;
+  --line: #d6cdb9;
+  --line-strong: #b9ae95;
+  --ink: #1b1d18;
+  --muted: #595b52;
+  --accent: #1f4d34;
+  --accent-soft: #dfe7d6;
+  --on-accent: #f7f4ec;
+  --correct: #1d6a3e;
+  --correct-soft: #dcebd9;
+  --wrong: #a8331d;
+  --wrong-soft: #f5ddd4;
+  --skip: #8a6a12;
+  --skip-soft: #f1e6c4;
+  --grid: rgb(27 29 24 / 0.06);
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  --bg: #0b0c0a;
+  --surface: #131411;
+  --surface-2: #1b1c18;
+  --line: #2a2c26;
+  --line-strong: #43463d;
+  --ink: #e9e7e0;
+  --muted: #9d9b92;
+  --accent: #c6f432;
+  --accent-soft: #263011;
+  --on-accent: #0b0c0a;
+  --correct: #b8ec3a;
+  --correct-soft: #1f2a0e;
+  --wrong: #ff7a63;
+  --wrong-soft: #351914;
+  --skip: #e8c25a;
+  --skip-soft: #30280f;
+  --grid: rgb(233 231 224 / 0.045);
+  color-scheme: dark;
+}
+
+@theme {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-on-accent: var(--on-accent);
+  --color-correct: var(--correct);
+  --color-correct-soft: var(--correct-soft);
+  --color-wrong: var(--wrong);
+  --color-wrong-soft: var(--wrong-soft);
+  --color-skip: var(--skip);
+  --color-skip-soft: var(--skip-soft);
+
+  --font-sans: 'Geist', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
+  --font-display: 'Instrument Serif', 'Iowan Old Style', Georgia, serif;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply font-sans antialiased;
+    min-height: 100dvh;
+    background: var(--bg);
+    transition: background-color 200ms ease, color 200ms ease;
+  }
+  ::selection {
+    background: var(--accent);
+    color: var(--on-accent);
+  }
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@layer components {
+  /* Faint engineering-paper grid used behind hero and quiz surfaces. */
+  .lab-grid {
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .eyebrow {
+    @apply font-mono text-[0.7rem] font-medium tracking-[0.18em] text-muted uppercase;
+  }
+  .btn {
+    @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full px-5 text-sm font-medium
+      transition-[background-color,color,border-color,transform] duration-150 ease-out
+      active:scale-[0.97] disabled:pointer-events-none disabled:opacity-40;
+  }
+  .btn-primary {
+    @apply bg-accent text-on-accent hover:opacity-90;
+  }
+  .btn-ghost {
+    @apply border border-line-strong text-ink hover:border-ink hover:bg-surface-2;
+  }
+}
+
+@keyframes segment-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

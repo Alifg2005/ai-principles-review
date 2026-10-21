@@ -1,0 +1,32 @@
+# ─── Private instructor-provided course materials (NEVER commit) ───
+/course-materials/
+
+# Potentially copyrighted source documents, anywhere in the tree
+*.pdf
+*.ppt
+*.pptx
+*.doc
+*.docx
+*.key
+
+# Build output
+/dist/
+/dist-ssr/
+*.local
+
+# Dependencies
+/node_modules/
+
+# Local environment files
+.env
+.env.*
+!.env.example
+
+# Tooling / OS
+.vercel
+.DS_Store
+Thumbs.db
+*.log
+coverage/
+.vscode/*
+!.vscode/extensions.json

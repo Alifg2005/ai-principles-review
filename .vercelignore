@@ -1,0 +1,10 @@
+# Never upload private course materials with `vercel` CLI deployments
+/course-materials
+*.pdf
+*.ppt
+*.pptx
+*.doc
+*.docx
+*.key
+node_modules
+dist
