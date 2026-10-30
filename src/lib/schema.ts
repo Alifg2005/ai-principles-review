@@ -24,6 +24,8 @@ export const questionSchema = z
     options: z.array(nonEmpty).length(OPTIONS_PER_QUESTION),
     correctAnswerIndex: z.number().int().min(0).max(OPTIONS_PER_QUESTION - 1),
     explanation: nonEmpty,
+    /** Optional note beyond the lecture, shown after submission behind its own control. */
+    clarification: nonEmpty.optional(),
     difficulty: difficultySchema,
     sourceReference: sourceReferenceSchema.optional(),
   })

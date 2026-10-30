@@ -107,6 +107,15 @@ explanations, accurate slide citations.
 In `src/data/chapters/index.ts`, add one import and append it to `chapterRegistry`.
 Do not reorder or edit other entries; sorting is automatic by `number`.
 
+## 6a. Add written and practical questions (when the material supports them)
+
+Create `src/data/practice/NN-<slug>.ts` with `definePracticeSet`, using the chapter's `id` as
+`chapterId` and ids like `p09-01`, and register it in `src/data/practice/index.ts`. Follow
+AGENTS.md §7a: choose question kinds from what the slides actually ask students to do, render the
+diagram slides to check them (text extraction misses figures), record slide errors in `slideNote`,
+and add recomputation checks for any algorithm or logic answers. A chapter without a practice set
+is valid: it simply does not appear in that section.
+
 ## 7. Validate and review
 
 ```bash

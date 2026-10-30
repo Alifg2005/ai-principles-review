@@ -1,6 +1,7 @@
 import { BookOpen, Check, Minus, RotateCcw, X } from 'lucide-react';
 import { useEffect, useMemo, useRef, useState, type ButtonHTMLAttributes } from 'react';
 import { Link } from '../app/Link';
+import { StatusLabel } from '../components/practice/AnswerPanel';
 import { ScoreRing } from '../components/ScoreRing';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { formatSource, verdict } from '../lib/format';
@@ -186,6 +187,15 @@ function ReviewItem({ item, number }: { item: QuestionResult; number: number }) 
         <p className="text-[0.95rem] leading-relaxed">{question.explanation}</p>
         {question.sourceReference && (
           <p className="mt-2 font-mono text-xs text-muted">Source: {formatSource(question.sourceReference)}</p>
+        )}
+        {question.clarification && (
+          <details className="mt-2 text-sm">
+            <summary className="inline-flex min-h-11 cursor-pointer items-center gap-2 text-muted hover:text-ink">
+              Show clarification
+              <StatusLabel status="additional-clarification" />
+            </summary>
+            <p className="pb-1 leading-relaxed">{question.clarification}</p>
+          </details>
         )}
       </div>
     </li>

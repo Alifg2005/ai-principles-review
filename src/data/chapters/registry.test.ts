@@ -39,6 +39,59 @@ describe('canonical chapter registry', () => {
     expect(q!.explanation).toMatch(/y is the mentor and x is the one mentored/);
   });
 
+  it('keeps the questions that gained a clarification unchanged', () => {
+    const all = chapters.flatMap((c) => c.questions);
+    const q14 = all.find((item) => item.id === 'ch05-q14')!;
+    expect(q14.question).toBe("According to the lecture's summary of A* properties, when is A* optimal?");
+    expect(q14.options[q14.correctAnswerIndex]).toBe('When an admissible heuristic is used');
+    expect(q14.correctAnswerIndex).toBe(3);
+    const q08 = all.find((item) => item.id === 'ch08-q08')!;
+    expect(q08.question).toBe('According to the lecture, a well-formed formula (sentence) in FOL is one that…');
+    expect(q08.options[q08.correctAnswerIndex]).toBe('contains no free variables');
+    expect(q08.correctAnswerIndex).toBe(2);
+  });
+
+  it('keeps ch05-q18 unchanged apart from its clarification', () => {
+    const q18 = chapters.flatMap((c) => c.questions).find((item) => item.id === 'ch05-q18')!;
+    expect(q18.question).toBe(
+      "In the lecture's comparison of uninformed and informed strategies, which pair are both complete and optimal?",
+    );
+    expect(q18.options).toEqual(['DFS and greedy best-first search', 'Greedy best-first search and A*', 'DFS and IDS', 'BFS and A*']);
+    expect(q18.correctAnswerIndex).toBe(3);
+    expect(q18.explanation).toBe(
+      'The comparison table marks BFS (with equal step costs), IDS and A* as complete and optimal. DFS and greedy best-first search are neither.',
+    );
+  });
+
+  it('states the conditions behind A* in the ch05-q18 clarification', () => {
+    const text = chapters.flatMap((c) => c.questions).find((item) => item.id === 'ch05-q18')?.clarification ?? '';
+    for (const phrase of [
+      'assumes the relevant search conditions',
+      'finite branching factor',
+      'positive lower bound on step costs',
+      'admissibility is sufficient for tree search',
+      'without reopening closed nodes generally requires consistency',
+      'additional background',
+    ]) {
+      expect(text).toContain(phrase);
+    }
+  });
+
+  it('adds clarifications only to the intended questions', () => {
+    const ids = chapters.flatMap((c) => c.questions).filter((q) => q.clarification).map((q) => q.id);
+    expect(ids.sort()).toEqual(['ch05-q14', 'ch05-q18', 'ch08-q08']);
+  });
+
+  it('clarifies A* conditions and the wff convention without implying otherwise', () => {
+    const clarification = (id: string) => chapters.flatMap((c) => c.questions).find((q) => q.id === id)?.clarification ?? '';
+    for (const phrase of ['tree search', 'Graph search', 'consistent', 'not unconditional']) {
+      expect(clarification('ch05-q14')).toContain(phrase);
+    }
+    for (const phrase of ['stricter convention', 'use that answer in this course', 'closed formula', 'free variables']) {
+      expect(clarification('ch08-q08')).toContain(phrase);
+    }
+  });
+
   describe.each(chapters.map((c) => [c.id, c] as const))('%s', (_id, chapter) => {
     it(`has exactly ${QUESTIONS_PER_CHAPTER} questions with ${OPTIONS_PER_QUESTION} options each`, () => {
       expect(chapter.questions).toHaveLength(QUESTIONS_PER_CHAPTER);

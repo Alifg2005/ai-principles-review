@@ -19,10 +19,33 @@ Prepared by **Ali Feras Alghanim**.
   per-question score ring, and a full review with your answer, the correct answer, an
   explanation and the source slides. A filter shows only missed questions.
 - **Retry** starts a fresh attempt; switching chapters always starts clean.
+- **Written & Practical Review**: a separate chapter-based bank of 96 questions (see below).
 - **Light and dark themes**: follows the OS on first visit, remembers your choice, and applies
   the theme before first paint (no flash).
 - Accessible: semantic HTML, native radio groups, visible focus, live announcements,
   skip link, reduced-motion support, 44px touch targets, responsive from phones to desktops.
+
+## Written & Practical Review
+
+Open it from the homepage or the **Practice** link. Each chapter lists its questions, filterable by
+Written or Practical. Students can reveal an answer at any time; their work stays on screen for
+comparison and is kept in memory until the page reloads.
+
+| Type | What the student does | Checking |
+| --- | --- | --- |
+| Written | Optionally drafts an answer, then reveals a short answer. A detailed answer is one more click | Self-compare |
+| Trace | Taps graph nodes or items in order | Per position, with intermediate steps in the solution |
+| Table | Fills queue, stack and frontier traces, truth tables and classifications | Per cell, except open-ended self-check tables |
+| Complete | Chooses the missing parts of a diagram | Per part, with the completed diagram in the solution |
+| Build | Adds nodes, connects and drags them | Reports missing and extra nodes and connections |
+| Logic | Writes formulas with a symbol keyboard | Matches reference forms; never marks a different form wrong |
+| Draw | Sketches freehand with mouse, pen or touch; undo, clear, reset | Self-compare with the reference diagram |
+
+Each section of an answer carries a source label: **Slide-based**, **Corrected concept**, **Additional
+clarification** or **Original worked example**. Where a slide appears to contain an error, the
+answer stays logically correct and shows the lecture wording beside the correct concept. Search
+traces state their order, tie-breaking and goal-test rules up front. Tests recompute the algorithm
+and logic answers, so a wrong key fails the build. Questions live in `src/data/practice/`, separate from the UI.
 
 ## Technology
 
@@ -44,6 +67,7 @@ Testing Library · ESLint. Static frontend only: no backend, database, accounts 
     ├── components/   Reusable UI
     ├── config/site.ts  Editable names, course title and code
     ├── data/chapters/  One file per chapter + index.ts (canonical registry)
+    ├── data/practice/  Written & Practical questions per chapter + index.ts
     ├── hooks/        Theme and document title
     ├── lib/          Schema, registry validation, quiz engine, formatting
     ├── pages/        Home, Quiz, Results, 404

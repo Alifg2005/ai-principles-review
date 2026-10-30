@@ -2,6 +2,8 @@ import { SiteFooter } from '../components/SiteFooter';
 import { SiteHeader } from '../components/SiteHeader';
 import { HomePage } from '../pages/HomePage';
 import { NotFoundPage } from '../pages/NotFoundPage';
+import { PracticeChapterPage } from '../pages/PracticeChapterPage';
+import { PracticeQuestionPage } from '../pages/PracticeQuestionPage';
 import { QuizPage } from '../pages/QuizPage';
 import { matchRoute, usePathname } from './router';
 
@@ -20,6 +22,10 @@ export function App() {
         {route.name === 'home' && <HomePage />}
         {/* Keying by chapter id gives each chapter its own fresh quiz state. */}
         {route.name === 'chapter' && <QuizPage key={route.chapterId} chapterId={route.chapterId} />}
+        {route.name === 'practice-chapter' && <PracticeChapterPage key={route.chapterId} chapterId={route.chapterId} />}
+        {route.name === 'practice-question' && (
+          <PracticeQuestionPage key={route.questionId} chapterId={route.chapterId} questionId={route.questionId} />
+        )}
         {route.name === 'not-found' && <NotFoundPage />}
       </main>
       <SiteFooter />

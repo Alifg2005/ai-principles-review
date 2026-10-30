@@ -34,14 +34,29 @@ export function navigate(to: string) {
   }
 }
 
-export type Route = { name: 'home' } | { name: 'chapter'; chapterId: string } | { name: 'not-found' };
+export type Route =
+  | { name: 'home' }
+  | { name: 'chapter'; chapterId: string }
+  | { name: 'practice-chapter'; chapterId: string }
+  | { name: 'practice-question'; chapterId: string; questionId: string }
+  | { name: 'not-found' };
 
 export function matchRoute(pathname: string): Route {
   const clean = pathname.replace(/\/+$/, '') || '/';
   if (clean === '/') return { name: 'home' };
   const match = /^\/chapters\/([^/]+)$/.exec(clean);
   if (match?.[1]) return { name: 'chapter', chapterId: decodeURIComponent(match[1]) };
+  const practice = /^\/practice\/([^/]+)(?:\/([^/]+))?$/.exec(clean);
+  if (practice?.[1]) {
+    const chapterId = decodeURIComponent(practice[1]);
+    return practice[2]
+      ? { name: 'practice-question', chapterId, questionId: decodeURIComponent(practice[2]) }
+      : { name: 'practice-chapter', chapterId };
+  }
   return { name: 'not-found' };
 }
 
 export const chapterPath = (id: string) => `/chapters/${encodeURIComponent(id)}`;
+export const practicePath = (chapterId: string) => `/practice/${encodeURIComponent(chapterId)}`;
+export const practiceQuestionPath = (chapterId: string, questionId: string) =>
+  `${practicePath(chapterId)}/${encodeURIComponent(questionId)}`;

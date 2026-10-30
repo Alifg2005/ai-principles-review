@@ -112,6 +112,8 @@ export default defineChapter({
       ],
       correctAnswerIndex: 2,
       explanation: 'A wff in this lecture is a sentence in which every variable is bound by a universal or existential quantifier.',
+      clarification:
+        "This question follows the stricter convention on slide 16, so use that answer in this course. In standard logic, a wff is any grammatically correct formula and may contain free variables; a formula with no free variables is called a closed formula, or sentence. Lecture 7, slide 33 also uses the broader meaning.",
       difficulty: 'foundational',
       sourceReference: { section: 'Syntax of FOL: Basic Elements', pages: [16] },
     },

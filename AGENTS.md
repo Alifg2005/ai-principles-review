@@ -23,9 +23,11 @@ src/
 ├── components/     Reusable presentational components (header, footer, rows, motifs, ring…)
 ├── config/site.ts  ALL editable personal/academic info (author, course)
 ├── data/chapters/  One file per chapter + index.ts (THE canonical registry) + registry.test.ts
+├── data/practice/  Written & Practical questions per chapter + index.ts + practice.test.ts
 ├── hooks/          useTheme, useDocumentTitle
 ├── lib/            schema.ts (zod), registry.ts (validation), chapters.ts (loaded data),
-│                   quiz.ts (reducer + scoring), format.ts (display helpers)
+│                   quiz.ts (reducer + scoring), format.ts (display helpers),
+│                   practiceSchema.ts, practiceRegistry.ts, practice.ts, practiceCheck.ts, graphLayout.ts
 ├── pages/          HomePage, QuizPage → QuizSession → ResultsView, NotFoundPage
 ├── styles/         index.css: Tailwind v4 + design tokens
 └── test/           Integration tests (RTL) and setup
@@ -33,7 +35,8 @@ scripts/verify-build.mjs   Post-build copyright safeguard
 course-materials/          LOCAL ONLY, git-ignored, never shipped
 ```
 
-- Routes: `/` (home + library), `/chapters/:id` (quiz, then results in the same view), anything
+- Routes: `/` (home + libraries), `/chapters/:id` (quiz, then results in the same view),
+  `/practice/:chapterId` (question list), `/practice/:chapterId/:questionId` (one question), anything
   else → 404. `vercel.json` rewrites every path to `index.html`.
 - Data flow: `data/chapters/index.ts` → `lib/registry.ts#validateRegistry` → `lib/chapters.ts`
   → pages. Pages never import chapter files directly.
@@ -90,7 +93,7 @@ Concept: *contemporary scientific editorial design meets an experimental AI labo
 
 ## 6. Component reuse
 
-Reuse before creating: `ChapterRow`, `ChapterMotif`, `QuestionNavigator`, `ScoreRing`,
+Reuse before creating: `ChapterRow`, `ChapterMotif`, `QuestionNavigator`, `ScoreRing`, `GraphFigure`, `Blocks`,
 `ThemeToggle`, `SiteHeader`/`SiteFooter`/`BrandMark`, `NotFoundPage`, `Link`. A new chapter must
 **never** require touching anything in `components/`, `pages/` or `app/`.
 
@@ -113,11 +116,41 @@ Defined in `src/lib/schema.ts` (zod) and enforced by `validateRegistry`:
 | `question.options` | **exactly 4**, non-empty, unique (case-insensitive) |
 | `question.correctAnswerIndex` | integer 0–3 |
 | `question.explanation` | non-empty, concise (1–3 sentences) |
+| `question.clarification` | optional note beyond the lecture, shown after submission behind its own control |
 | `question.difficulty` | `foundational` \| `intermediate` \| `advanced` |
 | `question.sourceReference` | `{ section, pages[] }`, required by the content gate |
 
 Chapter files: `src/data/chapters/NN-slug.ts`, default-exporting `defineChapter({...})`.
 Registration: import + append in `src/data/chapters/index.ts`. That is the **only** registry.
+
+## 7a. Written & Practical Review
+
+A separate question bank in `src/data/practice/NN-slug.ts` (`definePracticeSet`), registered in
+`src/data/practice/index.ts`, schema in `lib/practiceSchema.ts`. Question content never goes in
+components. The multiple-choice rules (exactly 20, four options) do not apply; the count follows
+the material.
+
+- **Kinds:** `written`, `sequence` (trace or ordering), `table`, `complete` (diagram completion),
+  `construct` (graph builder), `logic` (symbolic input), `draw` (freehand). Use the simplest kind
+  that fits the task, and `draw` only when a task really is a drawing.
+- **Answers:** `answer.short` is always shown first and must stay concise (75 words at most, tested).
+  `answer.detailed` is optional and must add to the short answer, not repeat it. Add `figure` for
+  a rendered reference and `steps` for intermediate algorithm states.
+- **Source labels:** every answer section carries one of four labels: `slide-based`,
+  `corrected-concept`, `additional-clarification` or `original-worked-example`. Set `shortStatus` and
+  `detailedStatus`, and put content with a different source in `more`. `questionStatus` labels the
+  question and its reference figure and steps. Every question cites `sourceReference`.
+- **Slide errors and conventions:** never copy an error silently. `slideNote` keeps the lecture wording
+  separate from the correct concept. A stricter or unusual lecture definition is a convention, not
+  an error: label it `additional-clarification` and name it as the lecture's convention.
+- **Search traces:** `traceRules` must state order, tie-breaking and goal-test timing before the
+  student starts.
+- **Several defensible answers:** state the assumptions before the student answers and say so in the
+  answer. If reliable marking is not possible, use `selfCheck` cells so nothing is marked wrong.
+- **Accuracy:** add a check to `data/practice/practice.test.ts` that recomputes every algorithm
+  trace, truth table or evaluation from the question's own data.
+- **Marking:** `logic` must never call a non-matching answer wrong, because equivalent forms exist.
+  Work is held in memory only (`usePracticeWork`); nothing is persisted.
 
 ## 8. Quiz-generation standards
 

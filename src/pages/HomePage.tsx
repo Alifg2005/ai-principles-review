@@ -2,6 +2,7 @@ import { ArrowDown, ArrowRight, Info, TriangleAlert } from 'lucide-react';
 import { Link } from '../app/Link';
 import { chapterPath } from '../app/router';
 import { ChapterRow } from '../components/ChapterRow';
+import { PracticeLibrary } from '../components/practice/PracticeLibrary';
 import { NeuralFigure } from '../components/NeuralFigure';
 import { siteConfig } from '../config/site';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
@@ -126,6 +127,8 @@ export function HomePage() {
           </ol>
         )}
       </section>
+
+      <PracticeLibrary />
     </>
   );
 }

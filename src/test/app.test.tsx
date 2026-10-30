@@ -191,6 +191,49 @@ describe('quiz flow', () => {
   });
 });
 
+describe('multiple-choice clarifications', () => {
+  const answerAndSubmit = async (user: ReturnType<typeof userEvent.setup>) => {
+    await user.click(screen.getAllByRole('button', { name: 'Submit answers' })[0]!);
+    await user.click(screen.getByRole('button', { name: 'Submit anyway' }));
+  };
+
+  it.each([
+    ['ch05-q14', /not unconditional/],
+    ['ch05-q18', /assumes the relevant search conditions/],
+    ['ch08-q08', /stricter convention/],
+  ])('shows the %s clarification only after submission, behind its own control', async (id, text) => {
+    const chapter = chapters.find((c) => c.questions.some((q) => q.id === id))!;
+    const question = chapter.questions.find((q) => q.id === id)!;
+    const user = renderAt(chapterPath(chapter.id));
+    expect(screen.queryByText(text)).not.toBeInTheDocument();
+    await answerAndSubmit(user);
+
+    const note = screen.getByText(text);
+    expect(note.closest('details')).not.toHaveAttribute('open');
+    expect(screen.getByText(question.explanation)).toBeInTheDocument();
+    await user.click(within(note.closest('details')!).getByText('Show clarification'));
+    expect(note.closest('details')).toHaveAttribute('open');
+  });
+
+  it('shows chapter 5 controls only on q14 and q18, labelled as additional clarification', async () => {
+    const chapter = chapters.find((c) => c.questions.some((q) => q.id === 'ch05-q18'))!;
+    const user = renderAt(chapterPath(chapter.id));
+    await answerAndSubmit(user);
+    expect(screen.getAllByText('Show clarification')).toHaveLength(2);
+    expect(screen.getAllByText('Additional clarification')).toHaveLength(2);
+    for (const id of ['ch05-q14', 'ch05-q18']) {
+      const item = document.getElementById(`review-${id}`)!;
+      expect(within(item).getByText('Show clarification')).toBeInTheDocument();
+    }
+  });
+
+  it('adds no clarification control to other questions', async () => {
+    const user = renderAt(chapterPath(first.id));
+    await answerAndSubmit(user);
+    expect(screen.queryByText('Show clarification')).not.toBeInTheDocument();
+  });
+});
+
 describe('routing and errors', () => {
   it('handles an unknown chapter id', () => {
     renderAt('/chapters/does-not-exist');

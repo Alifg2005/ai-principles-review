@@ -27,12 +27,15 @@ export function SiteHeader() {
             {siteConfig.productName}
           </span>
         </Link>
-        <nav aria-label="Primary" className="flex items-center gap-2">
+        <nav aria-label="Primary" className="flex items-center gap-1 sm:gap-2">
           <Link
             to="/#library"
-            className="inline-flex min-h-11 items-center rounded-full px-4 text-sm text-muted transition-colors hover:bg-surface-2 hover:text-ink"
+            className="inline-flex min-h-11 items-center rounded-full px-3 text-sm text-muted transition-colors hover:bg-surface-2 hover:text-ink sm:px-4"
           >
             Chapters
+          </Link>
+          <Link to="/#practice" className="inline-flex min-h-11 items-center rounded-full px-3 text-sm text-muted transition-colors hover:bg-surface-2 hover:text-ink sm:px-4">
+            Practice
           </Link>
           <ThemeToggle />
         </nav>

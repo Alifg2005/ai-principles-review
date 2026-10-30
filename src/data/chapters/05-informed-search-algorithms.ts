@@ -206,6 +206,8 @@ export default defineChapter({
       ],
       correctAnswerIndex: 3,
       explanation: 'A* is optimal when its heuristic is admissible, meaning it never overestimates.',
+      clarification:
+        "This answer follows the lecture's summary, and optimality is not unconditional. An admissible heuristic is enough for tree search. Graph search that never reopens closed nodes needs a consistent heuristic: h(n) ≤ c(n, n′) + h(n′) for every successor n′. The goal test must also happen when a node is selected for expansion. This distinction is background beyond the slides.",
       difficulty: 'foundational',
       sourceReference: { section: 'Properties of A* Search', pages: [36] },
     },
@@ -265,6 +267,8 @@ export default defineChapter({
       correctAnswerIndex: 3,
       explanation:
         'The comparison table marks BFS (with equal step costs), IDS and A* as complete and optimal. DFS and greedy best-first search are neither.',
+      clarification:
+        "The lecture's summary assumes the relevant search conditions. For A*, completeness depends on conditions such as a finite branching factor and a positive lower bound on step costs. Optimality depends on the heuristic and search strategy: admissibility is sufficient for tree search, while graph search without reopening closed nodes generally requires consistency. This is additional background beyond the lecture's summary.",
       difficulty: 'intermediate',
       sourceReference: { section: 'Comparison', pages: [37] },
     },
