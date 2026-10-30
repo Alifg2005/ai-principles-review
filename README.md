@@ -77,9 +77,10 @@ Testing Library · ESLint. Static frontend only: no backend, database, accounts 
 
 ## Getting started
 
-Requires **Node.js 22.22.2+ (22.x), 24.15+ (24.x) or 26+**, and npm. The floor comes from the
-test tools (Vitest 5 and jsdom 30), which also run during `npm run build`. The supported range is
-declared in `package.json` → `engines`.
+Requires **Node.js 24.x, version 24.15 or newer**, and npm. The minimum comes from jsdom 30, which
+runs during `npm run build`. The project standardises on one major version so local builds match
+Vercel; it is declared in `package.json` → `engines`. Newer Node versions may work, but npm will
+print an `EBADENGINE` warning because they are outside the declared range.
 
 ```bash
 npm install
@@ -146,10 +147,9 @@ indices, empty text, duplicate registrations, out-of-range page references) is r
 1. Push the repository to GitHub (course materials are ignored, so they are never pushed).
 2. Import the repo in Vercel. `vercel.json` already sets the Vite framework, `npm run build`,
    the `dist` output, and the SPA rewrite for `/chapters/:id` URLs.
-3. No environment variables are needed. Vercel reads `engines.node` from `package.json` to pick
-   the Node.js major version and installs with npm because of `package-lock.json`. Use Node 22.x
-   or 24.x in the project settings; because the range is open-ended (`>=26.0.0`), Vercel may
-   warn that it can upgrade the major version automatically.
+3. No environment variables are needed. Vercel installs with npm because of `package-lock.json`.
+   Select **24.x** under Settings → Build and Deployment → Node.js Version. `engines.node` in
+   `package.json` overrides that setting, and it is pinned to 24.x so the two agree.
 
 The production build fails automatically if a restricted document type ends up in `dist/` or if
 course materials are tracked by Git.
