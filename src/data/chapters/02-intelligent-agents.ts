@@ -6,11 +6,7 @@ export default defineChapter({
   title: 'Intelligent Agents',
   description:
     'Agents and environments, percepts, rationality, PEAS task descriptions, and the progression from simple reflex agents to goal-based, utility-based and learning agents.',
-  source: {
-    fileName: 'Topic 2 Intelligent agents-Updated.pdf',
-    label: 'Topic 2',
-    pageCount: 40,
-  },
+  source: { label: 'Topic 2' },
   questions: [
     {
       id: 'ch02-q01',
@@ -24,7 +20,6 @@ export default defineChapter({
       correctAnswerIndex: 2,
       explanation: 'An agent perceives its environment through sensors and acts on that environment through actuators.',
       difficulty: 'foundational',
-      sourceReference: { section: 'What is an intelligent agent?', pages: [5] },
     },
     {
       id: 'ch02-q02',
@@ -35,11 +30,10 @@ export default defineChapter({
       explanation:
         'A percept is the input an agent receives from its sensors at one moment. The percept sequence would be the full history of such readings.',
       difficulty: 'foundational',
-      sourceReference: { section: 'What is Percept?', pages: [8, 9] },
     },
     {
       id: 'ch02-q03',
-      question: 'Which of the following is NOT one of the four rules for designing an AI agent presented in the lecture?',
+      question: 'Which of the following is NOT one of the four rules for designing an AI agent?',
       options: [
         'The agent must be able to perceive its environment',
         'Observations must be used to make decisions',
@@ -50,7 +44,6 @@ export default defineChapter({
       explanation:
         'The four rules are: perceive the environment, use observations to decide, let decisions result in actions, and make those actions rational. Storing the full percept history is not required; simple reflex agents keep no memory at all.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'Rules for AI agent', pages: [11] },
     },
     {
       id: 'ch02-q04',
@@ -60,7 +53,6 @@ export default defineChapter({
       explanation:
         'The program sucks if the square is dirty; otherwise it moves right from A and left from B.',
       difficulty: 'foundational',
-      sourceReference: { section: 'Program implements the agent function for Vacuum-Agent', pages: [13, 14] },
     },
     {
       id: 'ch02-q05',
@@ -75,7 +67,6 @@ export default defineChapter({
       explanation:
         'Rationality depends on the performance measure, prior knowledge, available actions and the percept sequence so far. The last option lists the components of a learning agent.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'Rational Agent', pages: [16] },
     },
     {
       id: 'ch02-q06',
@@ -90,7 +81,6 @@ export default defineChapter({
       explanation:
         'To design a rational agent you first specify its task environment through its Performance measure, Environment, Actuators and Sensors.',
       difficulty: 'foundational',
-      sourceReference: { section: 'PEAS', pages: [17] },
     },
     {
       id: 'ch02-q07',
@@ -105,11 +95,10 @@ export default defineChapter({
       explanation:
         'A barcode scanner gathers input, so it is a sensor. Parcels per hour is a performance measure, conveyors and shelves are the environment, and the gripper is an actuator.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'PEAS examples', pages: [17, 18, 19, 20, 21] },
     },
     {
       id: 'ch02-q08',
-      question: "In the lecture's PEAS description of a medical diagnosis system, which element is listed as an actuator?",
+      question: "In a PEAS description of a medical diagnosis system, which element is an actuator?",
       options: [
         'Keyboard entry of symptoms and findings',
         'Patient, hospital and staff',
@@ -120,7 +109,6 @@ export default defineChapter({
       explanation:
         'The system acts by displaying questions, tests, diagnoses, treatments and referrals. The keyboard is its sensor, the patient and hospital are its environment, and patient health is its performance measure.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'PEAS Agent: Medical diagnosis system', pages: [20] },
     },
     {
       id: 'ch02-q09',
@@ -135,7 +123,6 @@ export default defineChapter({
       explanation:
         'Simple reflex agents fire condition–action rules on the current percept alone. With no memory, they cannot respond properly to situations they were not prepared for.',
       difficulty: 'foundational',
-      sourceReference: { section: 'Simple reflex agents', pages: [23] },
     },
     {
       id: 'ch02-q10',
@@ -146,7 +133,6 @@ export default defineChapter({
       explanation:
         'A single if–then rule applied to the current percept, with no internal state or look-ahead, is a simple reflex agent.',
       difficulty: 'foundational',
-      sourceReference: { section: 'Simple reflex agents', pages: [23, 25] },
     },
     {
       id: 'ch02-q11',
@@ -161,7 +147,6 @@ export default defineChapter({
       explanation:
         'Keeping the internal model current requires knowing how the world changes on its own and how the agent\'s actions change it.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'Model-based reflex agents', pages: [27] },
     },
     {
       id: 'ch02-q12',
@@ -172,7 +157,6 @@ export default defineChapter({
       explanation:
         'Combining the current percept with a stored, updated model of the world, but without goal-directed planning, is the defining feature of a model-based reflex agent.',
       difficulty: 'advanced',
-      sourceReference: { section: 'Model-based reflex agents', pages: [26, 27] },
     },
     {
       id: 'ch02-q13',
@@ -187,7 +171,6 @@ export default defineChapter({
       explanation:
         'Goal-based agents look ahead, evaluating action sequences against their goals before acting, while reflex agents simply respond to situations.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'Goal-based agents', pages: [30, 31] },
     },
     {
       id: 'ch02-q14',
@@ -202,7 +185,6 @@ export default defineChapter({
       explanation:
         'A goal is binary: reached or not. When several routes reach it, a utility function is needed to prefer the better ones, for example faster or safer routes.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'Utility-based agent', pages: [33] },
     },
     {
       id: 'ch02-q15',
@@ -214,9 +196,8 @@ export default defineChapter({
         "The cost of the agent's sensors",
       ],
       correctAnswerIndex: 0,
-      explanation: 'The lecture frames utility as the degree of "happiness" or success, not merely whether success occurred.',
+      explanation: 'Utility is the degree of "happiness" or success, not merely whether success occurred.',
       difficulty: 'foundational',
-      sourceReference: { section: 'Utility-based agent', pages: [33] },
     },
     {
       id: 'ch02-q16',
@@ -227,7 +208,6 @@ export default defineChapter({
       explanation:
         'Every schedule meets the goal, so what decides between them is a score over several criteria. That is a utility-based agent.',
       difficulty: 'advanced',
-      sourceReference: { section: 'Utility-based agent', pages: [33, 34] },
     },
     {
       id: 'ch02-q17',
@@ -236,7 +216,6 @@ export default defineChapter({
       correctAnswerIndex: 2,
       explanation: 'The problem generator proposes exploratory actions so the agent gains new, informative experiences.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'Learning agent', pages: [38] },
     },
     {
       id: 'ch02-q18',
@@ -247,11 +226,10 @@ export default defineChapter({
       explanation:
         'The learning element uses the critic\'s feedback to decide how the performance element should change to do better in future.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'Learning agent', pages: [38] },
     },
     {
       id: 'ch02-q19',
-      question: 'Which statement about learning agents is consistent with the lecture?',
+      question: 'Which statement about learning agents is correct?',
       options: [
         'Learning is a separate agent type that cannot be combined with the other four',
         'Learning agents can only operate in environments they fully know in advance',
@@ -262,7 +240,6 @@ export default defineChapter({
       explanation:
         'All four basic types can become learning agents. Learning adds new experience to the initial knowledge and helps the agent work in unfamiliar environments.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'Types of AI Agents / Learning agent', pages: [22, 36] },
     },
     {
       id: 'ch02-q20',
@@ -277,7 +254,6 @@ export default defineChapter({
       explanation:
         'Rationality is about expected performance given the evidence and the agent\'s built-in knowledge, not about perfect outcomes or imitating humans.',
       difficulty: 'foundational',
-      sourceReference: { section: 'Rational agent', pages: [15, 16] },
     },
   ],
 });

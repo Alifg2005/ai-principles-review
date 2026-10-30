@@ -44,12 +44,11 @@ export default definePracticeSet({
       answerStyle: 'definition',
       topic: 'Intelligence',
       difficulty: 'foundational',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Define intelligence, and list the four things it involves regarding an environment.',
-      sourceReference: { section: "What's involved in Intelligence?", pages: [6, 7] },
       answer: {
-        shortStatus: 'slide-based',
-        detailedStatus: 'slide-based',
+        shortStatus: 'course-concept',
+        detailedStatus: 'course-concept',
         short: [
           { type: 'p', text: 'Intelligence is the ability to understand and learn, rather than act by instinct or automatically. It involves:' },
           {
@@ -63,7 +62,7 @@ export default definePracticeSet({
           },
         ],
         detailed: [
-          { type: 'p', text: 'The lecture also lists seven characteristics: communication, creativity, internal knowledge, ability to learn, perceiving world knowledge, goal-directed behaviour and self-awareness.' },
+          { type: 'p', text: 'Seven characteristics of intelligence: communication, creativity, internal knowledge, ability to learn, perceiving world knowledge, goal-directed behaviour and self-awareness.' },
         ],
         more: [
           {
@@ -79,12 +78,11 @@ export default definePracticeSet({
       answerStyle: 'definition',
       topic: 'Defining AI',
       difficulty: 'foundational',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Give two accepted definitions of Artificial Intelligence, and state who coined the term.',
-      sourceReference: { section: 'What Is Artificial Intelligence?', pages: [11, 12] },
       answer: {
-        shortStatus: 'slide-based',
-        detailedStatus: 'slide-based',
+        shortStatus: 'course-concept',
+        detailedStatus: 'course-concept',
         short: [
           {
             type: 'ul',
@@ -96,7 +94,7 @@ export default definePracticeSet({
           },
         ],
         detailed: [
-          { type: 'p', text: 'Other definitions on the slides stress different ideas. Rich focuses on tasks people currently do better. Tanimoto focuses on tasks that appear to need intelligence when humans do them.' },
+          { type: 'p', text: 'Other definitions stress different ideas. Rich focuses on tasks people currently do better. Tanimoto focuses on tasks that appear to need intelligence when humans do them.' },
         ],
       },
     },
@@ -106,12 +104,11 @@ export default definePracticeSet({
       answerStyle: 'comparison',
       topic: 'Goals of AI',
       difficulty: 'intermediate',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Distinguish the scientific goal of AI from its engineering goal.',
-      sourceReference: { section: 'Goals of AI', pages: [13] },
       answer: {
-        shortStatus: 'slide-based',
-        detailedStatus: 'slide-based',
+        shortStatus: 'course-concept',
+        detailedStatus: 'course-concept',
         short: [
           {
             type: 'ul',
@@ -132,12 +129,11 @@ export default definePracticeSet({
       answerStyle: 'explanation',
       topic: 'Turing test',
       difficulty: 'foundational',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Describe the Turing test and state when a machine passes it.',
-      sourceReference: { section: 'Acting Humanly (Turing Test)', pages: [21, 22] },
       answer: {
-        shortStatus: 'slide-based',
-        detailedStatus: 'slide-based',
+        shortStatus: 'course-concept',
+        detailedStatus: 'course-concept',
         short: [
           { type: 'p', text: 'A human interrogator exchanges written questions with a hidden computer and a hidden person. The machine passes if the interrogator cannot tell which responses came from the machine.' },
         ],
@@ -152,11 +148,10 @@ export default definePracticeSet({
       answerStyle: 'list',
       topic: 'Turing test',
       difficulty: 'intermediate',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'List the capabilities needed to pass the Turing test, and the two extra capabilities the Total Turing Test requires.',
-      sourceReference: { section: 'What would a computer need to pass the Turing test?', pages: [23] },
       answer: {
-        shortStatus: 'slide-based',
+        shortStatus: 'course-concept',
         short: [
           { type: 'p', text: 'Turing test:' },
           {
@@ -179,12 +174,11 @@ export default definePracticeSet({
       answerStyle: 'comparison',
       topic: 'Agents',
       difficulty: 'intermediate',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Distinguish between the agent function and the agent program.',
-      sourceReference: { section: 'Agent Functions / Agent Program', pages: [17, 18] },
       answer: {
-        shortStatus: 'slide-based',
-        detailedStatus: 'slide-based',
+        shortStatus: 'course-concept',
+        detailedStatus: 'course-concept',
         short: [
           {
             type: 'ul',
@@ -205,17 +199,12 @@ export default definePracticeSet({
       answerStyle: 'comparison',
       topic: 'Four approaches',
       difficulty: 'advanced',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'State the main idea and one limitation of the thinking-humanly and thinking-rationally approaches.',
-      sourceReference: { section: 'Thinking Humanly / Thinking Rationally', pages: [27, 28] },
-      slideNote: {
-        status: 'corrected-concept',
-        slideWording: "Slide 28: \"Socrates is a man. All men are mortal. Therefore Abdullah is mortal.\"",
-        concept: "Those premises do not support a conclusion about Abdullah. The valid conclusion is \"Socrates is mortal\".",
-      },
+      mixUp: "Check that the conclusion is about the subject in the premises: from 'Socrates is a man' and 'All men are mortal', the valid conclusion is 'Socrates is mortal'.",
       answer: {
-        shortStatus: 'slide-based',
-        detailedStatus: 'slide-based',
+        shortStatus: 'course-concept',
+        detailedStatus: 'course-concept',
         short: [
           {
             type: 'table',
@@ -239,16 +228,11 @@ export default definePracticeSet({
       answerStyle: 'comparison',
       topic: 'Stages of AI',
       difficulty: 'foundational',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Compare the three stages of AI: ANI, AGI and ASI.',
-      sourceReference: { section: 'Stages of AI', pages: [56, 57, 59, 60] },
-      slideNote: {
-        status: 'corrected-concept',
-        slideWording: "Slides 57 and 58 are headed \"Artificial General Intelligence (ANI)\".",
-        concept: "ANI stands for Artificial Narrow Intelligence, which is what the slide content describes. AGI is the separate stage on slide 59.",
-      },
+      mixUp: "ANI stands for Artificial Narrow Intelligence. AGI is the separate, later stage.",
       answer: {
-        shortStatus: 'slide-based',
+        shortStatus: 'course-concept',
         short: [
           {
             type: 'ul',
@@ -266,9 +250,8 @@ export default definePracticeSet({
       kind: 'complete',
       topic: 'Four approaches',
       difficulty: 'foundational',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Complete the grid of the four approaches to AI.',
-      sourceReference: { section: 'Four Schools of Thought', pages: [19, 20] },
       figure: fourSchools('1', '2', '3', '4', 'blank'),
       slots: [
         { nodeId: 'a', options: APPROACHES, expected: 'Thinking humanly' },
@@ -277,7 +260,7 @@ export default definePracticeSet({
         { nodeId: 'd', options: APPROACHES, expected: 'Acting rationally' },
       ],
       answer: {
-        shortStatus: 'slide-based',
+        shortStatus: 'course-concept',
         short: [{ type: 'p', text: 'Rows separate thought from behaviour. Columns separate human performance from an ideal standard of rationality.' }],
         figure: fourSchools('Thinking humanly', 'Thinking rationally', 'Acting humanly', 'Acting rationally'),
       },
@@ -287,9 +270,8 @@ export default definePracticeSet({
       kind: 'table',
       topic: 'Foundations of AI',
       difficulty: 'intermediate',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Match each contribution to the field that AI draws it from.',
-      sourceReference: { section: 'Foundations of AI', pages: [45, 46] },
       columns: ['Contribution', 'Field'],
       rows: [
         [{ given: 'Logic, methods of reasoning, the mind as a physical system' }, choose('Philosophy')],
@@ -301,8 +283,8 @@ export default definePracticeSet({
         [{ given: 'Grammar, and how language relates to thought' }, choose('Linguistics')],
       ],
       answer: {
-        shortStatus: 'slide-based',
-        short: [{ type: 'p', text: 'The answers follow the contribution summary on the slides. Computer engineering, the eighth field, supplies the fast hardware.' }],
+        shortStatus: 'course-concept',
+        short: [{ type: 'p', text: 'Computer engineering, the eighth field, supplies the fast hardware.' }],
         steps: {
           columns: ['Field', 'Contribution to AI'],
           rows: [
@@ -322,13 +304,12 @@ export default definePracticeSet({
       kind: 'sequence',
       topic: 'History of AI',
       difficulty: 'intermediate',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Place these milestones in chronological order, earliest first.',
-      sourceReference: { section: 'History of AI', pages: [48, 49, 50, 51] },
       tokens: ['Deep Blue beats Kasparov', 'ELIZA chatbot', 'Artificial neuron model', "Watson wins Jeopardy", 'Dartmouth Conference', 'Expert systems boom', "Turing's test proposed"],
       expected: ['Artificial neuron model', "Turing's test proposed", 'Dartmouth Conference', 'ELIZA chatbot', 'Expert systems boom', 'Deep Blue beats Kasparov', 'Watson wins Jeopardy'],
       answer: {
-        shortStatus: 'slide-based',
+        shortStatus: 'course-concept',
         short: [{ type: 'p', text: 'Neuron model, Turing test, Dartmouth, ELIZA, expert systems, Deep Blue, Watson.' }],
         steps: {
           columns: ['Year', 'Milestone'],
@@ -349,11 +330,10 @@ export default definePracticeSet({
       kind: 'draw',
       topic: 'Agents',
       difficulty: 'foundational',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Sketch how an agent interacts with its environment. Label the sensors, actuators, percepts and actions.',
-      sourceReference: { section: 'What is an Agent?', pages: [14, 15] },
       answer: {
-        shortStatus: 'slide-based',
+        shortStatus: 'course-concept',
         short: [{ type: 'p', text: 'A closed loop: the environment produces percepts through sensors, the agent decides, and its actuators act back on the environment.' }],
         figure: {
           directed: true,

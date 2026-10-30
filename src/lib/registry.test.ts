@@ -9,7 +9,7 @@ function makeChapter(overrides: Partial<ChapterInput> = {}, number = 1): Chapter
     number,
     title: `Chapter ${number}`,
     description: 'A test chapter.',
-    source: { fileName: `chapter-${number}.pdf`, label: `Topic ${number}`, pageCount: 10 },
+    source: { label: `Topic ${number}` },
     questions: Array.from({ length: 20 }, (_, i) => ({
       id: `${prefix}-q${String(i + 1).padStart(2, '0')}`,
       question: `Question ${i + 1}?`,
@@ -17,7 +17,6 @@ function makeChapter(overrides: Partial<ChapterInput> = {}, number = 1): Chapter
       correctAnswerIndex: i % 4,
       explanation: 'Because of reasons.',
       difficulty: 'foundational' as const,
-      sourceReference: { section: 'Intro', pages: [1] },
     })),
     ...overrides,
   };
@@ -102,12 +101,6 @@ describe('validateRegistry', () => {
     expectInvalid([chapter], /must start with "ch02-"/);
   });
 
-  it('rejects source pages beyond the page count', () => {
-    const chapter = makeChapter();
-    chapter.questions[0] = { ...chapter.questions[0]!, sourceReference: { section: 'X', pages: [99] } };
-    expectInvalid([chapter], /exceeds pageCount/);
-  });
-
   it('rejects duplicate registrations of the same chapter', () => {
     const chapter = makeChapter();
     expectInvalid([chapter, chapter], /registered 2 times/);
@@ -115,14 +108,14 @@ describe('validateRegistry', () => {
 
   it('rejects two chapters sharing a number', () => {
     const a = makeChapter({}, 1);
-    const b = { ...makeChapter({}, 1), id: 'other', source: { ...a.source, fileName: 'other.pdf' } };
+    const b = { ...makeChapter({}, 1), id: 'other' };
     expectInvalid([a, b], /chapter number 1 is used by both/);
   });
 
-  it('rejects two chapters sharing a source file', () => {
-    const a = makeChapter({}, 1);
-    const b = makeChapter({ source: { ...a.source } }, 2);
-    expectInvalid([a, b], /source file/);
+  it('strips nothing it should keep and rejects source metadata being relied on', () => {
+    const [parsed] = validateRegistry([makeChapter()]);
+    expect(Object.keys(parsed!.source)).toEqual(['label']);
+    expect(parsed!.questions[0]).not.toHaveProperty('sourceReference');
   });
 
   it('rejects invalid metadata', () => {

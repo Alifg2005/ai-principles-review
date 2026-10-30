@@ -46,11 +46,6 @@ export function validatePracticeRegistry(raw: readonly unknown[], chapters: read
       if (seenIds.has(q.id)) issues.push(`question id "${q.id}" is used more than once`);
       seenIds.add(q.id);
       if (!q.id.startsWith(prefix)) issues.push(`question id "${q.id}" must start with "${prefix}"`);
-      for (const page of q.sourceReference.pages) {
-        if (page > chapter.source.pageCount) {
-          issues.push(`${q.id}: source page ${page} exceeds pageCount ${chapter.source.pageCount}`);
-        }
-      }
     }
   }
 

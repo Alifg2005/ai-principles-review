@@ -6,12 +6,7 @@ export default defineChapter({
   title: 'Logical Agents',
   description:
     'Knowledge-based agents and the TELL/ASK cycle, declarative versus procedural knowledge, the Wumpus world, entailment and models, propositional logic, and semantic networks, frames and production rules.',
-  source: {
-    fileName: 'Topic-7 Logical Agents.pdf',
-    label: 'Lecture 7',
-    pageCount: 68,
-    note: 'Logical connective glyphs were not preserved by text extraction; formulas were reconstructed from context and are written here in standard notation.',
-  },
+  source: { label: 'Lecture 7' },
   questions: [
     {
       id: 'ch07-q01',
@@ -26,7 +21,6 @@ export default defineChapter({
       explanation:
         'Search-based agents have limited reasoning and cannot infer facts they have not observed; logic-based agents use inference over knowledge.',
       difficulty: 'foundational',
-      sourceReference: { section: 'Why logical agents?', pages: [4] },
     },
     {
       id: 'ch07-q02',
@@ -41,7 +35,6 @@ export default defineChapter({
       explanation:
         'The knowledge base stores domain facts and rules, and the inference engine reasons over them to answer queries.',
       difficulty: 'foundational',
-      sourceReference: { section: 'Knowledge-based agents / Components', pages: [5, 11] },
     },
     {
       id: 'ch07-q03',
@@ -56,7 +49,6 @@ export default defineChapter({
       explanation:
         'The loop is: TELL the KB what was perceived, ASK it what to do, then TELL it which action was taken so a history is kept.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'Agent program workflow: TELL and ASK', pages: [9, 10] },
     },
     {
       id: 'ch07-q04',
@@ -66,7 +58,6 @@ export default defineChapter({
       explanation:
         'The knowledge level states what the agent knows, the logical level encodes it as sentences, and the implementation level is the physical representation.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'Architecture of a knowledge-based agent', pages: [7] },
     },
     {
       id: 'ch07-q05',
@@ -77,7 +68,6 @@ export default defineChapter({
       explanation:
         'Declarative knowledge is easy to modify and read, and matches how domain experts think, so experts can add rules directly.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'Declarative knowledge (knowing that)', pages: [13, 14] },
     },
     {
       id: 'ch07-q06',
@@ -92,7 +82,6 @@ export default defineChapter({
       explanation:
         'Behaviour coded directly as a program runs fast, but it is harder to modify and explain. The other options are advantages of declarative knowledge.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'Procedural knowledge (knowing how)', pages: [14, 15] },
     },
     {
       id: 'ch07-q07',
@@ -102,7 +91,6 @@ export default defineChapter({
       explanation:
         'Rooms next to a pit are breezy. Stench signals the Wumpus, glitter the gold, and a scream means the Wumpus has been killed.',
       difficulty: 'foundational',
-      sourceReference: { section: 'Wumpus World PEAS description', pages: [16, 18, 20] },
     },
     {
       id: 'ch07-q08',
@@ -117,7 +105,6 @@ export default defineChapter({
       explanation:
         'The agent perceives only what is local to its current room, so it must reason to work out where hazards are.',
       difficulty: 'foundational',
-      sourceReference: { section: 'Wumpus World Characterization', pages: [21, 22] },
     },
     {
       id: 'ch07-q09',
@@ -132,7 +119,6 @@ export default defineChapter({
       explanation:
         'Match finds the rules whose conditions hold, resolve picks one of them (conflict resolution), and act fires it.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'Production rules', pages: [65] },
     },
     {
       id: 'ch07-q10',
@@ -147,17 +133,15 @@ export default defineChapter({
       explanation:
         'No breeze means no adjacent pit, and no stench means no adjacent Wumpus, so the neighbouring squares are OK.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'Exploring the Wumpus World', pages: [23] },
     },
     {
       id: 'ch07-q11',
-      question: 'According to the lecture, a knowledge representation consists of syntax, semantics and which third element?',
+      question: 'A knowledge representation consists of syntax, semantics and which third element?',
       options: ['Hardware', 'Reasoning', 'Perception', 'Compilation'],
       correctAnswerIndex: 1,
       explanation:
         'Representation = syntax + semantics + reasoning: the symbols and rules, their meaning, and the algorithms that derive new information.',
       difficulty: 'foundational',
-      sourceReference: { section: 'Knowledge representation (KR)', pages: [29] },
     },
     {
       id: 'ch07-q12',
@@ -172,7 +156,6 @@ export default defineChapter({
       explanation:
         'Natural language is expressive but ambiguous. Programming languages have the opposite problem: they are precise but not expressive enough.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'Good knowledge representation languages', pages: [30] },
     },
     {
       id: 'ch07-q13',
@@ -186,7 +169,6 @@ export default defineChapter({
       correctAnswerIndex: 0,
       explanation: 'Entailment holds if and only if α is true in all worlds where the KB is true.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'Logical Entailment', pages: [35] },
     },
     {
       id: 'ch07-q14',
@@ -195,7 +177,6 @@ export default defineChapter({
       correctAnswerIndex: 3,
       explanation: 'Each symbol can be true or false, so n symbols give 2ⁿ models: 2⁴ = 16.',
       difficulty: 'foundational',
-      sourceReference: { section: 'Models', pages: [38] },
     },
     {
       id: 'ch07-q15',
@@ -204,7 +185,6 @@ export default defineChapter({
       correctAnswerIndex: 2,
       explanation: 'No assignment makes both A and ¬A true, so the sentence is true in no model: it is unsatisfiable.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'Models (2)', pages: [39] },
     },
     {
       id: 'ch07-q16',
@@ -219,7 +199,6 @@ export default defineChapter({
       explanation:
         'A ∧ B is true only when both are true, which is one model. That makes it satisfiable, but not valid because it is false in the other three.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'Models (2)', pages: [38, 39] },
     },
     {
       id: 'ch07-q17',
@@ -229,7 +208,6 @@ export default defineChapter({
       explanation:
         'A proposition is a statement that is either true or false. Questions, bare expressions and commands have no truth value.',
       difficulty: 'foundational',
-      sourceReference: { section: 'Propositional logic: propositions', pages: [40] },
     },
     {
       id: 'ch07-q18',
@@ -244,7 +222,6 @@ export default defineChapter({
       explanation:
         'Of the four models, KB is true only when P = true and Q = true. α is true there, so KB ⊨ Q. Q is not valid on its own; it only has to hold where KB holds.',
       difficulty: 'advanced',
-      sourceReference: { section: 'Exercise: Check entailment with truth table', pages: [44, 45] },
     },
     {
       id: 'ch07-q19',
@@ -260,7 +237,6 @@ export default defineChapter({
       explanation:
         'Properties stored higher in the hierarchy are inherited by the levels below. This is the restricted, inheritance-based inference semantic networks support.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'Semantic networks: inheritance', pages: [48, 49, 52] },
     },
     {
       id: 'ch07-q20',
@@ -276,7 +252,6 @@ export default defineChapter({
       explanation:
         'Values marked as typical (*) act as defaults that a subclass or instance may override, so the more specific value 2 applies.',
       difficulty: 'advanced',
-      sourceReference: { section: 'Frames: typical values / Frame slots', pages: [60, 61, 62] },
     },
   ],
 });

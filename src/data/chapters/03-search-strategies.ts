@@ -6,12 +6,7 @@ export default defineChapter({
   title: 'Search Strategies: Uninformed & Informed',
   description:
     'Blind versus informed search, breadth-first search with a FIFO queue, heuristics as estimates of solution cost, and best-first search with OPEN and CLOSED lists.',
-  source: {
-    fileName: 'Week 3 Search strategies_(Un)informed_Ch3.pdf',
-    label: 'Week 3',
-    pageCount: 32,
-    note: 'The slides carry no lecture number; number 3 comes from the filename ("Week 3").',
-  },
+  source: { label: 'Week 3' },
   questions: [
     {
       id: 'ch03-q01',
@@ -26,7 +21,6 @@ export default defineChapter({
       explanation:
         'A blind search has no domain information. It can only recognise whether a state is the goal and has no preference among non-goal states.',
       difficulty: 'foundational',
-      sourceReference: { section: 'Search', pages: [4] },
     },
     {
       id: 'ch03-q02',
@@ -41,7 +35,6 @@ export default defineChapter({
       explanation:
         'Informed search estimates what lies ahead, for example the cost to the goal, and uses that to decide where to look next.',
       difficulty: 'foundational',
-      sourceReference: { section: 'Search', pages: [4] },
     },
     {
       id: 'ch03-q03',
@@ -51,7 +44,6 @@ export default defineChapter({
       explanation:
         'A* appears under informed strategies. Depth-first, uniform-cost and iterative deepening are all listed as uninformed.',
       difficulty: 'foundational',
-      sourceReference: { section: 'Uninformed search / Informed search strategies', pages: [5, 25] },
     },
     {
       id: 'ch03-q04',
@@ -66,7 +58,6 @@ export default defineChapter({
       explanation:
         'BFS removes nodes from the head of a first-in, first-out queue and adds newly generated children to the tail.',
       difficulty: 'foundational',
-      sourceReference: { section: 'Breadth-first search (BFS)', pages: [6] },
     },
     {
       id: 'ch03-q05',
@@ -80,7 +71,6 @@ export default defineChapter({
       correctAnswerIndex: 3,
       explanation: 'BFS traverses level by level, finishing each depth before descending to the next.',
       difficulty: 'foundational',
-      sourceReference: { section: 'Breadth-first search (BFS)', pages: [7] },
     },
     {
       id: 'ch03-q06',
@@ -91,7 +81,6 @@ export default defineChapter({
       explanation:
         'BFS visits level 0 (R), then level 1 (M, N), then level 2 in queue order (P, Q from M, then T from N). The first option is a depth-first order.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'BFS Algorithm / Try and check', pages: [19, 20, 21] },
     },
     {
       id: 'ch03-q07',
@@ -106,11 +95,10 @@ export default defineChapter({
       explanation:
         'Generated children join the tail of the FIFO queue, which is what produces the level-by-level order.',
       difficulty: 'foundational',
-      sourceReference: { section: 'Breadth-first search (BFS) / BFS Algorithm', pages: [6, 19] },
     },
     {
       id: 'ch03-q08',
-      question: "In the lecture's step-by-step BFS illustration on a graph, when does the traversal terminate?",
+      question: "In a step-by-step BFS traversal of a graph, when does the traversal terminate?",
       options: [
         'When the first leaf node is reached',
         "After a fixed number of iterations equal to the graph's depth",
@@ -120,7 +108,6 @@ export default defineChapter({
       correctAnswerIndex: 2,
       explanation: 'The steps repeat while the queue is non-empty; once it is empty, the traversal stops.',
       difficulty: 'foundational',
-      sourceReference: { section: 'BFS Illustration', pages: [18, 19] },
     },
     {
       id: 'ch03-q09',
@@ -133,9 +120,8 @@ export default defineChapter({
       ],
       correctAnswerIndex: 1,
       explanation:
-        'The applications slide qualifies BFS shortest paths: path length must equal the number of edges, meaning every step counts equally.',
+        'BFS finds shortest paths under one condition: path length must equal the number of edges, meaning every step counts equally.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'Applications of BFS', pages: [22] },
     },
     {
       id: 'ch03-q10',
@@ -146,7 +132,6 @@ export default defineChapter({
       explanation:
         'Finding all nodes in one connected component is a listed BFS application. No heuristic is needed because every reachable node must be visited anyway.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'Applications of BFS', pages: [22] },
     },
     {
       id: 'ch03-q11',
@@ -158,9 +143,8 @@ export default defineChapter({
         'heuristic search or directed search',
       ],
       correctAnswerIndex: 3,
-      explanation: 'The lecture states that informed search is also called heuristic search or directed search.',
+      explanation: 'Informed search is also called heuristic search or directed search.',
       difficulty: 'foundational',
-      sourceReference: { section: 'Informed Search', pages: [23] },
     },
     {
       id: 'ch03-q12',
@@ -175,7 +159,6 @@ export default defineChapter({
       explanation:
         'A heuristic estimates solution cost. It is a rule of thumb for which choice might be best, not a guarantee.',
       difficulty: 'foundational',
-      sourceReference: { section: 'Heuristics', pages: [24] },
     },
     {
       id: 'ch03-q13',
@@ -189,7 +172,6 @@ export default defineChapter({
       correctAnswerIndex: 2,
       explanation: 'Because problems differ, a good heuristic comes from knowledge of the specific problem space.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'Heuristics', pages: [24] },
     },
     {
       id: 'ch03-q14',
@@ -204,7 +186,6 @@ export default defineChapter({
       explanation:
         'OPEN holds the nodes currently available for traversal; CLOSED keeps track of nodes that have already been traversed.',
       difficulty: 'foundational',
-      sourceReference: { section: 'Best-First Search', pages: [26] },
     },
     {
       id: 'ch03-q15',
@@ -214,7 +195,6 @@ export default defineChapter({
       explanation:
         'Best-first search uses a priority queue ordered by the heuristic evaluation, so the most promising node comes out first.',
       difficulty: 'foundational',
-      sourceReference: { section: 'Best-First Search', pages: [26] },
     },
     {
       id: 'ch03-q16',
@@ -225,7 +205,6 @@ export default defineChapter({
       explanation:
         'From S, choose B (3 < 6). OPEN is then {A 6, C 4, D 1}, so choose D, then G (0). E is never generated because A is never expanded, even though h(E) = 2 is low.',
       difficulty: 'advanced',
-      sourceReference: { section: 'Best-First Search: Example and Solution', pages: [28, 29] },
     },
     {
       id: 'ch03-q17',
@@ -240,7 +219,6 @@ export default defineChapter({
       explanation:
         'h(n) estimates the cost from n to the goal, so the node with the lowest estimate is considered most promising and expanded next.',
       difficulty: 'foundational',
-      sourceReference: { section: 'Best-First Search', pages: [27, 29] },
     },
     {
       id: 'ch03-q18',
@@ -255,7 +233,6 @@ export default defineChapter({
       explanation:
         'When more than the initial state, operators and goal test is known, such as the distance to the goal, that knowledge can prune where the search looks.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'Informed Search', pages: [23] },
     },
     {
       id: 'ch03-q19',
@@ -266,11 +243,10 @@ export default defineChapter({
       explanation:
         'Total path cost is the sum of the actual edge costs along the path: 5 + 2 + 6 = 13. Heuristic values guide the search but are not part of the path cost.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'Find the total cost to go from P to S', pages: [30, 31] },
     },
     {
       id: 'ch03-q20',
-      question: 'Which set lists only informed search strategies from the lecture?',
+      question: 'Which set lists only informed search strategies?',
       options: [
         'Breadth-first search, depth-first search, uniform-cost search',
         'Best-first search, A* search, local search algorithms',
@@ -281,7 +257,6 @@ export default defineChapter({
       explanation:
         'The informed strategies listed are best-first search, A* search, heuristics and local search algorithms. Each other option includes at least one uninformed strategy.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'Informed search strategies', pages: [25] },
     },
   ],
 });

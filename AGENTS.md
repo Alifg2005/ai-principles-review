@@ -106,10 +106,7 @@ Defined in `src/lib/schema.ts` (zod) and enforced by `validateRegistry`:
 | `id` | unique kebab-case slug, used in the URL |
 | `number` | positive integer, unique, the lecture/topic number from the source |
 | `title`, `description` | non-empty; title from the source deck |
-| `source.fileName` | exact filename in `course-materials/chapters/`, unique |
-| `source.label` | lecture label as printed (e.g. "Topic 2") |
-| `source.pageCount` | page count of the PDF; every cited page must be ≤ this |
-| `source.note` | optional caveats (extraction limits, inferred numbering) |
+| `source.label` | chapter label (e.g. "Topic 2"). The only source field allowed in shipped data |
 | `questions` | **exactly 20** |
 | `question.id` | `chNN-qMM`, NN = zero-padded chapter number; unique; never renumbered |
 | `question.question` | non-empty, unique within the chapter |
@@ -118,7 +115,6 @@ Defined in `src/lib/schema.ts` (zod) and enforced by `validateRegistry`:
 | `question.explanation` | non-empty, concise (1–3 sentences) |
 | `question.clarification` | optional note beyond the lecture, shown after submission behind its own control |
 | `question.difficulty` | `foundational` \| `intermediate` \| `advanced` |
-| `question.sourceReference` | `{ section, pages[] }`, required by the content gate |
 
 Chapter files: `src/data/chapters/NN-slug.ts`, default-exporting `defineChapter({...})`.
 Registration: import + append in `src/data/chapters/index.ts`. That is the **only** registry.
@@ -136,13 +132,13 @@ the material.
 - **Answers:** `answer.short` is always shown first and must stay concise (75 words at most, tested).
   `answer.detailed` is optional and must add to the short answer, not repeat it. Add `figure` for
   a rendered reference and `steps` for intermediate algorithm states.
-- **Source labels:** every answer section carries one of four labels: `slide-based`,
-  `corrected-concept`, `additional-clarification` or `original-worked-example`. Set `shortStatus` and
-  `detailedStatus`, and put content with a different source in `more`. `questionStatus` labels the
-  question and its reference figure and steps. Every question cites `sourceReference`.
-- **Slide errors and conventions:** never copy an error silently. `slideNote` keeps the lecture wording
-  separate from the correct concept. A stricter or unusual lecture definition is a convention, not
-  an error: label it `additional-clarification` and name it as the lecture's convention.
+- **Content labels:** every answer section carries one of three labels: `course-concept`,
+  `additional-clarification` or `original-worked-example`. Set `shortStatus` and `detailedStatus`, and
+  put content of a different kind in `more`. `questionStatus` labels the question and its reference
+  figure and steps.
+- **Source errors and conventions:** never copy an error silently. Present the correct concept directly;
+  use `mixUp` ("Common mix-up") for a frequent confusion, in neutral wording. Name an unusual definition
+  as this course's convention.
 - **Search traces:** `traceRules` must state order, tie-breaking and goal-test timing before the
   student starts.
 - **Several defensible answers:** state the assumptions before the student answers and say so in the
@@ -166,7 +162,7 @@ the material.
   (enforced by tests). Choose positions deliberately; do not leave them all at A.
 - Explanations state *why* the answer is right (and, where useful, why a tempting distractor is
   wrong) without contradicting the source.
-- Cite the section heading and slide numbers actually used.
+- Check each answer against the source, but do not cite slides, filenames or page numbers in shipped data.
 - No duplicates or near-duplicates testing the same fact.
 
 ## 9. Source-material protection (mandatory)
@@ -184,8 +180,10 @@ the material.
 - If source files are ever found tracked: `git rm --cached <file>` (keeps the local copy), report
   it, and check history with `git log --all -- '*.pdf' course-materials`. **Do not rewrite shared
   history or delete remote files without the owner's explicit authorisation.**
-- `npm run build` runs `scripts/verify-build.mjs`, which fails if restricted files are in
-  `dist/`, tracked by Git, or not ignored. Never bypass or weaken it.
+- Shipped data must not contain source filenames, page counts, slide numbers or internal processing
+  notes. Report such details in the completion report instead.
+- `npm run build` runs `scripts/verify-build.mjs`, which fails if restricted files or source metadata
+  are in `dist/`, or if restricted files are tracked or not ignored. Never bypass or weaken it.
 
 ## 10. Copyright-aware content
 
@@ -199,8 +197,8 @@ completion report.
 ## 11. Content validation
 
 Content is valid only when `npm run validate` (= `vitest run src/data`) passes: schema,
-uniqueness, 20×4 structure, answer-index range, page bounds, answer-position spread, difficulty
-mix, source references, and one registry entry per data file. Additionally, before publishing,
+uniqueness, 20×4 structure, answer-index range, answer-position spread, difficulty mix, absence of
+source metadata, and one registry entry per data file. Additionally, before publishing,
 manually re-check every answer key against the cited slides.
 
 ## 12. Required checks before declaring work done

@@ -10,16 +10,15 @@ const chapter = {
   number: 3,
   title: 'Demo',
   description: 'Demo',
-  source: { fileName: 'demo.pdf', label: 'Topic 3', pageCount: 10 },
+  source: { label: 'Topic 3' },
   questions: [],
 } as Chapter;
 
-const answer = { short: [{ type: 'p' as const, text: 'Answer' }], shortStatus: 'slide-based' as const };
+const answer = { short: [{ type: 'p' as const, text: 'Answer' }], shortStatus: 'course-concept' as const };
 const base = {
   topic: 'Topic',
   difficulty: 'foundational' as const,
-  questionStatus: 'slide-based' as const,
-  sourceReference: { section: 'Intro', pages: [1] },
+  questionStatus: 'course-concept' as const,
   answer,
 };
 
@@ -96,38 +95,10 @@ describe('validatePracticeRegistry', () => {
     );
   });
 
-  it('requires a corrected answer to show what the slide says', () => {
-    expectInvalid(
-      withQuestion({
-        ...base,
-        id: 'p03-03',
-        kind: 'written',
-        answerStyle: 'list',
-        prompt: 'x',
-        answer: { ...answer, shortStatus: 'corrected-concept' },
-      }),
-      /must show what the slide says/,
-    );
-  });
-
   it('keeps original worked examples labelled as such', () => {
     expectInvalid(
       withQuestion({ ...base, id: 'p03-03', kind: 'written', answerStyle: 'list', prompt: 'x', questionStatus: 'original-worked-example' }),
       /same label/,
-    );
-  });
-
-  it('rejects source pages beyond the page count', () => {
-    expectInvalid(
-      withQuestion({
-        ...base,
-        id: 'p03-03',
-        kind: 'logic',
-        prompt: 'x',
-        accepted: ['P'],
-        sourceReference: { section: 'x', pages: [99] },
-      }),
-      /exceeds pageCount/,
     );
   });
 
@@ -149,7 +120,7 @@ describe('validatePracticeRegistry', () => {
 
   it('rejects a sequence whose answer uses tokens that are not offered', () => {
     expectInvalid(
-      withQuestion({ ...base, id: 'p03-03', kind: 'sequence', prompt: 'x', tokens: ['A', 'B'], expected: ['A', 'C'], answer: { ...answer, detailed: answer.short, detailedStatus: 'slide-based' } }),
+      withQuestion({ ...base, id: 'p03-03', kind: 'sequence', prompt: 'x', tokens: ['A', 'B'], expected: ['A', 'C'], answer: { ...answer, detailed: answer.short, detailedStatus: 'course-concept' } }),
       /not offered/,
     );
   });

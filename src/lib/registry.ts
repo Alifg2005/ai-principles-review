@@ -44,7 +44,6 @@ export function validateRegistry(raw: readonly unknown[]): Chapter[] {
 
   const idCounts = new Map<string, number>();
   const byNumber = new Map<number, string>();
-  const byFile = new Map<string, string>();
   for (const chapter of chapters) {
     idCounts.set(chapter.id, (idCounts.get(chapter.id) ?? 0) + 1);
 
@@ -53,12 +52,6 @@ export function validateRegistry(raw: readonly unknown[]): Chapter[] {
       issues.push(`chapter number ${chapter.number} is used by both "${otherByNumber}" and "${chapter.id}"`);
     }
     byNumber.set(chapter.number, chapter.id);
-
-    const otherByFile = byFile.get(chapter.source.fileName);
-    if (otherByFile !== undefined) {
-      issues.push(`source file "${chapter.source.fileName}" is registered by both "${otherByFile}" and "${chapter.id}"`);
-    }
-    byFile.set(chapter.source.fileName, chapter.id);
   }
   for (const [id, count] of idCounts) {
     if (count > 1) issues.push(`chapter id "${id}" is registered ${count} times`);

@@ -160,7 +160,7 @@ describe('quiz flow', () => {
     expect(screen.getAllByRole('term').map((t) => t.textContent)).not.toContain('Unanswered');
     expect(screen.getAllByText('Correct answer')).toHaveLength(20);
     expect(screen.getByText(first.questions[0]!.explanation)).toBeInTheDocument();
-    expect(screen.getAllByText(/^Source:/).length).toBe(20);
+    expect(screen.queryByText(/^Source:/)).not.toBeInTheDocument();
 
     await user.click(screen.getByRole('button', { name: 'Missed (10)' }));
     expect(screen.queryByText(first.questions[0]!.explanation)).not.toBeInTheDocument();
@@ -231,6 +231,18 @@ describe('multiple-choice clarifications', () => {
     const user = renderAt(chapterPath(first.id));
     await answerAndSubmit(user);
     expect(screen.queryByText('Show clarification')).not.toBeInTheDocument();
+  });
+});
+
+describe('public wording', () => {
+  it('states the homepage value and the footer disclaimer without source references', () => {
+    renderAt('/');
+    expect(screen.getByText(/with every answer explained\./)).toBeInTheDocument();
+    expect(document.body).not.toHaveTextContent(/traced back/i);
+    expect(screen.getByRole('contentinfo')).toHaveTextContent(
+      'Unofficial study aid. AI-assisted content; verify with your course materials.',
+    );
+    expect(screen.getByRole('contentinfo')).toHaveTextContent('Questions are original and written from the lecture materials.');
   });
 });
 

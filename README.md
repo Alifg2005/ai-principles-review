@@ -41,9 +41,8 @@ comparison and is kept in memory until the page reloads.
 | Logic | Writes formulas with a symbol keyboard | Matches reference forms; never marks a different form wrong |
 | Draw | Sketches freehand with mouse, pen or touch; undo, clear, reset | Self-compare with the reference diagram |
 
-Each section of an answer carries a source label: **Slide-based**, **Corrected concept**, **Additional
-clarification** or **Original worked example**. Where a slide appears to contain an error, the
-answer stays logically correct and shows the lecture wording beside the correct concept. Search
+Each section of an answer carries a label: **Course concept**, **Additional clarification** or
+**Original worked example**. Frequent confusions appear as a neutral **Common mix-up** note. Search
 traces state their order, tie-breaking and goal-test rules up front. Tests recompute the algorithm
 and logic answers, so a wrong key fails the build. Questions live in `src/data/practice/`, separate from the UI.
 
@@ -123,7 +122,7 @@ Each chapter is a TypeScript file in `src/data/chapters/` registered in `index.t
   number: 2,
   title: 'Intelligent Agents',
   description: '…',
-  source: { fileName: 'Topic 2 Intelligent agents-Updated.pdf', label: 'Topic 2', pageCount: 41 },
+  source: { label: 'Topic 2' },
   questions: [                       // exactly 20
     {
       id: 'ch02-q01',                // stable id; scoring is keyed by it
@@ -132,14 +131,13 @@ Each chapter is a TypeScript file in `src/data/chapters/` registered in `index.t
       correctAnswerIndex: 2,         // 0–3
       explanation: '…',
       difficulty: 'foundational',    // | 'intermediate' | 'advanced'
-      sourceReference: { section: 'What is an intelligent agent?', pages: [5] },
     },
   ],
 }
 ```
 
 The full schema lives in `src/lib/schema.ts`. Invalid data (wrong counts, duplicate ids, bad
-indices, empty text, duplicate registrations, out-of-range page references) is rejected by
+indices, empty text, duplicate registrations) is rejected by
 `npm run validate`, which also runs before every build.
 
 ## Deploying to Vercel
@@ -159,7 +157,8 @@ course materials are tracked by Git.
 - **Original lecture PDFs are local-only.** They live in `course-materials/chapters/`, which is
   excluded by `.gitignore` (along with all `*.pdf`, `*.ppt(x)`, `*.doc(x)` and `*.key` files)
   and by `.vercelignore`. They are never imported, copied into `public/`, or bundled.
-  `scripts/verify-build.mjs` checks this on every build.
+  `scripts/verify-build.mjs` checks this on every build, and also fails if source filenames, slide
+  references or internal processing notes reach the JavaScript bundle.
 - **Quiz content is derived, not copied.** Questions and explanations are original wording
   written to test understanding of the lecture material. They do not reproduce slide text,
   diagrams or extended examples. Derived educational content can still carry copyright

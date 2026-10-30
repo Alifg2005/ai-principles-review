@@ -102,11 +102,10 @@ export default definePracticeSet({
       answerStyle: 'definition',
       topic: 'Knowledge-based agents',
       difficulty: 'foundational',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'What is a knowledge-based agent, and what are its two main components?',
-      sourceReference: { section: 'Knowledge-based agents / Components', pages: [5, 11] },
       answer: {
-        shortStatus: 'slide-based',
+        shortStatus: 'course-concept',
         short: [
           { type: 'p', text: 'An agent with an explicit representation of knowledge that it can reason with.' },
           {
@@ -122,12 +121,11 @@ export default definePracticeSet({
       answerStyle: 'steps',
       topic: 'TELL and ASK',
       difficulty: 'foundational',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'List the three steps a knowledge-based agent performs each time its program is called.',
-      sourceReference: { section: 'Agent program workflow: TELL and ASK', pages: [9, 10] },
       answer: {
-        shortStatus: 'slide-based',
-        detailedStatus: 'slide-based',
+        shortStatus: 'course-concept',
+        detailedStatus: 'course-concept',
         short: [
           { type: 'ol', items: ['TELL the KB what it perceives.', 'ASK the KB which action to take.', 'TELL the KB which action was executed.'] },
         ],
@@ -140,11 +138,10 @@ export default definePracticeSet({
       answerStyle: 'comparison',
       topic: 'Declarative vs procedural',
       difficulty: 'intermediate',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Compare declarative and procedural knowledge.',
-      sourceReference: { section: 'Declarative vs procedural knowledge', pages: [13, 14, 15] },
       answer: {
-        shortStatus: 'slide-based',
+        shortStatus: 'course-concept',
         short: [
           {
             type: 'table',
@@ -167,11 +164,10 @@ export default definePracticeSet({
       answerStyle: 'definition',
       topic: 'Entailment and models',
       difficulty: 'intermediate',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Define a model and entailment. How many models does a KB with n symbols have?',
-      sourceReference: { section: 'Logical Entailment / Models', pages: [35, 38] },
       answer: {
-        shortStatus: 'slide-based',
+        shortStatus: 'course-concept',
         short: [
           {
             type: 'ul',
@@ -189,11 +185,10 @@ export default definePracticeSet({
       answerStyle: 'definition',
       topic: 'Entailment and models',
       difficulty: 'foundational',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Define valid, satisfiable and unsatisfiable, with an example of each.',
-      sourceReference: { section: 'Models (2)', pages: [39] },
       answer: {
-        shortStatus: 'slide-based',
+        shortStatus: 'course-concept',
         more: [
           {
             status: 'additional-clarification',
@@ -214,11 +209,10 @@ export default definePracticeSet({
       answerStyle: 'explanation',
       topic: 'Knowledge representation',
       difficulty: 'intermediate',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'What are the three parts of a knowledge representation, and why are neither programming languages nor natural languages ideal for it?',
-      sourceReference: { section: 'Knowledge representation (KR) / Good KR languages', pages: [29, 30] },
       answer: {
-        shortStatus: 'slide-based',
+        shortStatus: 'course-concept',
         short: [
           {
             type: 'ul',
@@ -237,12 +231,11 @@ export default definePracticeSet({
       answerStyle: 'comparison',
       topic: 'Other KR methods',
       difficulty: 'intermediate',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Compare semantic networks with frames.',
-      sourceReference: { section: 'Semantic networks / Frames', pages: [48, 49, 58, 59] },
       answer: {
-        shortStatus: 'slide-based',
-        detailedStatus: 'slide-based',
+        shortStatus: 'course-concept',
+        detailedStatus: 'course-concept',
         short: [
           {
             type: 'ul',
@@ -262,11 +255,10 @@ export default definePracticeSet({
       answerStyle: 'list',
       topic: 'Wumpus world',
       difficulty: 'foundational',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Characterise the Wumpus world environment, and list its five percepts.',
-      sourceReference: { section: 'Wumpus World Characterization', pages: [20, 21] },
       answer: {
-        shortStatus: 'slide-based',
+        shortStatus: 'course-concept',
         short: [
           { type: 'p', text: 'Partially observable, deterministic, sequential, static, discrete, single-agent.' },
           { type: 'p', text: 'Percepts: breeze, stench, glitter, scream, bump.' },
@@ -278,9 +270,8 @@ export default definePracticeSet({
       kind: 'complete',
       topic: 'TELL and ASK',
       difficulty: 'foundational',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Complete the cycle of a knowledge-based agent, starting at the top left.',
-      sourceReference: { section: 'A simple knowledge-based agent', pages: [8, 9, 10] },
       figure: agentCycle(['1', '2', '4', '3'], 'blank'),
       slots: [
         { nodeId: 'tell', options: CYCLE_PARTS, expected: 'TELL: percept' },
@@ -289,7 +280,7 @@ export default definePracticeSet({
         { nodeId: 'record', options: CYCLE_PARTS, expected: 'TELL: action taken' },
       ],
       answer: {
-        shortStatus: 'slide-based',
+        shortStatus: 'course-concept',
         short: [{ type: 'p', text: 'Perceive and TELL, ASK for an action, perform it, then TELL the KB what was done.' }],
         figure: agentCycle(CYCLE_PARTS),
       },
@@ -301,7 +292,6 @@ export default definePracticeSet({
       difficulty: 'intermediate',
       questionStatus: 'original-worked-example',
       prompt: 'Which level of a knowledge-based agent does each statement describe?',
-      sourceReference: { section: 'Architecture of a knowledge-based agent', pages: [7] },
       columns: ['Statement', 'Level'],
       rows: [
         [given('A delivery robot knows that Gate 3 opens onto the loading bay'), { accepted: ['Knowledge'], options: LEVELS }],
@@ -320,7 +310,6 @@ export default definePracticeSet({
       difficulty: 'intermediate',
       questionStatus: 'original-worked-example',
       prompt: 'Let KB = (P ∨ Q) ∧ ¬P and α = Q. Complete the truth table, then decide whether KB ⊨ α.',
-      sourceReference: { section: 'Exercise: Check entailment with truth table', pages: [36, 44, 45] },
       columns: ['P', 'Q', 'P ∨ Q', '¬P', 'KB', 'α = Q'],
       rows: [
         [given('T'), given('T'), tf('T'), tf('F'), tf('F'), given('T')],
@@ -342,7 +331,6 @@ export default definePracticeSet({
       difficulty: 'intermediate',
       questionStatus: 'original-worked-example',
       prompt: 'Classify each sentence.',
-      sourceReference: { section: 'Models (2) / Truth tables for connectives', pages: [39, 44] },
       columns: ['Sentence', 'Classification'],
       rows: [
         [given('P ∨ ¬P'), { accepted: ['Valid'], options: STATUS }],
@@ -360,15 +348,14 @@ export default definePracticeSet({
       kind: 'logic',
       topic: 'Propositional logic',
       difficulty: 'intermediate',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Write as a propositional sentence: "Swimming at the beach is not allowed, and either swimming at the beach is allowed or sharks have not been spotted." Use S = swimming is allowed and K = sharks have been spotted.',
-      sourceReference: { section: 'Exercise: propositional sentence', pages: [46] },
       accepted: ['¬S ∧ (S ∨ ¬K)'],
       answer: {
         shortStatus: 'original-worked-example',
         detailedStatus: 'original-worked-example',
         short: [{ type: 'formula', text: '¬S ∧ (S ∨ ¬K)' }],
-        detailed: [{ type: 'p', text: 'The slide poses this exercise without a solution, so this answer is derived from the sentence itself. The "and" joins two clauses and the "either … or" stays in brackets. The sentence forces S false, and so K false too.' }],
+        detailed: [{ type: 'p', text: 'The "and" joins two clauses and the "either … or" stays in brackets. The sentence forces S false, and so K false too.' }],
       },
     },
     {
@@ -376,13 +363,12 @@ export default definePracticeSet({
       kind: 'logic',
       topic: 'Equivalences',
       difficulty: 'foundational',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Using De Morgan\'s law, rewrite ¬(P ∧ Q) without negating a bracket.',
-      sourceReference: { section: 'Propositional logic: equivalences', pages: [47] },
       accepted: ['¬P ∨ ¬Q'],
       answer: {
-        shortStatus: 'slide-based',
-        detailedStatus: 'slide-based',
+        shortStatus: 'course-concept',
+        detailedStatus: 'course-concept',
         short: [{ type: 'formula', text: '¬P ∨ ¬Q' }],
         detailed: [{ type: 'p', text: 'De Morgan moves the negation inside and swaps the connective: ∧ becomes ∨, and ∨ becomes ∧.' }],
       },
@@ -392,12 +378,11 @@ export default definePracticeSet({
       kind: 'logic',
       topic: 'Equivalences',
       difficulty: 'foundational',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Using implication elimination, rewrite P ⇒ Q with only ¬ and ∨.',
-      sourceReference: { section: 'Propositional logic: equivalences', pages: [47] },
       accepted: ['¬P ∨ Q', 'Q ∨ ¬P'],
       answer: {
-        shortStatus: 'slide-based',
+        shortStatus: 'course-concept',
         short: [{ type: 'formula', text: '¬P ∨ Q' }],
       },
     },
@@ -408,7 +393,6 @@ export default definePracticeSet({
       difficulty: 'advanced',
       questionStatus: 'original-worked-example',
       prompt: 'The agent has visited [1,1], [2,1] and [1,2] and sensed the percepts shown. Each cell\'s first number is the column and the second is the row. Work out what is in each marked room.',
-      sourceReference: { section: 'Exploring the Wumpus World', pages: [23, 25, 27, 28] },
       figure: wumpusGrid({ r13: 'A [1,3]', r22: 'B [2,2]', r31: 'C [3,1]' }, 'blank'),
       slots: [
         { nodeId: 'r13', options: ROOM_OPTIONS, expected: 'Wumpus' },
@@ -439,7 +423,6 @@ export default definePracticeSet({
       difficulty: 'intermediate',
       questionStatus: 'original-worked-example',
       prompt: 'Build a semantic network for: "Rex is a sheepdog. A sheepdog is a dog. A dog is a mammal. Mammals have fur. Rex is owned by Sara."',
-      sourceReference: { section: 'Semantic networks / Exercise', pages: [49, 52, 54, 56, 57] },
       directed: true,
       nodeLabels: ['Rex', 'Sheepdog', 'Dog', 'Mammal', 'Fur', 'Sara'],
       edgeLabels: ['is_a', 'has', 'owned_by'],
@@ -470,7 +453,6 @@ export default definePracticeSet({
           },
         },
       ],
-      sourceReference: { section: 'Frames: typical values / inheritance example', pages: [59, 60, 61, 62] },
       columns: ['Query', 'Value'],
       rows: [
         [given('WeeklyHours of Lina'), { accepted: ['15'] }],
@@ -500,7 +482,6 @@ export default definePracticeSet({
           ],
         },
       ],
-      sourceReference: { section: 'Production rules', pages: [65, 66] },
       tokens: ['R1', 'R2', 'R3'],
       expected: ['R3', 'R2', 'R1'],
       answer: {
@@ -525,7 +506,6 @@ export default definePracticeSet({
       difficulty: 'intermediate',
       questionStatus: 'original-worked-example',
       prompt: 'Draw frames for this hierarchy: Vehicle has Wheels and Owner slots. Bicycle is a Vehicle with Wheels = 2. "Maya\'s bike" is an instance of Bicycle with Owner = Maya. Show the links between the frames.',
-      sourceReference: { section: 'Frames: vehicle example', pages: [59, 62, 63] },
       answer: {
         shortStatus: 'original-worked-example',
         short: [{ type: 'p', text: 'Three boxes, each listing its slots, linked upward: Maya\'s bike → Bicycle → Vehicle. Wheels = 2 is inherited by Maya\'s bike.' }],

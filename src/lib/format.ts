@@ -1,28 +1,4 @@
-import type { Chapter, Difficulty, SourceReference } from './schema';
-
-/** Formats slide numbers compactly: [3,4,5,9] → "slides 3–5, 9". */
-export function formatPages(pages: readonly number[]): string {
-  const sorted = [...new Set(pages)].sort((a, b) => a - b);
-  const ranges: string[] = [];
-  let start = sorted[0];
-  let prev = sorted[0];
-  for (const page of [...sorted.slice(1), Number.NaN]) {
-    if (start === undefined || prev === undefined) break;
-    if (page === prev + 1) {
-      prev = page;
-      continue;
-    }
-    ranges.push(start === prev ? `${start}` : `${start}–${prev}`);
-    start = page;
-    prev = page;
-  }
-  const single = sorted.length === 1;
-  return `${single ? 'slide' : 'slides'} ${ranges.join(', ')}`;
-}
-
-export function formatSource(ref: SourceReference): string {
-  return `${ref.section} · ${formatPages(ref.pages)}`;
-}
+import type { Chapter, Difficulty } from './schema';
 
 export const DIFFICULTY_LABEL: Record<Difficulty, string> = {
   foundational: 'Foundational',
@@ -50,6 +26,6 @@ export function missingChaptersNote(missing: readonly number[]): string | null {
 export function verdict(percentage: number): string {
   if (percentage >= 90) return 'Excellent command of this chapter.';
   if (percentage >= 70) return 'A solid grasp. Review the questions you missed.';
-  if (percentage >= 50) return 'Partial understanding. Revisit the slides for the gaps.';
+  if (percentage >= 50) return 'Partial understanding. Revisit the chapter for the gaps.';
   return 'Worth another careful pass through the material.';
 }

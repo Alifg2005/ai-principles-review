@@ -9,13 +9,6 @@ const nonEmpty = z.string().trim().min(1, 'must not be empty');
 
 export const difficultySchema = z.enum(['foundational', 'intermediate', 'advanced']);
 
-export const sourceReferenceSchema = z.object({
-  /** Heading or topic in the source deck the question is grounded in. */
-  section: nonEmpty,
-  /** 1-based slide/page numbers in the source PDF. */
-  pages: z.array(z.number().int().positive()).min(1),
-});
-
 export const questionSchema = z
   .object({
     /** Stable identifier, e.g. `ch02-q07`. Never reuse or renumber. */
@@ -24,10 +17,9 @@ export const questionSchema = z
     options: z.array(nonEmpty).length(OPTIONS_PER_QUESTION),
     correctAnswerIndex: z.number().int().min(0).max(OPTIONS_PER_QUESTION - 1),
     explanation: nonEmpty,
-    /** Optional note beyond the lecture, shown after submission behind its own control. */
+    /** Optional note beyond the core material, shown after submission behind its own control. */
     clarification: nonEmpty.optional(),
     difficulty: difficultySchema,
-    sourceReference: sourceReferenceSchema.optional(),
   })
   .superRefine((q, ctx) => {
     const normalised = q.options.map((o) => o.trim().toLowerCase());
@@ -40,18 +32,13 @@ export const chapterSchema = z
   .object({
     /** URL-safe, unique slug, e.g. `intelligent-agents`. */
     id: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, 'must be a lowercase kebab-case slug'),
-    /** Lecture/topic number as used in the course. */
+    /** Chapter number as used in the course. */
     number: z.number().int().positive(),
     title: nonEmpty,
     description: nonEmpty,
     source: z.object({
-      /** Filename of the local-only PDF in course-materials/chapters/. Never shipped. */
-      fileName: nonEmpty,
-      /** Lecture label as printed in the source, e.g. "Topic 2". */
+      /** Chapter label shown in the library, e.g. "Topic 2". */
       label: nonEmpty,
-      pageCount: z.number().int().positive(),
-      /** Any caveat about extraction or numbering that reviewers should know. */
-      note: nonEmpty.optional(),
     }),
     questions: z.array(questionSchema).length(QUESTIONS_PER_CHAPTER),
   })
@@ -76,20 +63,10 @@ export const chapterSchema = z
         ctx.addIssue({ code: 'custom', message: 'duplicate question text', path: ['questions', i, 'question'] });
       }
       texts.add(text);
-      for (const page of q.sourceReference?.pages ?? []) {
-        if (page > chapter.source.pageCount) {
-          ctx.addIssue({
-            code: 'custom',
-            message: `source page ${page} exceeds pageCount ${chapter.source.pageCount}`,
-            path: ['questions', i, 'sourceReference', 'pages'],
-          });
-        }
-      }
     });
   });
 
 export type Difficulty = z.infer<typeof difficultySchema>;
-export type SourceReference = z.infer<typeof sourceReferenceSchema>;
 export type Question = z.infer<typeof questionSchema>;
 export type Chapter = z.infer<typeof chapterSchema>;
 export type ChapterInput = z.input<typeof chapterSchema>;

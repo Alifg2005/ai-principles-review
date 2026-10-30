@@ -6,15 +6,11 @@ export default defineChapter({
   title: 'Introduction to Artificial Intelligence',
   description:
     'What intelligence is, competing definitions of AI, the four schools of thought, the Turing test, the foundations and history of the field, and the stages of AI.',
-  source: {
-    fileName: 'Week 1 Intro to AI.pdf',
-    label: 'Week 1',
-    pageCount: 65,
-  },
+  source: { label: 'Week 1' },
   questions: [
     {
       id: 'ch01-q01',
-      question: 'According to the lecture, how does the field of AI go beyond simply studying how humans think?',
+      question: 'How does the field of AI go beyond simply studying how humans think?',
       options: [
         'It focuses only on replicating human emotions in software',
         'It aims both to understand intelligence and to build intelligent entities',
@@ -23,9 +19,8 @@ export default defineChapter({
       ],
       correctAnswerIndex: 1,
       explanation:
-        'The lecture contrasts human self-study with AI, which attempts not only to understand intelligence but also to build intelligent entities such as robot cleaners or self-driving cars.',
+        'Human self-study differs from AI, which attempts not only to understand intelligence but also to build intelligent entities such as robot cleaners or self-driving cars.',
       difficulty: 'foundational',
-      sourceReference: { section: 'Intelligence', pages: [5] },
     },
     {
       id: 'ch01-q02',
@@ -39,13 +34,12 @@ export default defineChapter({
       ],
       correctAnswerIndex: 3,
       explanation:
-        'Using the outcome of a mistake to change future behaviour is "learning from" the environment, one of the components in the lecture\'s definition of intelligence.',
+        'Using the outcome of a mistake to change future behaviour is "learning from" the environment, one of the components of intelligence.',
       difficulty: 'intermediate',
-      sourceReference: { section: "What's involved in Intelligence?", pages: [6] },
     },
     {
       id: 'ch01-q03',
-      question: 'Which set of capabilities does the lecture say an intelligent system should have?',
+      question: 'Which set of capabilities should an intelligent system have?',
       options: [
         'Reasoning, learning, problem solving and perception',
         'Memorisation, repetition, storage and retrieval',
@@ -54,9 +48,8 @@ export default defineChapter({
       ],
       correctAnswerIndex: 0,
       explanation:
-        'The slide on what intelligent systems should do ends by listing reasoning, learning, problem solving and perception.',
+        'Intelligent systems should have reasoning, learning, problem solving and perception.',
       difficulty: 'foundational',
-      sourceReference: { section: 'Intelligent System Should do the following', pages: [10] },
     },
     {
       id: 'ch01-q04',
@@ -71,7 +64,6 @@ export default defineChapter({
       explanation:
         'John McCarthy first adopted the term at the Dartmouth Conference in 1956, which established AI as an academic field.',
       difficulty: 'foundational',
-      sourceReference: { section: 'What Is Artificial Intelligence? / History of AI', pages: [11, 48] },
     },
     {
       id: 'ch01-q05',
@@ -82,7 +74,6 @@ export default defineChapter({
       explanation:
         'The scientific goal is to understand the principles behind intelligent behaviour by analysing agents and testing hypotheses; the engineering goal focuses on designing useful intelligent artefacts.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'Goals of AI', pages: [13] },
     },
     {
       id: 'ch01-q06',
@@ -98,7 +89,6 @@ export default defineChapter({
       explanation:
         'A software agent senses keystrokes, file contents and network packets, and acts by displaying output, writing files and sending packets. The other options describe robotic or human agents.',
       difficulty: 'foundational',
-      sourceReference: { section: 'What is an Agent?', pages: [14] },
     },
     {
       id: 'ch01-q07',
@@ -113,11 +103,10 @@ export default defineChapter({
       explanation:
         "A percept is the agent's perceptual input at a given instant, while the percept sequence is the full history of everything the agent has ever perceived.",
       difficulty: 'foundational',
-      sourceReference: { section: 'Percept and Percept Sequence', pages: [16] },
     },
     {
       id: 'ch01-q08',
-      question: 'How does the lecture distinguish the agent function from the agent program?',
+      question: 'What distinguishes the agent function from the agent program?',
       options: [
         'The agent function runs on hardware; the agent program is only a theoretical model',
         'The agent function is an abstract mathematical mapping; the agent program is its concrete implementation running on the agent architecture',
@@ -126,9 +115,8 @@ export default defineChapter({
       ],
       correctAnswerIndex: 1,
       explanation:
-        'The lecture stresses keeping the two ideas distinct: the function is an abstract description, and the program is the concrete implementation that runs on an architecture.',
+        'The two ideas are distinct: the function is an abstract description, and the program is the concrete implementation that runs on an architecture.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'Agent Functions / Agent Program', pages: [17, 18] },
     },
     {
       id: 'ch01-q09',
@@ -143,7 +131,6 @@ export default defineChapter({
       explanation:
         'P* is the set of all possible percept histories; the agent function maps each such history to an action in A.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'Agent Functions', pages: [17] },
     },
     {
       id: 'ch01-q10',
@@ -154,7 +141,6 @@ export default defineChapter({
       explanation:
         'Judging behaviour (acting) against an ideal of best expected outcome (rationality) is the acting-rationally approach, which the course adopts as its standard model.',
       difficulty: 'advanced',
-      sourceReference: { section: 'Four Schools of Thought / Acting Rationally', pages: [19, 29] },
     },
     {
       id: 'ch01-q11',
@@ -169,7 +155,6 @@ export default defineChapter({
       explanation:
         'The machine passes if a human interrogator, after asking written questions, cannot tell whether the answers came from a person or a computer.',
       difficulty: 'foundational',
-      sourceReference: { section: 'Acting Humanly (Turing Test)', pages: [21] },
     },
     {
       id: 'ch01-q12',
@@ -184,7 +169,6 @@ export default defineChapter({
       explanation:
         'Because the standard test excludes physical interaction, the Total Turing Test adds computer vision (to perceive objects) and robotics (to manipulate them).',
       difficulty: 'intermediate',
-      sourceReference: { section: 'What would a computer need to pass the Turing test?', pages: [23] },
     },
     {
       id: 'ch01-q13',
@@ -193,9 +177,8 @@ export default defineChapter({
       options: ['Robotics', 'Computer vision', 'Machine learning', 'Knowledge representation'],
       correctAnswerIndex: 3,
       explanation:
-        'The lecture assigns knowledge representation the role of storing information provided during the test so it can be used later.',
+        'Knowledge representation has the role of storing information provided during the test so it can be used later.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'What would a computer need to pass the Turing test?', pages: [23] },
     },
     {
       id: 'ch01-q14',
@@ -208,9 +191,8 @@ export default defineChapter({
       ],
       correctAnswerIndex: 0,
       explanation:
-        'The lecture lists that humans do not always behave rationally, reverse engineering the mind is hard, and brain hardware is very different from a program. The certainty problem belongs to the laws-of-thought approach.',
+        'Humans do not always behave rationally, reverse engineering the mind is hard, and brain hardware is very different from a program. The certainty problem belongs to the laws-of-thought approach.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'Thinking Humanly (Cognitive Modeling Approach)', pages: [27] },
     },
     {
       id: 'ch01-q15',
@@ -225,7 +207,6 @@ export default defineChapter({
       explanation:
         'Logic needs knowledge stated formally and with certainty; uncertain knowledge is hard to encode and the computation can be expensive. There is also a gap between solving a problem in principle and in practice.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'Thinking Rationally: The "Laws of Thought" approach', pages: [28] },
     },
     {
       id: 'ch01-q16',
@@ -240,7 +221,6 @@ export default defineChapter({
       explanation:
         'Rational behaviour means doing the right thing: acting to maximise expected goal achievement given the available information.',
       difficulty: 'foundational',
-      sourceReference: { section: 'Acting Rationally', pages: [29] },
     },
     {
       id: 'ch01-q17',
@@ -250,7 +230,6 @@ export default defineChapter({
       explanation:
         'The summary of foundations credits economics with utility and decision theory, reflecting its focus on making good choices under uncertainty.',
       difficulty: 'foundational',
-      sourceReference: { section: 'Foundations of AI', pages: [41, 45] },
     },
     {
       id: 'ch01-q18',
@@ -261,7 +240,6 @@ export default defineChapter({
       explanation:
         'Control theory and cybernetics study how machines regulate themselves and design systems that optimise an objective over time without constant human input.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'Foundations of AI', pages: [43, 46] },
     },
     {
       id: 'ch01-q19',
@@ -276,11 +254,10 @@ export default defineChapter({
       explanation:
         'The artificial neuron model dates from 1943, the Logic Theorist from 1955, ELIZA from 1966, and Deep Blue beat Kasparov in 1997.',
       difficulty: 'advanced',
-      sourceReference: { section: 'History of AI', pages: [48, 49, 50] },
     },
     {
       id: 'ch01-q20',
-      question: 'Siri, Alexa and self-driving cars are given in the lecture as examples of which stage of AI?',
+      question: 'Siri, Alexa and self-driving cars are examples of which stage of AI?',
       options: [
         'Artificial General Intelligence (strong AI)',
         'Artificial Super Intelligence',
@@ -289,9 +266,8 @@ export default defineChapter({
       ],
       correctAnswerIndex: 2,
       explanation:
-        'Narrow (weak) AI performs a narrowly defined set of tasks. The lecture notes that almost all AI systems built so far, including these assistants and vehicles, fall into this category.',
+        'Narrow (weak) AI performs a narrowly defined set of tasks. Almost all AI systems built so far, including these assistants and vehicles, fall into this category.',
       difficulty: 'foundational',
-      sourceReference: { section: 'Stages of AI', pages: [57] },
     },
   ],
 });

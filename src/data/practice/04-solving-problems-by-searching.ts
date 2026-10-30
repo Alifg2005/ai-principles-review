@@ -79,11 +79,10 @@ export default definePracticeSet({
       answerStyle: 'list',
       topic: 'Search infrastructure',
       difficulty: 'foundational',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'List the four components stored in a search-tree node.',
-      sourceReference: { section: 'Infrastructure for Search Algorithms', pages: [5] },
       answer: {
-        shortStatus: 'slide-based',
+        shortStatus: 'course-concept',
         short: [
           {
             type: 'ul',
@@ -98,11 +97,10 @@ export default definePracticeSet({
       answerStyle: 'definition',
       topic: 'Search infrastructure',
       difficulty: 'foundational',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'What is the frontier, and what are the three common queue variants?',
-      sourceReference: { section: 'Infrastructure for Search Algorithms', pages: [6, 7] },
       answer: {
-        shortStatus: 'slide-based',
+        shortStatus: 'course-concept',
         short: [
           { type: 'p', text: 'The frontier is the set of nodes available for expansion. Its queue can be:' },
           { type: 'ul', items: ['FIFO: pops the oldest element', 'LIFO (stack): pops the newest element', 'Priority queue: pops the highest-priority element'] },
@@ -115,17 +113,12 @@ export default definePracticeSet({
       answerStyle: 'comparison',
       topic: 'BFS vs DFS',
       difficulty: 'intermediate',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Compare BFS and DFS on completeness, optimality, time and space.',
-      sourceReference: { section: 'BFS Vs. DFS', pages: [22, 23, 46, 49] },
-      slideNote: {
-        status: 'corrected-concept',
-        slideWording: "Slide 23: \"Finds the shortest path (if all steps cost the same). Which means it is always optimal.\"",
-        concept: "BFS is not always optimal. It is optimal when all step costs are equal, the condition stated on slide 22.",
-      },
+      mixUp: "BFS is optimal only when all step costs are equal.",
       answer: {
-        shortStatus: 'slide-based',
-        detailedStatus: 'slide-based',
+        shortStatus: 'course-concept',
+        detailedStatus: 'course-concept',
         short: [
           {
             type: 'table',
@@ -151,11 +144,10 @@ export default definePracticeSet({
       answerStyle: 'explanation',
       topic: 'Depth-first search',
       difficulty: 'intermediate',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'What is the "blind alley" problem of DFS, and how does it affect completeness?',
-      sourceReference: { section: 'Properties and disadvantages of DFS', pages: [46, 48] },
       answer: {
-        shortStatus: 'slide-based',
+        shortStatus: 'course-concept',
         short: [{ type: 'p', text: 'DFS can keep going deeper down one path and get lost. In an infinite-depth space it may never come back to the branch holding the goal, so it is not complete.' }],
       },
     },
@@ -165,14 +157,13 @@ export default definePracticeSet({
       answerStyle: 'explanation',
       topic: 'Uniform-cost search',
       difficulty: 'foundational',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'State the main idea of uniform-cost search and when it is optimal.',
-      sourceReference: { section: 'Uniform Cost Search (UCS)', pages: [25, 26] },
       answer: {
-        shortStatus: 'slide-based',
-        detailedStatus: 'slide-based',
+        shortStatus: 'course-concept',
+        detailedStatus: 'course-concept',
         short: [{ type: 'p', text: 'Expand the node with the lowest path cost g(n). It is optimal when step costs are non-negative, so path cost never decreases with depth.' }],
-        detailed: [{ type: 'p', text: 'UCS is a variant of Dijkstra\'s algorithm and is guided by path cost instead of depth. Slide 26 also requires a positive lower bound ε on action costs in its complexity result.' }],
+        detailed: [{ type: 'p', text: 'UCS is a variant of Dijkstra\'s algorithm and is guided by path cost instead of depth. Its complexity result also assumes a positive lower bound ε on action costs.' }],
         more: [
           {
             status: 'additional-clarification',
@@ -187,11 +178,10 @@ export default definePracticeSet({
       answerStyle: 'explanation',
       topic: 'Iterative deepening',
       difficulty: 'intermediate',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'How does iterative deepening work, when is it preferred, and what is its disadvantage?',
-      sourceReference: { section: 'Iterative deepening search', pages: [53, 60] },
       answer: {
-        shortStatus: 'slide-based',
+        shortStatus: 'course-concept',
         short: [
           {
             type: 'ul',
@@ -206,16 +196,11 @@ export default definePracticeSet({
       answerStyle: 'explanation',
       topic: 'Depth-limited search',
       difficulty: 'intermediate',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'When is depth-limited search complete, and why is it not optimal?',
-      sourceReference: { section: 'Depth-Limited Search (DLS)', pages: [51, 52] },
-      slideNote: {
-        status: 'corrected-concept',
-        slideWording: "Slide 52: \"Complete? Yes if there is a goal state at a depth less than L\".",
-        concept: "A goal exactly at depth L is also reached, because only nodes beyond the bound are excluded. The condition is depth at most L.",
-      },
+      mixUp: "Depth-limited search is complete when a goal exists at depth at most L, including exactly L.",
       answer: {
-        shortStatus: 'corrected-concept',
+        shortStatus: 'course-concept',
         short: [
           {
             type: 'ul',
@@ -232,12 +217,11 @@ export default definePracticeSet({
       difficulty: 'advanced',
       questionStatus: 'original-worked-example',
       prompt: 'A search tree has branching factor b = 3 and its shallowest solution is at depth d = 3. How many nodes does BFS generate in the worst case?',
-      sourceReference: { section: 'Properties of Breadth-first Search', pages: [22] },
       answer: {
         shortStatus: 'original-worked-example',
         detailedStatus: 'original-worked-example',
         short: [{ type: 'formula', text: '1 + 3 + 9 + 27 = 40 nodes' }],
-        detailed: [{ type: 'p', text: 'Apply 1 + b + b² + … + bᵈ, which is the level-by-level count. It is dominated by the last term, which is why the slides write it as O(bᵈ).' }],
+        detailed: [{ type: 'p', text: 'Apply 1 + b + b² + … + bᵈ, which is the level-by-level count. It is dominated by the last term, which is why it is written as O(bᵈ).' }],
       },
     },
     {
@@ -245,9 +229,8 @@ export default definePracticeSet({
       kind: 'complete',
       topic: 'Search taxonomy',
       difficulty: 'foundational',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Complete the classification of search algorithms.',
-      sourceReference: { section: 'Search Algorithm', pages: [2, 9] },
       figure: taxonomy(['1', '2', '3', '4'], 'blank'),
       slots: [
         { nodeId: 'un', options: ALGORITHM_PARTS, expected: 'Uninformed (blind)' },
@@ -256,8 +239,8 @@ export default definePracticeSet({
         { nodeId: 'astar', options: ALGORITHM_PARTS, expected: 'A* search' },
       ],
       answer: {
-        shortStatus: 'slide-based',
-        short: [{ type: 'p', text: 'Uninformed strategies use only the problem definition; informed strategies add problem-specific knowledge. Slide 2 also lists bidirectional search under uninformed.' }],
+        shortStatus: 'course-concept',
+        short: [{ type: 'p', text: 'Uninformed strategies use only the problem definition; informed strategies add problem-specific knowledge. Bidirectional search is also uninformed.' }],
         figure: taxonomy(ALGORITHM_PARTS),
       },
     },
@@ -266,9 +249,8 @@ export default definePracticeSet({
       kind: 'table',
       topic: 'Search infrastructure',
       difficulty: 'foundational',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Which frontier does each algorithm use?',
-      sourceReference: { section: 'BFS, UCS, DFS and DLS implementation', pages: [11, 25, 34, 52] },
       columns: ['Algorithm', 'Frontier'],
       rows: [
         [{ given: 'Breadth-first search' }, { accepted: ['FIFO queue'], options: FRONTIERS }],
@@ -276,13 +258,9 @@ export default definePracticeSet({
         [{ given: 'Depth-first search' }, { accepted: ['LIFO queue (stack)'], options: FRONTIERS }],
         [{ given: 'Depth-limited search' }, { accepted: ['LIFO queue (stack)'], options: FRONTIERS }],
       ],
-      slideNote: {
-        status: 'additional-clarification',
-        slideWording: "Slide 25: nodes are \"ordered according to their path cost\". The UCS slides do not name a data structure.",
-        concept: "A priority queue, defined on slide 7, is the standard way to implement that ordering.",
-      },
+      mixUp: "UCS orders nodes by path cost. A priority queue is the standard way to implement that ordering.",
       answer: {
-        shortStatus: 'slide-based',
+        shortStatus: 'course-concept',
         short: [{ type: 'p', text: 'BFS uses FIFO, UCS orders by path cost, and DFS and DLS both use LIFO. DLS simply adds a depth limit.' }],
       },
     },
@@ -291,9 +269,8 @@ export default definePracticeSet({
       kind: 'table',
       topic: 'Complexity',
       difficulty: 'intermediate',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Complete the comparison table of BFS, DFS and IDS.',
-      sourceReference: { section: 'BFS Vs. DFS Vs. IDS', pages: [59] },
       columns: ['Property', 'BFS', 'DFS', 'IDS'],
       rows: [
         [{ given: 'Complete?' }, { accepted: ['Yes'], options: YES_NO }, { accepted: ['No'], options: YES_NO }, { accepted: ['Yes'], options: YES_NO }],
@@ -302,7 +279,7 @@ export default definePracticeSet({
         [{ given: 'Optimal?' }, { accepted: ['Yes'], options: YES_NO }, { accepted: ['No'], options: YES_NO }, { accepted: ['Yes'], options: YES_NO }],
       ],
       answer: {
-        shortStatus: 'slide-based',
+        shortStatus: 'course-concept',
         short: [{ type: 'p', text: 'IDS combines the completeness and optimality of BFS (for equal step costs) with memory that is linear in depth, like DFS.' }],
       },
     },
@@ -314,7 +291,6 @@ export default definePracticeSet({
       questionStatus: 'original-worked-example',
       prompt: 'Goal is H. Give the BFS visiting order, stopping when H is removed from the queue. Children are added left to right.',
       traceRules: { order: "Children are added left to right. FIFO order leaves no ties.", goalTest: "Tested when a node is removed from the queue." },
-      sourceReference: { section: 'Breadth-First Search walkthrough', pages: [12, 21] },
       figure: TRAVERSAL_TREE,
       tokens: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'],
       expected: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'],
@@ -337,7 +313,7 @@ export default definePracticeSet({
         more: [
           {
             status: 'additional-clarification',
-            blocks: [{ type: 'p', text: "The slides stop when the goal is removed from the queue, as on slide 21. Some textbooks test BFS when a node is generated, which would stop earlier, as soon as H is added. The answer here follows the slides." }],
+            blocks: [{ type: 'p', text: "This trace stops when the goal is removed from the queue. Some textbooks test BFS when a node is generated, which would stop earlier, as soon as H is added." }],
           },
         ],
       },
@@ -350,7 +326,6 @@ export default definePracticeSet({
       questionStatus: 'original-worked-example',
       prompt: 'Goal is H in the tree below. Trace DFS: give the stack after each node is removed and its children pushed, with the top of the stack first and left children on top. Write "goal" when H is removed.',
       traceRules: { order: "Children are pushed so the leftmost is on top. LIFO order leaves no ties.", goalTest: "Tested when a node is removed from the stack." },
-      sourceReference: { section: 'Depth-First Search walkthrough', pages: [34, 35, 36, 37, 38, 44] },
       figure: TRAVERSAL_TREE,
       columns: ['Removed', 'Stack (top first)'],
       rows: [
@@ -376,7 +351,6 @@ export default definePracticeSet({
       questionStatus: 'original-worked-example',
       prompt: 'Trace UCS from S to G. List the frontier alphabetically as node and g value, such as "A3, B1". Keep only the cheapest entry for each node. The goal test happens when a node is removed.',
       traceRules: { order: "Remove the lowest g(n). Ties would break alphabetically, but none occur. A cheaper entry replaces a dearer one for the same node.", goalTest: "Tested when a node is removed, not when it is generated." },
-      sourceReference: { section: 'Uniform Cost Search (UCS) example', pages: [27, 28, 29, 30, 31, 32, 33] },
       figure: COST_GRAPH,
       columns: ['Removed (g)', 'Frontier after expanding'],
       rows: [
@@ -411,7 +385,6 @@ export default definePracticeSet({
       questionStatus: 'original-worked-example',
       prompt: 'Goal is G. Run depth-limited search with L = 2 (the root has depth 0). Give the visiting order, going left to right.',
       traceRules: { order: "Children are visited left to right. Nodes at depth L are visited but not expanded.", goalTest: "Tested when a node is visited." },
-      sourceReference: { section: 'Depth-Limited Search (DLS)', pages: [50, 51, 52] },
       figure: LIMITED_TREE,
       tokens: ['A', 'B', 'C', 'D', 'E', 'F', 'G'],
       expected: ['A', 'B', 'D', 'E', 'C', 'F'],
@@ -440,7 +413,6 @@ export default definePracticeSet({
       questionStatus: 'original-worked-example',
       prompt: 'Goal is F. Give the nodes visited in each iteration of iterative deepening, going left to right and stopping as soon as the goal is visited.',
       traceRules: { order: "Each iteration restarts from the root and visits children left to right.", goalTest: "Tested when a node is visited. The search stops at once when the goal is visited." },
-      sourceReference: { section: 'Iterative Deepening Search (l = 0 to 3)', pages: [55, 56, 57, 58] },
       figure: DEEPENING_TREE,
       columns: ['Limit', 'Nodes visited'],
       rows: [

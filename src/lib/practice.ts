@@ -43,15 +43,13 @@ export const KIND_LABEL: Record<PracticeKind, string> = {
 };
 
 export const STATUS_LABEL: Record<SourceStatus, string> = {
-  'slide-based': 'Slide-based',
-  'corrected-concept': 'Corrected concept',
+  'course-concept': 'Course concept',
   'additional-clarification': 'Additional clarification',
   'original-worked-example': 'Original worked example',
 };
 
 export const STATUS_MEANING: Record<SourceStatus, string> = {
-  'slide-based': 'Directly supported by the lecture material.',
-  'corrected-concept': 'Scientifically corrected where a lecture slide contains an apparent error.',
-  'additional-clarification': 'Standard academic information that expands on the slides.',
+  'course-concept': 'A core concept of this subject.',
+  'additional-clarification': 'Standard academic information beyond the core material.',
   'original-worked-example': 'A practice example created to demonstrate a course concept.',
 };

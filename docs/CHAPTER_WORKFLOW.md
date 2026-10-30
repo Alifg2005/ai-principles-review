@@ -18,10 +18,10 @@ or style changes.
 
 ```bash
 ls course-materials/chapters/
-grep -h "fileName:" src/data/chapters/*.ts
+grep -h "title:" src/data/chapters/*.ts
 ```
 
-The new PDF is the one whose filename is not yet registered. If more than one file is new,
+The new PDF is the one whose chapter title is not yet registered. If more than one file is new,
 or none is, **stop and report** instead of guessing.
 
 ## 2. Verify protection before reading it
@@ -42,20 +42,6 @@ OUT="$(mktemp -d)"
 pdftotext -layout "course-materials/chapters/<file>.pdf" "$OUT/source.txt"
 ```
 
-- **Page count:** `pdftotext` ends *every* page, including the last one, with a form feed (`\f`).
-  So the number of form-feed characters equals the number of pages:
-
-  ```bash
-  tr -cd '\f' < "$OUT/source.txt" | wc -c      # = pageCount
-  ```
-
-  Do **not** split the text on `\f` and count the pieces: that yields one extra, empty segment
-  after the final form feed and overcounts by one. If `pdfinfo` (poppler) is available, its
-  `Pages:` line is an independent check; the two must agree. Also confirm that the last printed
-  slide number in the text matches the count (decks may have unnumbered title slides, so treat a
-  mismatch as something to investigate, not to "fix" by guessing).
-- **Citing pages:** page N is the text before the N-th form feed. Cite these 1-based PDF page
-  numbers; on these decks they match the slide numbers printed on each slide.
 - Read every page. Note image-only pages (no text) and garbled symbols (logic glyphs often drop).
 - If the PDF is scanned, try OCR (e.g. `ocrmypdf` or `tesseract`) if available. If reliable text
   still cannot be obtained, **report the specific pages/limits and do not invent content**.
@@ -65,10 +51,10 @@ pdftotext -layout "course-materials/chapters/<file>.pdf" "$OUT/source.txt"
 - **Title:** from the title slide.
 - **Number:** the lecture/topic/week number printed in the deck or filename. If it is absent,
   infer only from explicit evidence (e.g. "next lecture" references) and record that in
-  `source.note`. If it stays ambiguous, stop and report.
+  your completion report. If it stays ambiguous, stop and report.
 - **id:** kebab-case slug of the title.
-- Check for collisions: `grep -h "id:\|number:\|fileName:" src/data/chapters/*.ts`. The
-  validator also rejects duplicate ids, numbers and filenames. Never overwrite an existing chapter.
+- Check for collisions: `grep -h "id:\|number:\|title:" src/data/chapters/*.ts`. The
+  validator also rejects duplicate ids and numbers. Never overwrite an existing chapter.
 
 ## 5. Write the questions
 
@@ -82,7 +68,7 @@ export default defineChapter({
   number: 9,
   title: 'Title From Slide',
   description: 'One or two sentences on what the chapter covers.',
-  source: { fileName: 'Exact File Name.pdf', label: 'Topic 9', pageCount: 42 },
+  source: { label: 'Topic 9' },
   questions: [
     {
       id: 'ch09-q01',
@@ -91,7 +77,6 @@ export default defineChapter({
       correctAnswerIndex: 2,
       explanation: '…',
       difficulty: 'foundational',
-      sourceReference: { section: 'Heading on the slide', pages: [5, 6] },
     },
     // … exactly 20
   ],
@@ -100,7 +85,7 @@ export default defineChapter({
 
 Follow AGENTS.md §8 and §10: original wording, plausible distractors, balanced difficulty,
 planned answer positions (each index 3–7 times, never three equal in a row), concise
-explanations, accurate slide citations.
+explanations. Do not put filenames, slide numbers or extraction notes in the data.
 
 ## 6. Register it
 
@@ -112,7 +97,7 @@ Do not reorder or edit other entries; sorting is automatic by `number`.
 Create `src/data/practice/NN-<slug>.ts` with `definePracticeSet`, using the chapter's `id` as
 `chapterId` and ids like `p09-01`, and register it in `src/data/practice/index.ts`. Follow
 AGENTS.md §7a: choose question kinds from what the slides actually ask students to do, render the
-diagram slides to check them (text extraction misses figures), record slide errors in `slideNote`,
+diagram slides to check them (text extraction misses figures), present the correct concept directly, using `mixUp` for frequent confusions,
 and add recomputation checks for any algorithm or logic answers. A chapter without a practice set
 is valid: it simply does not appear in that section.
 
@@ -122,7 +107,7 @@ is valid: it simply does not appear in that section.
 npm run validate
 ```
 
-Then re-read each question against its cited slides and confirm the answer key. Fix and re-run
+Then re-read each question against the source and confirm the answer key. Fix and re-run
 until it passes cleanly.
 
 ## 8. Full verification

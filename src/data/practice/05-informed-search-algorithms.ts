@@ -37,11 +37,10 @@ export default definePracticeSet({
       answerStyle: 'definition',
       topic: 'Best-first search',
       difficulty: 'foundational',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'How does best-first search choose the next node, and how is it implemented?',
-      sourceReference: { section: 'Informed/Heuristic Search', pages: [5] },
       answer: {
-        shortStatus: 'slide-based',
+        shortStatus: 'course-concept',
         short: [{ type: 'p', text: 'It expands the node with the lowest value of an evaluation function f(n), read as a cost estimate. It is implemented with a priority queue.' }],
       },
     },
@@ -51,11 +50,10 @@ export default definePracticeSet({
       answerStyle: 'definition',
       topic: 'A* search',
       difficulty: 'foundational',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Write the A* evaluation function and define each term.',
-      sourceReference: { section: 'A* Search', pages: [27] },
       answer: {
-        shortStatus: 'slide-based',
+        shortStatus: 'course-concept',
         short: [
           { type: 'formula', text: 'f(n) = g(n) + h(n)' },
           {
@@ -71,17 +69,12 @@ export default definePracticeSet({
       answerStyle: 'comparison',
       topic: 'Greedy vs A*',
       difficulty: 'intermediate',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Compare greedy best-first search with A*.',
-      sourceReference: { section: 'Greedy best-first search / A* Search', pages: [8, 15, 27, 36] },
-      slideNote: {
-        status: 'corrected-concept',
-        slideWording: "Slide 27: A* \"is both complete and optimal\", with no conditions stated.",
-        concept: "Both need conditions. Slide 36 gives them: optimal with an admissible heuristic, and complete unless infinitely many nodes have f < f(G).",
-      },
+      mixUp: "A* is optimal with an admissible heuristic, and complete unless infinitely many nodes have f < f(G).",
       answer: {
-        shortStatus: 'corrected-concept',
-        detailedStatus: 'slide-based',
+        shortStatus: 'course-concept',
+        detailedStatus: 'course-concept',
         short: [
           {
             type: 'table',
@@ -97,7 +90,7 @@ export default definePracticeSet({
           },
         ],
         detailed: [
-          { type: 'p', text: 'Greedy looks only ahead, so it can be drawn into paths that are already expensive. A* also counts the cost already paid. Both keep all nodes in memory, and a good heuristic can improve their running time dramatically. The lecture states A* is optimal with an admissible heuristic and complete unless infinitely many nodes have f < f(G). Its Romania tree regenerates cities such as Arad, which is tree search.' },
+          { type: 'p', text: 'Greedy looks only ahead, so it can be drawn into paths that are already expensive. A* also counts the cost already paid. Both keep all nodes in memory, and a good heuristic can improve their running time dramatically. A* is optimal with an admissible heuristic and complete unless infinitely many nodes have f < f(G). The Romania walkthrough regenerates cities such as Arad, which is tree search.' },
         ],
         more: [
           {
@@ -113,11 +106,10 @@ export default definePracticeSet({
       answerStyle: 'definition',
       topic: 'Admissible heuristics',
       difficulty: 'intermediate',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Define an admissible heuristic, and explain why straight-line distance is admissible.',
-      sourceReference: { section: 'A* Search: admissible heuristic', pages: [28] },
       answer: {
-        shortStatus: 'slide-based',
+        shortStatus: 'course-concept',
         more: [
           {
             status: 'additional-clarification',
@@ -136,16 +128,11 @@ export default definePracticeSet({
       answerStyle: 'explanation',
       topic: 'Greedy best-first search',
       difficulty: 'intermediate',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Using the Romania example, explain why greedy best-first search is neither complete nor optimal.',
-      sourceReference: { section: 'Properties of greedy best-first search', pages: [14, 15] },
-      slideNote: {
-        status: 'additional-clarification',
-        slideWording: "Slide 14 marks \"450 Miles\", while slide 15 says \"32 kilometers longer\".",
-        concept: "The unit is inconsistent and the decks do not settle it. The difference of 32 between the two routes holds on the map values.",
-      },
+      mixUp: "Treat the distances as plain numbers. The difference between the two routes is 32.",
       answer: {
-        shortStatus: 'slide-based',
+        shortStatus: 'course-concept',
         short: [
           {
             type: 'ul',
@@ -162,7 +149,6 @@ export default definePracticeSet({
       questionStatus: 'original-worked-example',
       prompt: 'Goal is G. Give the order in which greedy best-first search expands nodes, using the h values shown.',
       traceRules: { order: "Expand the lowest h(n) in the frontier. No ties occur in this example.", goalTest: "Tested when a node is selected for expansion." },
-      sourceReference: { section: 'Greedy best-first search example', pages: [16, 17, 18, 19, 20, 21, 22, 23] },
       figure: tree(
         'S',
         { S: ['A', 'B'], A: ['C', 'D'], B: ['E', 'F'], E: ['G'] },
@@ -192,7 +178,6 @@ export default definePracticeSet({
       questionStatus: 'original-worked-example',
       prompt: 'Run greedy best-first search on this graph, from S to G. Give the expansion order.',
       traceRules: { order: "Expand the lowest h(n) in the frontier. No ties occur in this example.", goalTest: "Tested when a node is selected for expansion." },
-      sourceReference: { section: 'Greedy best-first search / Properties', pages: [8, 15] },
       figure: ROUTE_GRAPH,
       tokens: ['S', 'A', 'B', 'C', 'D', 'G'],
       expected: ['S', 'B', 'G'],
@@ -216,7 +201,6 @@ export default definePracticeSet({
       questionStatus: 'original-worked-example',
       prompt: 'Run A* on the same graph from S to G. Give f for each node as it is generated, and the node expanded next.',
       traceRules: { order: "Expand the lowest f(n). Ties break alphabetically; B and D tie at 8 but neither is ever lowest.", goalTest: "Tested when a node is selected for expansion, not when it is generated." },
-      sourceReference: { section: 'A* Search Example', pages: [30, 31, 32, 33, 34] },
       figure: ROUTE_GRAPH,
       columns: ['Expanded', 'Generated: f = g + h', 'Next to expand'],
       rows: [
@@ -251,7 +235,6 @@ export default definePracticeSet({
       difficulty: 'intermediate',
       questionStatus: 'original-worked-example',
       prompt: 'h* is the true cheapest cost to the goal. Is each heuristic value admissible for its node?',
-      sourceReference: { section: 'A* Search: admissible heuristic', pages: [28] },
       columns: ['Node', 'h(n)', 'h*(n)', 'Admissible?'],
       rows: [
         [{ given: 'K' }, { given: '4' }, { given: '6' }, { accepted: ['Yes'], options: YES_NO }],
@@ -269,9 +252,8 @@ export default definePracticeSet({
       kind: 'table',
       topic: 'A* search',
       difficulty: 'intermediate',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Romania example: A* has reached Sibiu with g = 140. Complete g and f for the next cities, using the road costs and straight-line values given.',
-      sourceReference: { section: 'A* Search Example', pages: [31, 32, 33] },
       columns: ['City', 'Route cost', 'h', 'g', 'f'],
       rows: [
         [{ given: 'Fagaras' }, { given: '140 + 99' }, { given: '176' }, { accepted: ['239'] }, { accepted: ['415'] }],
@@ -280,7 +262,7 @@ export default definePracticeSet({
         [{ given: 'Bucharest via Pitesti' }, { given: '317 + 101' }, { given: '0' }, { accepted: ['418'] }, { accepted: ['418'] }],
       ],
       answer: {
-        shortStatus: 'slide-based',
+        shortStatus: 'course-concept',
         short: [{ type: 'p', text: 'A* expands Rimnicu Vilcea (413) before Fagaras (415), and finally returns Bucharest via Pitesti at 418, not the 450 route through Fagaras.' }],
       },
     },
@@ -289,9 +271,8 @@ export default definePracticeSet({
       kind: 'table',
       topic: 'Comparison',
       difficulty: 'foundational',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Complete the comparison of the two informed strategies.',
-      sourceReference: { section: 'Comparison', pages: [37] },
       columns: ['Property', 'Greedy', 'A*'],
       rows: [
         [{ given: 'Complete?' }, { accepted: ['No'], options: YES_NO }, { accepted: ['Yes'], options: YES_NO }],
@@ -300,12 +281,12 @@ export default definePracticeSet({
         [{ given: 'Optimal?' }, { accepted: ['No'], options: YES_NO }, { accepted: ['Yes'], options: YES_NO }],
       ],
       answer: {
-        shortStatus: 'slide-based',
-        short: [{ type: 'p', text: 'A* is better on every line of the lecture table. Its optimality assumes an admissible heuristic.' }],
+        shortStatus: 'course-concept',
+        short: [{ type: 'p', text: 'A* is better on every line of the table. Its optimality assumes an admissible heuristic.' }],
         more: [
           {
             status: 'additional-clarification',
-            blocks: [{ type: 'p', text: "The admissible condition applies directly to tree search. Graph search that never reopens closed nodes needs a consistent heuristic. The lecture table shows O(bᵈ) for A*; the practical cost depends strongly on heuristic quality." }],
+            blocks: [{ type: 'p', text: "The admissible condition applies directly to tree search. Graph search that never reopens closed nodes needs a consistent heuristic. The table shows O(bᵈ) for A*; the practical cost depends strongly on heuristic quality." }],
           },
         ],
       },

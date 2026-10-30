@@ -93,11 +93,10 @@ export default definePracticeSet({
       answerStyle: 'definition',
       topic: 'Agents',
       difficulty: 'foundational',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Define an intelligent agent, and give one human and one robotic example of sensors and actuators.',
-      sourceReference: { section: 'What is an intelligent agent?', pages: [5, 6] },
       answer: {
-        shortStatus: 'slide-based',
+        shortStatus: 'course-concept',
         short: [
           { type: 'p', text: 'An autonomous entity that perceives its environment through sensors and acts on it through actuators to achieve goals. It may learn from the environment.' },
           {
@@ -113,11 +112,10 @@ export default definePracticeSet({
       answerStyle: 'comparison',
       topic: 'Percepts',
       difficulty: 'foundational',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Distinguish a percept from a percept sequence.',
-      sourceReference: { section: 'What is Percept? / Percept sequence', pages: [8, 9] },
       answer: {
-        shortStatus: 'slide-based',
+        shortStatus: 'course-concept',
         detailedStatus: 'original-worked-example',
         short: [
           {
@@ -134,11 +132,10 @@ export default definePracticeSet({
       answerStyle: 'list',
       topic: 'Rationality',
       difficulty: 'intermediate',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'What is a rational agent, and which four factors determine rationality?',
-      sourceReference: { section: 'Rational agent', pages: [15, 16] },
       answer: {
-        shortStatus: 'slide-based',
+        shortStatus: 'course-concept',
         detailedStatus: 'additional-clarification',
         short: [
           { type: 'p', text: 'An agent that chooses the action expected to maximise its performance measure, given its evidence and built-in knowledge. Rationality depends on:' },
@@ -156,12 +153,11 @@ export default definePracticeSet({
       answerStyle: 'comparison',
       topic: 'Agent types',
       difficulty: 'intermediate',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'How does a model-based reflex agent differ from a simple reflex agent?',
-      sourceReference: { section: 'Simple reflex agents / Model-based reflex agents', pages: [23, 26, 27] },
       answer: {
-        shortStatus: 'slide-based',
-        detailedStatus: 'slide-based',
+        shortStatus: 'course-concept',
+        detailedStatus: 'course-concept',
         short: [
           {
             type: 'ul',
@@ -182,11 +178,10 @@ export default definePracticeSet({
       answerStyle: 'comparison',
       topic: 'Agent types',
       difficulty: 'intermediate',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Why are goals sometimes not enough? Explain the difference between goal-based and utility-based agents.',
-      sourceReference: { section: 'Goal-based agents / Utility-based agent', pages: [30, 33] },
       answer: {
-        shortStatus: 'slide-based',
+        shortStatus: 'course-concept',
         short: [
           {
             type: 'ul',
@@ -205,11 +200,10 @@ export default definePracticeSet({
       answerStyle: 'list',
       topic: 'Learning agents',
       difficulty: 'intermediate',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Name the four elements of a learning agent and state the role of each.',
-      sourceReference: { section: 'Learning agent', pages: [38] },
       answer: {
-        shortStatus: 'slide-based',
+        shortStatus: 'course-concept',
         short: [
           {
             type: 'ul',
@@ -230,7 +224,6 @@ export default definePracticeSet({
       difficulty: 'intermediate',
       questionStatus: 'original-worked-example',
       prompt: 'Write a PEAS description for a smart irrigation controller that waters a farm field. Several answers are valid.',
-      sourceReference: { section: 'PEAS', pages: [17, 18, 19, 20, 21] },
       columns: ['Element', 'Your answer'],
       rows: [
         [{ given: 'Performance measure' }, { accepted: ['Healthy crops, water saved'], selfCheck: true }],
@@ -262,9 +255,8 @@ export default definePracticeSet({
       kind: 'table',
       topic: 'Vacuum-cleaner world',
       difficulty: 'foundational',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Trace the reflex vacuum agent: give the action for each [location, status] percept.',
-      sourceReference: { section: 'Example: Vacuum-cleaner world', pages: [13, 14] },
       columns: ['Percept', 'Action'],
       rows: [
         [{ given: '[A, Dirty]' }, { accepted: ['Suck'], options: VACUUM }],
@@ -273,8 +265,8 @@ export default definePracticeSet({
         [{ given: '[B, Clean]' }, { accepted: ['Left'], options: VACUUM }],
       ],
       answer: {
-        shortStatus: 'slide-based',
-        detailedStatus: 'slide-based',
+        shortStatus: 'course-concept',
+        detailedStatus: 'course-concept',
         short: [{ type: 'p', text: 'If the square is dirty, suck. Otherwise move to the other square: right from A, left from B.' }],
         detailed: [{ type: 'p', text: 'The status test comes first, so location only matters when the square is clean. The agent uses only the current percept, which makes it a simple reflex agent.' }],
       },
@@ -296,7 +288,6 @@ export default definePracticeSet({
           ],
         },
       ],
-      sourceReference: { section: 'Types of AI Agents', pages: [22, 23, 26, 30, 33, 36] },
       columns: ['System', 'Agent type'],
       rows: [
         [{ given: 'An automatic door opens whenever its motion sensor fires' }, { accepted: ['Simple reflex'], options: TYPES, selfCheck: true }],
@@ -321,7 +312,7 @@ export default definePracticeSet({
         more: [
           {
             status: 'additional-clarification',
-            blocks: [{ type: 'p', text: "The model classification follows the stated descriptions. Real systems often combine types: slide 22 notes that any type can become a learning agent, a music app may also score songs by utility, and a warehouse robot that compares paths by time would be utility-based. Given different assumptions, a different label can be equally defensible." }],
+            blocks: [{ type: 'p', text: "The model classification follows the stated descriptions. Real systems often combine types: any type can become a learning agent, a music app may also score songs by utility, and a warehouse robot that compares paths by time would be utility-based. Given different assumptions, a different label can be equally defensible." }],
           },
         ],
       },
@@ -331,9 +322,8 @@ export default definePracticeSet({
       kind: 'complete',
       topic: 'Agent architecture',
       difficulty: 'intermediate',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Complete the block diagram of a model-based reflex agent.',
-      sourceReference: { section: 'Model-based reflex agents', pages: [28] },
       figure: modelBased(['1', '2', '3', '4'], 'blank'),
       slots: [
         { nodeId: 'state', options: MODEL_PARTS, expected: 'State' },
@@ -342,7 +332,7 @@ export default definePracticeSet({
         { nodeId: 'rules', options: MODEL_PARTS, expected: 'Condition–action rules' },
       ],
       answer: {
-        shortStatus: 'slide-based',
+        shortStatus: 'course-concept',
         short: [{ type: 'p', text: 'State and the two world-knowledge boxes feed "What is the world like now?". The rules then turn that picture into an action.' }],
         figure: modelBased(MODEL_PARTS),
       },
@@ -352,9 +342,8 @@ export default definePracticeSet({
       kind: 'complete',
       topic: 'Learning agents',
       difficulty: 'intermediate',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Complete the block diagram of a learning agent.',
-      sourceReference: { section: 'Learning agent', pages: [37, 38] },
       figure: learningAgent(['1', '2', '3', '4'], 'blank'),
       slots: [
         { nodeId: 'critic', options: LEARNING_PARTS, expected: 'Critic' },
@@ -363,7 +352,7 @@ export default definePracticeSet({
         { nodeId: 'gen', options: LEARNING_PARTS, expected: 'Problem generator' },
       ],
       answer: {
-        shortStatus: 'slide-based',
+        shortStatus: 'course-concept',
         short: [{ type: 'p', text: 'The critic judges results, the learning element changes the performance element, and the problem generator proposes experiments.' }],
         figure: learningAgent(LEARNING_PARTS),
       },
@@ -373,11 +362,10 @@ export default definePracticeSet({
       kind: 'draw',
       topic: 'Agent architecture',
       difficulty: 'foundational',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Draw the block diagram of a simple reflex agent, including the environment.',
-      sourceReference: { section: 'Simple reflex agents', pages: [24] },
       answer: {
-        shortStatus: 'slide-based',
+        shortStatus: 'course-concept',
         short: [{ type: 'p', text: 'Sensors report the current state, condition–action rules choose the action, and effectors carry it out. No state or memory box appears.' }],
         figure: {
           directed: true,

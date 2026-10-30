@@ -14,7 +14,7 @@ export function SiteFooter() {
               {course.code ? `${course.code} · ` : ''}
               {course.title}
             </span>
-            . Questions are original and written from the lecture materials.
+            . Questions are original and written from the lecture materials. Unofficial study aid. AI-assisted content; verify with your course materials.
           </p>
         </div>
         <p className="font-mono text-xs leading-relaxed tracking-wide md:text-right">

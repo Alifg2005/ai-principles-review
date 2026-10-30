@@ -41,12 +41,11 @@ export default definePracticeSet({
       answerStyle: 'comparison',
       topic: 'Blind vs informed',
       difficulty: 'foundational',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Compare blind (uninformed) search with informed search.',
-      sourceReference: { section: 'Search / Informed Search', pages: [4, 23] },
       answer: {
-        shortStatus: 'slide-based',
-        detailedStatus: 'slide-based',
+        shortStatus: 'course-concept',
+        detailedStatus: 'course-concept',
         short: [
           {
             type: 'ul',
@@ -65,11 +64,10 @@ export default definePracticeSet({
       answerStyle: 'definition',
       topic: 'Heuristics',
       difficulty: 'foundational',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'What is a heuristic, and why is there no general theory for finding one?',
-      sourceReference: { section: 'Heuristics', pages: [24] },
       answer: {
-        shortStatus: 'slide-based',
+        shortStatus: 'course-concept',
         short: [
           { type: 'ul', items: ['A function that estimates solution cost; a rule of thumb for which choice might be best.', 'Every problem is different, so the choice depends on knowledge of that problem space.'] },
         ],
@@ -81,11 +79,10 @@ export default definePracticeSet({
       answerStyle: 'steps',
       topic: 'Breadth-first search',
       difficulty: 'foundational',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'State the steps of the BFS algorithm and the data structure it uses.',
-      sourceReference: { section: 'Breadth-first search / BFS Algorithm', pages: [6, 19] },
       answer: {
-        shortStatus: 'slide-based',
+        shortStatus: 'course-concept',
         detailedStatus: 'additional-clarification',
         short: [
           { type: 'p', text: 'FIFO queue:' },
@@ -103,16 +100,11 @@ export default definePracticeSet({
       answerStyle: 'comparison',
       topic: 'Best-first search',
       difficulty: 'foundational',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'What do the OPEN and CLOSED lists hold in best-first search, and which node is chosen next?',
-      sourceReference: { section: 'Best-First Search', pages: [26, 27] },
-      slideNote: {
-        status: 'additional-clarification',
-        slideWording: "These slides abbreviate best-first search as \"BFS\", the same abbreviation used for breadth-first search.",
-        concept: "They are different algorithms. Write the names out in an exam to avoid ambiguity.",
-      },
+      mixUp: "Write the names out in an exam: best-first search and breadth-first search are different algorithms, although both are sometimes abbreviated BFS.",
       answer: {
-        shortStatus: 'slide-based',
+        shortStatus: 'course-concept',
         short: [
           {
             type: 'ul',
@@ -127,24 +119,19 @@ export default definePracticeSet({
       answerStyle: 'list',
       topic: 'Breadth-first search',
       difficulty: 'foundational',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Give three applications of BFS.',
-      sourceReference: { section: 'Applications of BFS', pages: [22] },
-      slideNote: {
-        status: 'corrected-concept',
-        slideWording: "Slide 22: \"shortest path between two edges\".",
-        concept: "A path connects nodes, so this should read \"between two nodes\".",
-      },
+      mixUp: "A path connects nodes, so say 'between two nodes'.",
       answer: {
-        shortStatus: 'slide-based',
-        detailedStatus: 'slide-based',
+        shortStatus: 'course-concept',
+        detailedStatus: 'course-concept',
         short: [
           {
             type: 'ul',
             items: ['Shortest path when length is the number of edges', 'Finding neighbouring locations in GPS navigation', 'Finding all nodes in one connected component'],
           },
         ],
-        detailed: [{ type: 'p', text: 'The slides also list peer-to-peer network connections and broadcasting packets in a network.' }],
+        detailed: [{ type: 'p', text: 'Others include peer-to-peer network connections and broadcasting packets in a network.' }],
       },
     },
     {
@@ -155,7 +142,6 @@ export default definePracticeSet({
       questionStatus: 'original-worked-example',
       prompt: 'Find the BFS visiting order for this tree. Children enter the queue from left to right.',
       traceRules: { order: "Children enter the queue left to right. No ties can occur.", goalTest: "No goal: traverse every node until the queue is empty." },
-      sourceReference: { section: 'BFS: Try and check', pages: [20, 21] },
       figure: tree('S', { S: ['A', 'B', 'C'], A: ['D', 'E'], B: ['F'], C: ['G', 'H'], E: ['I'] }),
       tokens: ['S', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'],
       expected: ['S', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'],
@@ -181,7 +167,6 @@ export default definePracticeSet({
       questionStatus: 'original-worked-example',
       prompt: 'Run BFS from P. Give the queue after each removal. Add neighbours alphabetically and skip nodes already visited. Write "empty" for an empty queue.',
       traceRules: { order: "Neighbours are added alphabetically and marked visited when added.", goalTest: "No goal: continue until the queue is empty." },
-      sourceReference: { section: 'BFS Illustration', pages: [11, 12, 13, 14, 15, 16, 17, 18] },
       figure: CYCLE_GRAPH,
       columns: ['Removed', 'Queue (head first)'],
       rows: [
@@ -214,7 +199,6 @@ export default definePracticeSet({
       questionStatus: 'original-worked-example',
       prompt: 'Build the BFS tree for the graph below, starting at P with neighbours taken alphabetically. Connect each node from the node that first discovered it.',
       traceRules: { order: "Neighbours are taken alphabetically and marked visited when discovered.", goalTest: "No goal: continue until every reachable node is discovered." },
-      sourceReference: { section: 'BFS Illustration', pages: [13, 14, 15, 16] },
       figure: CYCLE_GRAPH,
       directed: true,
       nodeLabels: ['P', 'Q', 'R', 'S', 'T'],
@@ -232,7 +216,6 @@ export default definePracticeSet({
       questionStatus: 'original-worked-example',
       prompt: 'Trace best-first search from S to goal G using h(n). Write OPEN alphabetically, and CLOSED in the order nodes were chosen.',
       traceRules: { order: "Choose the lowest h(n) in OPEN. No ties occur in this example.", goalTest: "Tested when a node is chosen from OPEN, not when it is generated." },
-      sourceReference: { section: 'Best-First Search: Example and Solution', pages: [28, 29, 31] },
       figure: BEST_FIRST_TREE,
       columns: ['Step', 'Chosen', 'OPEN after expanding', 'CLOSED'],
       rows: [

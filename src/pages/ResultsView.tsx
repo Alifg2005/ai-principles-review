@@ -4,7 +4,7 @@ import { Link } from '../app/Link';
 import { StatusLabel } from '../components/practice/AnswerPanel';
 import { ScoreRing } from '../components/ScoreRing';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
-import { formatSource, verdict } from '../lib/format';
+import { verdict } from '../lib/format';
 import { OPTION_LETTERS, pad2, scoreQuiz, type Answers, type QuestionOutcome, type QuestionResult } from '../lib/quiz';
 import type { Chapter } from '../lib/schema';
 
@@ -185,9 +185,6 @@ function ReviewItem({ item, number }: { item: QuestionResult; number: number }) 
 
       <div className="mt-5 border-l-2 border-accent pl-4">
         <p className="text-[0.95rem] leading-relaxed">{question.explanation}</p>
-        {question.sourceReference && (
-          <p className="mt-2 font-mono text-xs text-muted">Source: {formatSource(question.sourceReference)}</p>
-        )}
         {question.clarification && (
           <details className="mt-2 text-sm">
             <summary className="inline-flex min-h-11 cursor-pointer items-center gap-2 text-muted hover:text-ink">

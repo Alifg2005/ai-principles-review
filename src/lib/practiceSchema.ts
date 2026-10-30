@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { difficultySchema, sourceReferenceSchema } from './schema';
+import { difficultySchema } from './schema';
 
 const text = z.string().trim().min(1, 'must not be empty');
 
@@ -71,12 +71,11 @@ export const graphSchema = z
   });
 
 /**
- * Where a piece of content comes from. Labelled per section of an answer, because one answer can
- * combine lecture content with clarification.
+ * What kind of content a section holds. Labelled per section of an answer, because one answer can
+ * combine core material with clarification.
  */
 export const sourceStatusSchema = z.enum([
-  'slide-based',
-  'corrected-concept',
+  'course-concept',
   'additional-clarification',
   'original-worked-example',
 ]);
@@ -110,15 +109,6 @@ export const traceRulesSchema = z.object({
   goalTest: text,
 });
 
-/** A slide problem or convention, kept visibly separate from the concept stated in its place. */
-export const slideNoteSchema = z.object({
-  status: z.enum(['corrected-concept', 'additional-clarification']),
-  /** Short quotation or description of what the slide says. */
-  slideWording: text,
-  /** The scientifically accurate statement, or the convention to be aware of. */
-  concept: text,
-});
-
 const baseQuestion = {
   /** Stable identifier, e.g. `p03-07`. Never reuse or renumber. */
   id: z.string().regex(/^p\d{2}-\d{2}$/, 'must look like p03-07'),
@@ -129,12 +119,12 @@ const baseQuestion = {
   context: z.array(blockSchema).optional(),
   /** Given diagram shown with the question. */
   figure: graphSchema.optional(),
-  /** Where the question itself comes from. Reference figures and steps inherit this label. */
-  questionStatus: z.enum(['slide-based', 'original-worked-example']),
+  /** The kind of question. Reference figures and steps inherit this label. */
+  questionStatus: z.enum(['course-concept', 'original-worked-example']),
   traceRules: traceRulesSchema.optional(),
-  sourceReference: sourceReferenceSchema,
   answer: answerSchema,
-  slideNote: slideNoteSchema.optional(),
+  /** A frequent confusion about this concept, shown as "Common mix-up". */
+  mixUp: text.optional(),
 };
 
 const tableCellSchema = z.union([
@@ -200,9 +190,6 @@ export const practiceQuestionSchema = z
     const issue = (message: string, path: (string | number)[] = []) => ctx.addIssue({ code: 'custom', message, path });
     if (q.questionStatus === 'original-worked-example' && q.answer.shortStatus !== 'original-worked-example') {
       issue('the answer to an original worked example must carry the same label', ['answer', 'shortStatus']);
-    }
-    if (q.answer.shortStatus === 'corrected-concept' && q.slideNote?.status !== 'corrected-concept') {
-      issue('a corrected answer must show what the slide says in slideNote', ['slideNote']);
     }
     switch (q.kind) {
       case 'sequence': {

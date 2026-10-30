@@ -156,17 +156,28 @@ describe('practice registry', () => {
     }
   });
 
-  it('separates lecture wording from the corrected concept on flagged questions', () => {
-    for (const id of ['p01-07', 'p01-08', 'p03-05', 'p04-03', 'p04-07', 'p05-03', 'p08-04', 'p08-05']) {
-      expect(question(id).slideNote?.status, id).toBe('corrected-concept');
-    }
-    for (const id of ['p03-04', 'p04-10', 'p05-05', 'p08-03']) {
-      expect(question(id).slideNote?.status, id).toBe('additional-clarification');
-    }
+  it('uses the agreed neutral text for all 12 common mix-ups', () => {
+    const expected: Record<string, RegExp> = {
+      'p01-07': /the valid conclusion is 'Socrates is mortal'/,
+      'p01-08': /^ANI stands for Artificial Narrow Intelligence\. AGI is the separate, later stage\.$/,
+      'p03-04': /different algorithms, although both are sometimes abbreviated BFS/,
+      'p03-05': /A path connects nodes/,
+      'p04-03': /^BFS is optimal only when all step costs are equal\.$/,
+      'p04-07': /at depth at most L, including exactly L/,
+      'p04-10': /A priority queue is the standard way/,
+      'p05-03': /complete unless infinitely many nodes have f < f\(G\)/,
+      'p05-05': /Treat the distances as plain numbers/,
+      'p08-03': /closed formula or sentence/,
+      'p08-04': /^∃x At\(x, IAU\) ⇒ Smart\(x\)\. The sentence is true because/,
+      'p08-05': /∀x ∃y likes\(y,x\).*∃y ∀x likes\(y,x\)\. Quantifier order matters\.$/,
+    };
+    for (const [id, pattern] of Object.entries(expected)) expect(question(id).mixUp, id).toMatch(pattern);
+    expect(questions.filter((q) => q.mixUp)).toHaveLength(12);
   });
 
-  it('labels the answers that depend on a correction', () => {
-    for (const id of ['p04-07', 'p05-03', 'p08-05']) expect(question(id).answer.shortStatus, id).toBe('corrected-concept');
+  it('ships no source metadata or commentary about slides', () => {
+    for (const q of questions) expect(q, q.id).not.toHaveProperty('sourceReference');
+    expect(JSON.stringify(sets)).not.toMatch(/\.pdf|\bslides?\b|\blecture\b|extraction/i);
   });
 
   it('states the A* assumptions for tree and graph search', () => {
@@ -178,8 +189,8 @@ describe('practice registry', () => {
 
   it('identifies the wff definition as the convention of this lecture', () => {
     const q = question('p08-03');
-    expect(JSON.stringify(q.answer.short)).toContain("this lecture's convention");
-    expect(q.slideNote?.concept).toContain('closed formula');
+    expect(JSON.stringify(q.answer.short)).toContain("this course's convention");
+    expect(q.mixUp).toContain('closed formula');
   });
 
   it('states the p02-09 assumptions up front and does not auto-mark it', () => {
@@ -192,12 +203,10 @@ describe('practice registry', () => {
   });
 
   it('preserves the agreed conventions', () => {
-    expect(question('p04-10').slideNote?.status).toBe('additional-clarification');
-    expect(question('p04-10').slideNote?.concept).toContain('priority queue');
+    expect(question('p04-10').mixUp).toContain('priority queue');
     expect(question('p07-13').answer.shortStatus).toBe('original-worked-example');
-    // The unit stays an open question: the warning remains and no unit is chosen.
-    expect(question('p05-05').slideNote?.status).toBe('additional-clarification');
-    expect(question('p05-05').slideNote?.concept).toContain('do not settle');
+    // No unit is chosen for the Romania distances.
+    expect(question('p05-05').mixUp).toContain('plain numbers');
     // Tree and graph search stay optional, outside every short answer.
     for (const q of questions) {
       expect(JSON.stringify(q.answer.short), q.id).not.toMatch(/tree search|graph search/i);

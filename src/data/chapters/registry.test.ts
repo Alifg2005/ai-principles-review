@@ -42,11 +42,11 @@ describe('canonical chapter registry', () => {
   it('keeps the questions that gained a clarification unchanged', () => {
     const all = chapters.flatMap((c) => c.questions);
     const q14 = all.find((item) => item.id === 'ch05-q14')!;
-    expect(q14.question).toBe("According to the lecture's summary of A* properties, when is A* optimal?");
+    expect(q14.question).toBe('In the standard summary of A* properties, when is A* optimal?');
     expect(q14.options[q14.correctAnswerIndex]).toBe('When an admissible heuristic is used');
     expect(q14.correctAnswerIndex).toBe(3);
     const q08 = all.find((item) => item.id === 'ch08-q08')!;
-    expect(q08.question).toBe('According to the lecture, a well-formed formula (sentence) in FOL is one that…');
+    expect(q08.question).toBe('In this course, a well-formed formula (sentence) in FOL is one that…');
     expect(q08.options[q08.correctAnswerIndex]).toBe('contains no free variables');
     expect(q08.correctAnswerIndex).toBe(2);
   });
@@ -54,7 +54,7 @@ describe('canonical chapter registry', () => {
   it('keeps ch05-q18 unchanged apart from its clarification', () => {
     const q18 = chapters.flatMap((c) => c.questions).find((item) => item.id === 'ch05-q18')!;
     expect(q18.question).toBe(
-      "In the lecture's comparison of uninformed and informed strategies, which pair are both complete and optimal?",
+      'In the comparison of uninformed and informed strategies, which pair are both complete and optimal?',
     );
     expect(q18.options).toEqual(['DFS and greedy best-first search', 'Greedy best-first search and A*', 'DFS and IDS', 'BFS and A*']);
     expect(q18.correctAnswerIndex).toBe(3);
@@ -87,7 +87,7 @@ describe('canonical chapter registry', () => {
     for (const phrase of ['tree search', 'Graph search', 'consistent', 'not unconditional']) {
       expect(clarification('ch05-q14')).toContain(phrase);
     }
-    for (const phrase of ['stricter convention', 'use that answer in this course', 'closed formula', 'free variables']) {
+    for (const phrase of ['stricter convention', 'use that answer here', 'closed formula', 'free variables']) {
       expect(clarification('ch08-q08')).toContain(phrase);
     }
   });
@@ -124,8 +124,10 @@ describe('canonical chapter registry', () => {
       expect(levels.size).toBeGreaterThanOrEqual(2);
     });
 
-    it('cites a source reference for every question', () => {
-      for (const q of chapter.questions) expect(q.sourceReference).toBeDefined();
+    it('ships no source metadata', () => {
+      expect(Object.keys(chapter.source)).toEqual(['label']);
+      for (const q of chapter.questions) expect(q).not.toHaveProperty('sourceReference');
+      expect(JSON.stringify(chapter)).not.toMatch(/\.pdf|\bslides?\b|extraction/i);
     });
   });
 });

@@ -1,14 +1,12 @@
 import { ChevronDown, Eye, EyeOff, TriangleAlert } from 'lucide-react';
 import { usePracticeWork } from '../../hooks/usePracticeWork';
-import { formatSource } from '../../lib/format';
 import { isWritten, STATUS_LABEL, STATUS_MEANING } from '../../lib/practice';
 import type { PracticeQuestion, SourceStatus } from '../../lib/practiceSchema';
 import { Blocks, DataTable } from './Blocks';
 import { GraphFigure } from './GraphFigure';
 
 const STATUS_TONE: Record<SourceStatus, string> = {
-  'slide-based': 'border-line-strong text-muted',
-  'corrected-concept': 'border-skip bg-skip-soft text-ink',
+  'course-concept': 'border-line-strong text-muted',
   'additional-clarification': 'border-accent bg-accent-soft text-ink',
   'original-worked-example': 'border-line-strong bg-surface-2 text-ink',
 };
@@ -36,12 +34,12 @@ function SectionHeading({ title, status }: { title: string; status: SourceStatus
 /**
  * Reveals the model answer. The short answer always comes first; the detailed answer stays
  * behind its own button, so nobody has to read more than they want to. Every section carries
- * its own source label, because one answer can combine lecture content with clarification.
+ * its own label, because one answer can combine core material with clarification.
  */
 export function AnswerPanel({ question }: { question: PracticeQuestion }) {
   const [revealed, setRevealed] = usePracticeWork(`${question.id}:revealed`, false);
   const [detailOpen, setDetailOpen] = usePracticeWork(`${question.id}:detail`, false);
-  const { answer, slideNote } = question;
+  const { answer, mixUp } = question;
   const written = isWritten(question);
   const noun = written ? 'model answer' : 'reference solution';
   const detailId = `${question.id}-detail`;
@@ -61,23 +59,13 @@ export function AnswerPanel({ question }: { question: PracticeQuestion }) {
             <Blocks blocks={answer.short} />
           </div>
 
-          {slideNote && (
+          {mixUp && (
             <div className="mt-5 rounded-xl border border-skip bg-skip-soft p-4 text-sm leading-relaxed">
-              <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+              <div className="flex items-center gap-2">
                 <TriangleAlert className="size-4 shrink-0 text-skip" aria-hidden="true" />
-                <h3 className="font-medium">Note on the slides</h3>
-                <StatusLabel status={slideNote.status} />
+                <h3 className="font-medium">Common mix-up</h3>
               </div>
-              <dl className="mt-2 space-y-2">
-                <div>
-                  <dt className="eyebrow">Lecture wording</dt>
-                  <dd className="mt-0.5">{slideNote.slideWording}</dd>
-                </div>
-                <div>
-                  <dt className="eyebrow">{slideNote.status === 'corrected-concept' ? 'Correct concept' : 'What to know'}</dt>
-                  <dd className="mt-0.5">{slideNote.concept}</dd>
-                </div>
-              </dl>
+              <p className="mt-2">{mixUp}</p>
             </div>
           )}
 
@@ -142,7 +130,6 @@ export function AnswerPanel({ question }: { question: PracticeQuestion }) {
           <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 font-mono text-xs text-muted">
             <span>Question:</span>
             <StatusLabel status={question.questionStatus} />
-            <span>Source: {formatSource(question.sourceReference)}</span>
           </div>
           <details className="mt-3 text-xs text-muted">
             <summary className="inline-flex min-h-11 cursor-pointer items-center">What do these labels mean?</summary>

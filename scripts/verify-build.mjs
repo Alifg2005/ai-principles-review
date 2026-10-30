@@ -5,17 +5,20 @@
  * Fails the build if:
  *  - dist/ contains any restricted document type (.pdf, .ppt(x), .doc(x), .key);
  *  - dist/ contains a file whose name matches a local course-materials file;
+ *  - dist/ text mentions a local course-material filename, source metadata or processing notes;
  *  - (when Git is available) any restricted file is tracked by Git, or any file
  *    in course-materials/ is not ignored.
  */
 import { execFileSync } from 'node:child_process';
-import { existsSync, readdirSync, statSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { basename, extname, join, relative } from 'node:path';
 
 const ROOT = process.cwd();
 const DIST = join(ROOT, 'dist');
 const MATERIALS = join(ROOT, 'course-materials');
 const RESTRICTED = new Set(['.pdf', '.ppt', '.pptx', '.doc', '.docx', '.key']);
+// Source metadata and internal processing notes that must never ship.
+const FORBIDDEN_TEXT = [/\bfileName\b/, /\bpageCount\b/, /\bsourceReference\b/, /\bslideNote\b/, /\bslideWording\b/, /slide-based/, /Lecture wording/, /text extraction/i, /walkthrough slides/i, /CNF slides/i, /\bslides? \d/i, /\.pdf\b/i];
 
 const problems = [];
 const notes = [];
@@ -37,8 +40,19 @@ if (!existsSync(DIST)) {
     const rel = relative(ROOT, file);
     if (RESTRICTED.has(extname(file).toLowerCase())) problems.push(`restricted document in build output: ${rel}`);
     if (materialNames.has(basename(file).toLowerCase())) problems.push(`course-material file copied into build: ${rel}`);
+    if (!['.js', '.css', '.html', '.svg', '.json', '.map'].includes(extname(file).toLowerCase())) continue;
+    const text = readFileSync(file, 'utf8');
+    const lower = text.toLowerCase();
+    for (const pattern of FORBIDDEN_TEXT) {
+      if (pattern.test(text)) problems.push(`source metadata in build output (${pattern}): ${rel}`);
+    }
+    for (const name of materialNames) {
+      const stem = name.replace(/\.[^.]+$/, '');
+      // A plain name can equal a chapter title; the .pdf rule above still catches the full filename.
+      if (/[\d_-]/.test(stem) && lower.includes(stem)) problems.push(`course-material filename in build output ("${stem}"): ${rel}`);
+    }
   }
-  notes.push(`scanned ${distFiles.length} files in dist/; no restricted documents allowed`);
+  notes.push(`scanned ${distFiles.length} files in dist/ for restricted documents, source metadata and filenames`);
 }
 
 // 2. Git tracking (skipped gracefully where Git or the repository is unavailable, e.g. some CI images)

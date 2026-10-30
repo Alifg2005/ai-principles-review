@@ -135,20 +135,15 @@ describe('written questions', () => {
     expect(screen.queryByText(detailText(withDetail))).not.toBeInTheDocument();
   });
 
-  it('shows the source reference and slide notes with the answer', async () => {
-    const user = openById('p08-05');
-    await user.click(reveal(/reveal model answer/i));
-    expect(screen.getByText(/Source:/)).toBeInTheDocument();
-    expect(screen.getByText(/Note on the slides/)).toBeInTheDocument();
-  });
-
-  it('separates lecture wording from the corrected concept', async () => {
+  it('shows a common mix-up with the answer, and no source references', async () => {
     const user = openById('p04-07');
     await user.click(reveal(/reveal model answer/i));
-    expect(screen.getByText('Lecture wording')).toBeInTheDocument();
-    expect(screen.getByText('Correct concept')).toBeInTheDocument();
-    expect(screen.getByText(/depth less than L/)).toBeInTheDocument();
-    expect(screen.getAllByText('Corrected concept').length).toBeGreaterThanOrEqual(2);
+    expect(screen.getByText('Common mix-up')).toBeInTheDocument();
+    expect(screen.getByText(/including exactly L/)).toBeInTheDocument();
+    expect(screen.queryByText(/Source:/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Lecture wording/)).not.toBeInTheDocument();
+    expect(screen.queryByText(/Corrected concept/)).not.toBeInTheDocument();
+    expect(document.body).not.toHaveTextContent(/\bslides?\b/i);
   });
 
   it('labels each section of one answer separately', async () => {
@@ -160,7 +155,7 @@ describe('written questions', () => {
     await user.click(reveal(/show detailed answer/i));
     expect(clarifications()).toBe(before + 1);
     expect(screen.getByText(/needs a consistent heuristic/)).toBeInTheDocument();
-    expect(panel().getAllByText('Slide-based').length).toBeGreaterThanOrEqual(1);
+    expect(panel().getAllByText('Course concept').length).toBeGreaterThanOrEqual(1);
   });
 
   it('keeps clarification behind the optional detail button', async () => {

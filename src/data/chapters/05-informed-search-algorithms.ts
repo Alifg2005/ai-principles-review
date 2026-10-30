@@ -6,12 +6,7 @@ export default defineChapter({
   title: 'Informed Search Algorithms',
   description:
     'Best-first search with evaluation functions, greedy best-first search, A* with f(n) = g(n) + h(n), admissible heuristics, and how the strategies compare.',
-  source: {
-    fileName: 'Topic 5-Informed Search Algorithms.pdf',
-    label: 'Lecture 5',
-    pageCount: 38,
-    note: 'The Romania map walkthrough slides are images; questions rely on the extracted text and tables, plus original worked examples.',
-  },
+  source: { label: 'Lecture 5' },
   questions: [
     {
       id: 'ch05-q01',
@@ -26,7 +21,6 @@ export default defineChapter({
       explanation:
         'The evaluation function is read as a cost estimate, so the node with the lowest evaluation is expanded first, using a priority queue.',
       difficulty: 'foundational',
-      sourceReference: { section: 'Informed/Heuristic Search', pages: [5] },
     },
     {
       id: 'ch05-q02',
@@ -41,7 +35,6 @@ export default defineChapter({
       explanation:
         'Both are special cases of best-first search. They differ in the evaluation function f(n) they use.',
       difficulty: 'foundational',
-      sourceReference: { section: 'Special cases of best-first search', pages: [7] },
     },
     {
       id: 'ch05-q03',
@@ -51,7 +44,6 @@ export default defineChapter({
       explanation:
         'Greedy search ranks nodes only by the heuristic estimate of the cost from n to the goal.',
       difficulty: 'foundational',
-      sourceReference: { section: 'Greedy best-first search', pages: [8] },
     },
     {
       id: 'ch05-q04',
@@ -66,7 +58,6 @@ export default defineChapter({
       explanation:
         'It grabs whatever looks closest to the goal right now, without accounting for the cost already paid.',
       difficulty: 'foundational',
-      sourceReference: { section: 'Greedy best-first search', pages: [8] },
     },
     {
       id: 'ch05-q05',
@@ -79,9 +70,8 @@ export default defineChapter({
       ],
       correctAnswerIndex: 1,
       explanation:
-        'Following only h(n), the search can oscillate between states (Iasi and Neamt in the lecture example) and never reach the goal.',
+        'Following only h(n), the search can oscillate between states (for example, Iasi and Neamt) and never reach the goal.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'Properties of greedy best-first search', pages: [15] },
     },
     {
       id: 'ch05-q06',
@@ -96,7 +86,6 @@ export default defineChapter({
       explanation:
         'Greedy search reaches Bucharest via Sibiu and Fagaras, but the route via Rimnicu Vilcea and Pitesti is shorter. It finds a solution, not the best one.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'Properties of greedy best-first search', pages: [14, 15] },
     },
     {
       id: 'ch05-q07',
@@ -112,7 +101,6 @@ export default defineChapter({
       explanation:
         'Greedy picks B (h = 3 < 7), then D, then G, giving a path cost of 1 + 5 + 5 = 11. The path S → A → G costs only 4, which shows greedy search is not optimal.',
       difficulty: 'advanced',
-      sourceReference: { section: 'Greedy best-first search / Properties', pages: [8, 15] },
     },
     {
       id: 'ch05-q08',
@@ -127,7 +115,6 @@ export default defineChapter({
       explanation:
         'g(n) is the cost already paid to reach n and h(n) estimates the remaining cost, so their sum estimates the cheapest complete solution through n.',
       difficulty: 'foundational',
-      sourceReference: { section: 'A* Search', pages: [27] },
     },
     {
       id: 'ch05-q09',
@@ -142,7 +129,6 @@ export default defineChapter({
       explanation:
         'Admissibility means h(n) ≤ h*(n) for every node n, where h*(n) is the true cheapest cost to the goal.',
       difficulty: 'foundational',
-      sourceReference: { section: 'A* Search: admissible heuristic', pages: [28] },
     },
     {
       id: 'ch05-q10',
@@ -157,7 +143,6 @@ export default defineChapter({
       explanation:
         'No road between two points can be shorter than the straight line between them, so h_SLD is admissible.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'A* Search: admissible heuristic', pages: [28] },
     },
     {
       id: 'ch05-q11',
@@ -167,7 +152,6 @@ export default defineChapter({
       explanation:
         'The true remaining cost at a goal is 0, and an admissible, non-negative heuristic cannot exceed it, so h(G) = 0.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'A* Search: admissible heuristic', pages: [28] },
     },
     {
       id: 'ch05-q12',
@@ -177,7 +161,6 @@ export default defineChapter({
       correctAnswerIndex: 3,
       explanation: 'g(M) = 120 + 40 = 160, so f(M) = g(M) + h(M) = 160 + 70 = 230.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'A* Search Example', pages: [31, 32, 33] },
     },
     {
       id: 'ch05-q13',
@@ -193,11 +176,10 @@ export default defineChapter({
       explanation:
         'f(P) = 360, f(Q) = 340 and f(R) = 360. A* expands the lowest f, which is Q. Choosing R by smallest h would be greedy behaviour.',
       difficulty: 'advanced',
-      sourceReference: { section: 'A* Search', pages: [27, 31] },
     },
     {
       id: 'ch05-q14',
-      question: "According to the lecture's summary of A* properties, when is A* optimal?",
+      question: "In the standard summary of A* properties, when is A* optimal?",
       options: [
         'When the heuristic overestimates the true cost',
         'When all step costs are exactly 1',
@@ -207,9 +189,8 @@ export default defineChapter({
       correctAnswerIndex: 3,
       explanation: 'A* is optimal when its heuristic is admissible, meaning it never overestimates.',
       clarification:
-        "This answer follows the lecture's summary, and optimality is not unconditional. An admissible heuristic is enough for tree search. Graph search that never reopens closed nodes needs a consistent heuristic: h(n) ≤ c(n, n′) + h(n′) for every successor n′. The goal test must also happen when a node is selected for expansion. This distinction is background beyond the slides.",
+        "This answer follows the standard summary, and optimality is not unconditional. An admissible heuristic is enough for tree search. Graph search that never reopens closed nodes needs a consistent heuristic: h(n) ≤ c(n, n′) + h(n′) for every successor n′. The goal test must also happen when a node is selected for expansion. This distinction is background beyond the core material.",
       difficulty: 'foundational',
-      sourceReference: { section: 'Properties of A* Search', pages: [36] },
     },
     {
       id: 'ch05-q15',
@@ -224,7 +205,6 @@ export default defineChapter({
       explanation:
         'Including g(n) penalises paths that have already become costly, which greedy search ignores.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'A* Search', pages: [27] },
     },
     {
       id: 'ch05-q16',
@@ -237,9 +217,8 @@ export default defineChapter({
       ],
       correctAnswerIndex: 2,
       explanation:
-        'Both property slides note that the algorithm keeps all nodes in memory, which can be a serious limitation on large problems.',
+        'Both algorithms keep all nodes in memory, which can be a serious limitation on large problems.',
       difficulty: 'intermediate',
-      sourceReference: { section: 'Properties of greedy best-first search / A*', pages: [15, 36] },
     },
     {
       id: 'ch05-q17',
@@ -253,11 +232,10 @@ export default defineChapter({
       correctAnswerIndex: 0,
       explanation: 'A heuristic function produces a number that indicates how good or bad a node is likely to be.',
       difficulty: 'foundational',
-      sourceReference: { section: 'Informed/Heuristic Search', pages: [4] },
     },
     {
       id: 'ch05-q18',
-      question: "In the lecture's comparison of uninformed and informed strategies, which pair are both complete and optimal?",
+      question: "In the comparison of uninformed and informed strategies, which pair are both complete and optimal?",
       options: [
         'DFS and greedy best-first search',
         'Greedy best-first search and A*',
@@ -268,9 +246,8 @@ export default defineChapter({
       explanation:
         'The comparison table marks BFS (with equal step costs), IDS and A* as complete and optimal. DFS and greedy best-first search are neither.',
       clarification:
-        "The lecture's summary assumes the relevant search conditions. For A*, completeness depends on conditions such as a finite branching factor and a positive lower bound on step costs. Optimality depends on the heuristic and search strategy: admissibility is sufficient for tree search, while graph search without reopening closed nodes generally requires consistency. This is additional background beyond the lecture's summary.",
+        "The summary assumes the relevant search conditions. For A*, completeness depends on conditions such as a finite branching factor and a positive lower bound on step costs. Optimality depends on the heuristic and search strategy: admissibility is sufficient for tree search, while graph search without reopening closed nodes generally requires consistency. This is additional background beyond the summary.",
       difficulty: 'intermediate',
-      sourceReference: { section: 'Comparison', pages: [37] },
     },
     {
       id: 'ch05-q19',
@@ -286,11 +263,10 @@ export default defineChapter({
       explanation:
         'A* compares f(n) = g(n) + h(n): 413 < 415, so Rimnicu Vilcea goes first, even though Fagaras has the smaller h (176 vs 193). Choosing by h alone is what greedy search does.',
       difficulty: 'advanced',
-      sourceReference: { section: 'A* Search Example', pages: [31] },
     },
     {
       id: 'ch05-q20',
-      question: "According to the lecture's objective, why can an informed strategy find solutions more efficiently than an uninformed one?",
+      question: "Why can an informed strategy find solutions more efficiently than an uninformed one?",
       options: [
         'It considers fewer actions per state by design',
         'It uses problem-specific knowledge beyond the definition of the problem itself',
@@ -301,7 +277,6 @@ export default defineChapter({
       explanation:
         'Informed search adds knowledge beyond the bare problem definition, such as distance estimates, to guide where it searches.',
       difficulty: 'foundational',
-      sourceReference: { section: 'Objective', pages: [2] },
     },
   ],
 });

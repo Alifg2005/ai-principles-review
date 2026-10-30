@@ -14,11 +14,10 @@ export default definePracticeSet({
       answerStyle: 'explanation',
       topic: 'Propositional vs first-order',
       difficulty: 'foundational',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'What are the limitations of propositional logic, and how does first-order logic overcome them?',
-      sourceReference: { section: 'Problem of Propositional Logic', pages: [6, 8] },
       answer: {
-        shortStatus: 'slide-based',
+        shortStatus: 'course-concept',
         detailedStatus: 'original-worked-example',
         short: [
           {
@@ -39,11 +38,10 @@ export default definePracticeSet({
       answerStyle: 'comparison',
       topic: 'FOL syntax',
       difficulty: 'foundational',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Distinguish a predicate from a function in FOL, with an example of each.',
-      sourceReference: { section: 'Predicate vs Function', pages: [9, 10] },
       answer: {
-        shortStatus: 'slide-based',
+        shortStatus: 'course-concept',
         short: [
           {
             type: 'ul',
@@ -58,16 +56,11 @@ export default definePracticeSet({
       answerStyle: 'definition',
       topic: 'FOL syntax',
       difficulty: 'intermediate',
-      questionStatus: 'slide-based',
-      prompt: 'Define a term, a ground term, a free variable and a well-formed formula (as used in this lecture).',
-      sourceReference: { section: 'Syntax of FOL: Basic Elements', pages: [14, 15, 16] },
-      slideNote: {
-        status: 'additional-clarification',
-        slideWording: "Slide 16: a wff \"is a sentence containing no free variables\".",
-        concept: "This is the convention of this lecture, so use it in this course. In standard logic a wff is any grammatically correct formula, and it may contain free variables. A formula with no free variables is called a closed formula, or sentence. Lecture 7, slide 33 also uses the broader meaning.",
-      },
+      questionStatus: 'course-concept',
+      prompt: 'Define a term, a ground term, a free variable and a well-formed formula (as used in this course).',
+      mixUp: "In this course, a wff is a sentence with no free variables. In standard logic, a wff is any well-formed formula, and a formula with no free variables is called a closed formula or sentence.",
       answer: {
-        shortStatus: 'slide-based',
+        shortStatus: 'course-concept',
         short: [
           {
             type: 'ul',
@@ -75,14 +68,14 @@ export default definePracticeSet({
               'Term: a constant, a variable, or a function applied to terms. It denotes an object.',
               'Ground term: a term with no variables.',
               'Free variable: a variable not bound by a quantifier.',
-              'Well-formed formula (this lecture\'s convention): a sentence with no free variables.',
+              'Well-formed formula (this course\'s convention): a sentence with no free variables.',
             ],
           },
         ],
         more: [
           {
             status: 'additional-clarification',
-            blocks: [{ type: 'p', text: "P(x) is a wff in standard logic but not a closed formula, because x is free. ∀x P(x) is both. Under this lecture's convention, only ∀x P(x) counts as a wff." }],
+            blocks: [{ type: 'p', text: "P(x) is a wff in standard logic but not a closed formula, because x is free. ∀x P(x) is both. Under this course's convention, only ∀x P(x) counts as a wff." }],
           },
         ],
       },
@@ -93,17 +86,12 @@ export default definePracticeSet({
       answerStyle: 'explanation',
       topic: 'Quantifiers',
       difficulty: 'intermediate',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'Which connective normally goes with each quantifier? Explain the common mistake with each.',
-      sourceReference: { section: 'Common mistakes with quantifiers', pages: [20, 23, 24, 26, 29] },
-      slideNote: {
-        status: 'corrected-concept',
-        slideWording: "Slide 29: ∃x At(x, IAU) ⇒ Smart(x) is true \"since at least Sarah is at IAU\". Slide 27 covers ∃ under the heading \"The Universal Quantifier\".",
-        concept: "The sentence is true because anyone not at IAU makes the implication true, even if nobody at IAU is smart. Slide 27 should be headed \"The Existential Quantifier\".",
-      },
+      mixUp: "∃x At(x, IAU) ⇒ Smart(x). The sentence is true because anyone not at IAU makes the implication true, even if nobody at IAU is smart.",
       answer: {
-        shortStatus: 'slide-based',
-        detailedStatus: 'slide-based',
+        shortStatus: 'course-concept',
+        detailedStatus: 'course-concept',
         short: [
           {
             type: 'ul',
@@ -124,16 +112,11 @@ export default definePracticeSet({
       answerStyle: 'explanation',
       topic: 'Quantifier order',
       difficulty: 'advanced',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'When does swapping quantifiers change the meaning? Illustrate with Likes(x, y), meaning "x likes y".',
-      sourceReference: { section: 'Properties of quantifiers', pages: [36, 44] },
-      slideNote: {
-        status: 'corrected-concept',
-        slideWording: "Slide 36: \"Everyone in the world is loved by at least one person\": ∀x ∃y likes(x,y), and \"There is a person who loves everyone in the world\": ∃y ∀x likes(x,y).",
-        concept: "With likes(x,y) meaning \"x likes y\", those English sentences need the arguments swapped: ∀x ∃y likes(y,x) and ∃y ∀x likes(y,x). The quantifier-order point of the slide still holds.",
-      },
+      mixUp: "With likes(x,y) meaning 'x likes y', 'Everyone is loved by at least one person' is ∀x ∃y likes(y,x), and 'There is a person who loves everyone' is ∃y ∀x likes(y,x). Quantifier order matters.",
       answer: {
-        shortStatus: 'corrected-concept',
+        shortStatus: 'course-concept',
         short: [
           { type: 'p', text: 'Swapping the same quantifier changes nothing. Swapping ∀ with ∃ changes the meaning:' },
           {
@@ -149,12 +132,11 @@ export default definePracticeSet({
       answerStyle: 'explanation',
       topic: 'Quantifier duality',
       difficulty: 'intermediate',
-      questionStatus: 'slide-based',
+      questionStatus: 'course-concept',
       prompt: 'State the negation rules for quantifiers and the two duality equivalences.',
-      sourceReference: { section: 'Connections between ∀ and ∃ / Quantifier duality', pages: [37, 38, 39] },
       answer: {
-        shortStatus: 'slide-based',
-        detailedStatus: 'slide-based',
+        shortStatus: 'course-concept',
+        detailedStatus: 'course-concept',
         short: [
           { type: 'formula', text: '¬∀x P(x)  ≡  ∃x ¬P(x)\n¬∃x P(x)  ≡  ∀x ¬P(x)\n∀x P(x)   ≡  ¬∃x ¬P(x)\n∃x P(x)   ≡  ¬∀x ¬P(x)' },
         ],
@@ -168,7 +150,6 @@ export default definePracticeSet({
       difficulty: 'foundational',
       questionStatus: 'original-worked-example',
       prompt: 'Classify each expression.',
-      sourceReference: { section: 'First-Order logic / Syntax of FOL', pages: [9, 10, 11, 14] },
       columns: ['Expression', 'Type'],
       rows: [
         [given('Dammam'), { accepted: ['Constant'], options: TERM }],
@@ -188,7 +169,6 @@ export default definePracticeSet({
       difficulty: 'intermediate',
       questionStatus: 'original-worked-example',
       prompt: 'In ∀x (R(y, x) ∧ ∃y P(y, z)), is each variable occurrence free or bound?',
-      sourceReference: { section: 'Syntax of FOL: free and bound variables', pages: [15] },
       columns: ['Occurrence', 'Status'],
       rows: [
         [given('x in R(y, x)'), { accepted: ['Bound'], options: SCOPE }],
@@ -204,7 +184,7 @@ export default definePracticeSet({
         more: [
           {
             status: 'additional-clarification',
-            blocks: [{ type: 'p', text: "Because y and z occur free, this is not a wff under this lecture's convention (slide 16). In standard logic it is a wff but not a closed formula." }],
+            blocks: [{ type: 'p', text: "Because y and z occur free, this is not a wff under this course's convention. In standard logic it is a wff but not a closed formula." }],
           },
         ],
       },
@@ -216,7 +196,6 @@ export default definePracticeSet({
       difficulty: 'foundational',
       questionStatus: 'original-worked-example',
       prompt: 'Translate to FOL: "All surgeons are doctors." Use Surgeon(x) and Doctor(x).',
-      sourceReference: { section: 'Universal Quantifiers: Examples', pages: [20, 21] },
       accepted: ['∀x Surgeon(x) ⇒ Doctor(x)', '∀x (Surgeon(x) ⇒ Doctor(x))'],
       answer: {
         shortStatus: 'original-worked-example',
@@ -229,7 +208,6 @@ export default definePracticeSet({
       difficulty: 'foundational',
       questionStatus: 'original-worked-example',
       prompt: 'Translate to FOL: "Some engineers are poets." Use Engineer(x) and Poet(x).',
-      sourceReference: { section: 'Existential Quantifiers: More examples', pages: [26, 28] },
       accepted: ['∃x Engineer(x) ∧ Poet(x)', '∃x (Engineer(x) ∧ Poet(x))'],
       answer: {
         shortStatus: 'original-worked-example',
@@ -242,7 +220,6 @@ export default definePracticeSet({
       difficulty: 'intermediate',
       questionStatus: 'original-worked-example',
       prompt: 'Translate to FOL: "No cat likes water." Use Cat(x), Likes(x, y) and the constant Water.',
-      sourceReference: { section: 'Thinking in FOL: Quantifiers', pages: [31, 35, 43] },
       accepted: [
         '∀x Cat(x) ⇒ ¬Likes(x, Water)',
         '∀x (Cat(x) ⇒ ¬Likes(x, Water))',
@@ -263,7 +240,6 @@ export default definePracticeSet({
       difficulty: 'intermediate',
       questionStatus: 'original-worked-example',
       prompt: 'Translate to FOL, where Admires(x, y) means "x admires y": "Everyone admires someone."',
-      sourceReference: { section: 'Thinking in FOL: multiple variables', pages: [36, 44] },
       accepted: ['∀x ∃y Admires(x, y)'],
       answer: {
         shortStatus: 'original-worked-example',
@@ -279,7 +255,6 @@ export default definePracticeSet({
       difficulty: 'advanced',
       questionStatus: 'original-worked-example',
       prompt: 'Translate to FOL, where Knows(x, y) means "x knows y": "There is one song that everyone knows." Let y be the song.',
-      sourceReference: { section: 'Thinking in FOL: multiple variables', pages: [36, 44] },
       accepted: ['∃y ∀x Knows(x, y)'],
       answer: {
         shortStatus: 'original-worked-example',
@@ -295,7 +270,6 @@ export default definePracticeSet({
       difficulty: 'intermediate',
       questionStatus: 'original-worked-example',
       prompt: 'Using duality, rewrite ∀x Passed(x) with ∃ instead of ∀.',
-      sourceReference: { section: 'Quantifier duality', pages: [38, 39] },
       accepted: ['¬∃x ¬Passed(x)'],
       answer: {
         shortStatus: 'original-worked-example',
@@ -311,7 +285,6 @@ export default definePracticeSet({
       difficulty: 'intermediate',
       questionStatus: 'original-worked-example',
       prompt: 'A student translated "Every nurse is trained" as ∀x Nurse(x) ∧ Trained(x). Write the corrected sentence.',
-      sourceReference: { section: 'A common mistake to avoid', pages: [23, 24] },
       accepted: ['∀x Nurse(x) ⇒ Trained(x)', '∀x (Nurse(x) ⇒ Trained(x))'],
       answer: {
         shortStatus: 'original-worked-example',
@@ -327,7 +300,6 @@ export default definePracticeSet({
       difficulty: 'advanced',
       questionStatus: 'original-worked-example',
       prompt: 'The domain is {a, b}, and L(x, y) is true only for the two arrows shown: L(a, b) and L(b, a). Evaluate each sentence.',
-      sourceReference: { section: 'Quantifiers / Properties of quantifiers', pages: [17, 25, 36] },
       figure: {
         directed: true,
         width: 240,

@@ -22,7 +22,7 @@ export const siteConfig: SiteConfig = {
   productName: 'AI Principles Review',
   brand: 'MIND//LAB',
   description:
-    "An interactive study experience for reviewing AI Principles through chapter-based quizzes grounded in the course lecture materials. Twenty questions per chapter, with every answer explained and traced back to the lecture slides.",
+    "An interactive study experience for reviewing AI Principles through chapter-based quizzes. Twenty questions per chapter, with every answer explained.",
   course: {
     // From the title slide of the Week 1 lecture deck.
     title: 'Artificial Intelligence: Principles and Techniques',
