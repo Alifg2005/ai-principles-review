@@ -167,17 +167,19 @@ describe('practice registry', () => {
       'p04-10': /A priority queue is the standard way/,
       'p05-03': /complete unless infinitely many nodes have f < f\(G\)/,
       'p05-05': /Treat the distances as plain numbers/,
-      'p08-03': /closed formula or sentence/,
-      'p08-04': /^∃x At\(x, IAU\) ⇒ Smart\(x\)\. The sentence is true because/,
-      'p08-05': /∀x ∃y likes\(y,x\).*∃y ∀x likes\(y,x\)\. Quantifier order matters\.$/,
+      'p09-03': /closed formula or sentence/,
+      'p09-04': /^∃x At\(x, IAU\) ⇒ Smart\(x\)\. The sentence is true because/,
+      'p09-05': /∀x ∃y likes\(y,x\).*∃y ∀x likes\(y,x\)\. Quantifier order matters\.$/,
     };
     for (const [id, pattern] of Object.entries(expected)) expect(question(id).mixUp, id).toMatch(pattern);
-    expect(questions.filter((q) => q.mixUp)).toHaveLength(12);
+    // The original 12, plus four for the expert systems and NLP chapters.
+    const added = ['p08-12', 'p10-05', 'p11-09', 'p11-10'];
+    expect(questions.filter((q) => q.mixUp).map((q) => q.id).sort()).toEqual([...Object.keys(expected), ...added].sort());
   });
 
   it('ships no source metadata or commentary about slides', () => {
     for (const q of questions) expect(q, q.id).not.toHaveProperty('sourceReference');
-    expect(JSON.stringify(sets)).not.toMatch(/\.pdf|\bslides?\b|\blecture\b|extraction/i);
+    expect(JSON.stringify(sets)).not.toMatch(/\.pdf|\bslides?\b|\blecture\b|text extraction/i);
   });
 
   it('states the A* assumptions for tree and graph search', () => {
@@ -188,7 +190,7 @@ describe('practice registry', () => {
   });
 
   it('identifies the wff definition as the convention of this lecture', () => {
-    const q = question('p08-03');
+    const q = question('p09-03');
     expect(JSON.stringify(q.answer.short)).toContain("this course's convention");
     expect(q.mixUp).toContain('closed formula');
   });
@@ -398,6 +400,114 @@ describe('algorithm answers match a real run', () => {
   });
 });
 
+describe('expert system and NLP answers match a real run', () => {
+  type Rule = { id: string; needs: string[]; adds: string };
+  const RULES: Rule[] = [
+    { id: 'R1', needs: ['A'], adds: 'C' },
+    { id: 'R2', needs: ['B', 'C'], adds: 'D' },
+    { id: 'R3', needs: ['D'], adds: 'E' },
+    { id: 'R4', needs: ['F'], adds: 'E' },
+    { id: 'R5', needs: ['E', 'B'], adds: 'G' },
+  ];
+
+  it('the rules in the context match the rules the checks use', () => {
+    const shown = JSON.stringify(question('p08-09').context);
+    for (const r of RULES) expect(shown).toContain(`${r.id}: ${r.needs.join(' and ')} → ${r.adds}`);
+  });
+
+  it('forward chaining fires rules in the stated order', () => {
+    const facts = new Set(['A', 'B']);
+    const fired: string[] = [];
+    for (;;) {
+      const rule = RULES.find((r) => !fired.includes(r.id) && r.needs.every((n) => facts.has(n)));
+      if (!rule) break;
+      fired.push(rule.id);
+      facts.add(rule.adds);
+    }
+    const rows = rowsOf('p08-09');
+    expect(rows.map((row) => cellText(row[1]))).toEqual([...fired, 'none']);
+    expect(rows.map((row) => cellText(row[2]))).toEqual([...fired.map((id) => RULES.find((r) => r.id === id)!.adds), 'none']);
+    expect([...facts].sort()).toEqual(['A', 'B', 'C', 'D', 'E', 'G']);
+  });
+
+  it('backward chaining proves G through the stated subgoals', () => {
+    const known = new Set(['A', 'B']);
+    const trace: string[][] = [];
+    const prove = (goal: string): boolean => {
+      if (known.has(goal)) return true;
+      for (const rule of RULES.filter((r) => r.adds === goal)) {
+        trace.push([goal, rule.id, rule.needs.join(', ')]);
+        if (rule.needs.every(prove)) return true;
+      }
+      return false;
+    };
+    expect(prove('G')).toBe(true);
+    expect(rowsOf('p08-10').map((row) => row.map(cellText))).toEqual(trace);
+  });
+
+  it('certainty factors combine as stated', () => {
+    for (const row of rowsOf('p08-12')) {
+      const [a, b] = [Number(cellText(row[0])), Number(cellText(row[1]))];
+      expect(Number(cellText(row[2]))).toBeCloseTo(a + b * (1 - a), 10);
+    }
+  });
+
+  it('conflict resolution picks the rule each strategy defines', () => {
+    const rules = [
+      { id: 'R1', conditions: ['alarm'], priority: 3 },
+      { id: 'R2', conditions: ['alarm', 'heat'], priority: 1 },
+      { id: 'R3', conditions: ['smoke'], priority: 1 },
+    ];
+    const time: Record<string, number> = { alarm: 1, heat: 2, smoke: 3 };
+    const best = (score: (r: (typeof rules)[number]) => number) => rules.reduce((a, b) => (score(b) > score(a) ? b : a)).id;
+    expect(rowsOf('p08-14').map((row) => cellText(row[1]))).toEqual([
+      best((r) => r.priority),
+      best((r) => r.conditions.length),
+      best((r) => Math.max(...r.conditions.map((c) => time[c]!))),
+    ]);
+  });
+
+  it('the decision tree encodes exactly the three rules', () => {
+    const figure = question('p08-13').answer.figure!;
+    const label = (id: string) => figure.nodes.find((n) => n.id === id)!.label;
+    const paths: string[] = [];
+    const walk = (id: string, conds: string[]) => {
+      const out = figure.edges.filter((e) => e.from === id);
+      if (!out.length) return void paths.push(`${conds.join(' & ')} => ${label(id)}`);
+      for (const e of out) walk(e.to, [...conds, `${label(id)} ${e.label}`]);
+    };
+    const root = figure.nodes.find((n) => !figure.edges.some((e) => e.to === n.id))!;
+    walk(root.id, []);
+    expect(paths.sort()).toEqual(
+      ['Warm-blooded? yes & Feathers? yes => Bird', 'Warm-blooded? yes & Feathers? no => Mammal', 'Warm-blooded? no => Reptile'].sort(),
+    );
+  });
+
+  it('the leftmost derivation uses the stated rules in order and yields the sentence', () => {
+    const q = question('p11-06');
+    const expected = expectedOf('p11-06');
+    let form = ['S'];
+    for (const rule of expected) {
+      const [lhs, rhs] = rule.split(' → ');
+      const i = form.findIndex((sym) => /^[A-Z]/.test(sym) && sym !== sym.toLowerCase());
+      expect(form[i], rule).toBe(lhs);
+      form = [...form.slice(0, i), ...rhs!.split(' '), ...form.slice(i + 1)];
+    }
+    expect(form.join(' ')).toBe('the cat chased a dog');
+    if (q.kind === 'sequence') expect(q.answer.steps!.rows.map((r) => r[1])).toContain('the cat chased a dog');
+  });
+
+  it('the completed parse tree reads back the sentence under the right categories', () => {
+    const q = question('p11-07');
+    if (q.kind !== 'complete') throw new Error('not a completion');
+    const ref = q.answer.figure!;
+    const label = new Map(ref.nodes.map((n) => [n.id, n.label]));
+    for (const slot of q.slots) expect(label.get(slot.nodeId), slot.nodeId).toBe(slot.expected);
+    const leaves = ref.nodes.filter((n) => n.shape === 'box').sort((a, b) => a.x - b.x || a.y - b.y).map((n) => n.label);
+    expect(leaves.join(' ')).toBe('the cat chased a dog');
+  });
+});
+
 describe('logic answers match evaluation', () => {
   const bool = (v: boolean) => (v ? 'T' : 'F');
 
@@ -454,7 +564,7 @@ describe('logic answers match evaluation', () => {
   it('quantifier sentences on the two-element model', () => {
     const domain = ['a', 'b'];
     const L = (x: string, y: string) => x !== y;
-    expect(rowsOf('p08-16').map((row) => cellText(row[1]))).toEqual([
+    expect(rowsOf('p09-16').map((row) => cellText(row[1]))).toEqual([
       bool(domain.every((x) => domain.some((y) => L(x, y)))),
       bool(domain.some((y) => domain.every((x) => L(x, y)))),
       bool(domain.some((x) => domain.some((y) => L(x, y)))),

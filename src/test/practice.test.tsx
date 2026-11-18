@@ -376,7 +376,7 @@ describe('graph construction', () => {
 
 describe('logic exercises', () => {
   it('inserts symbols and recognises a reference form', async () => {
-    const user = openById('p08-09');
+    const user = openById('p09-09');
     const input = screen.getByRole('textbox', { name: 'Your expression' });
     await user.click(screen.getByRole('button', { name: 'Insert ∀' }));
     expect(input).toHaveValue('∀');
@@ -387,16 +387,76 @@ describe('logic exercises', () => {
   });
 
   it('never calls a different form wrong', async () => {
-    const user = openById('p08-09');
+    const user = openById('p09-09');
     await user.type(screen.getByRole('textbox', { name: 'Your expression' }), '∀y Surgeon(y) ⇒ Doctor(y)');
     await user.click(screen.getByRole('button', { name: 'Compare with reference' }));
     expect(screen.getByRole('status')).toHaveTextContent('Equivalent forms or other variable names can still be correct');
   });
 
   it('preserves logical notation in the reference answer', async () => {
-    const user = openById('p08-13');
+    const user = openById('p09-13');
     await user.click(reveal(/reveal reference solution/i));
     expect(screen.getByText('∃y ∀x Knows(x, y)')).toBeInTheDocument();
+  });
+});
+
+describe('expert system and NLP practice', () => {
+  it('marks a forward-chaining trace cell by cell', async () => {
+    const user = openById('p08-09');
+    expect(screen.getByText('Order and ties')).toBeInTheDocument();
+    const inputs = screen.getAllByRole('textbox');
+    for (const [i, value] of ['R1', 'C', 'R2', 'D', 'R3', 'E', 'R5', 'G', 'none', 'none'].entries()) await user.type(inputs[i]!, value);
+    await user.click(screen.getByRole('button', { name: 'Check table' }));
+    expect(screen.getByRole('status')).toHaveTextContent('10 of 10 cells correct');
+  });
+
+  it('builds the decision tree with labelled branches', async () => {
+    const user = openById('p08-13');
+    for (const label of ['Warm-blooded?', 'Feathers?', 'Bird', 'Mammal', 'Reptile']) {
+      await user.click(screen.getByRole('button', { name: `Add node ${label}` }));
+    }
+    const space = screen.getByRole('group', { name: 'Graph workspace' });
+    const connect = async (a: string, b: string, branch: string) => {
+      await user.selectOptions(screen.getByRole('combobox', { name: /label for the next connection/i }), branch);
+      await user.click(within(space).getByRole('button', { name: `Node ${a}` }));
+      await user.click(within(space).getByRole('button', { name: `Node ${b}` }));
+    };
+    await connect('Warm-blooded?', 'Feathers?', 'yes');
+    await connect('Warm-blooded?', 'Reptile', 'no');
+    await connect('Feathers?', 'Bird', 'yes');
+    await connect('Feathers?', 'Mammal', 'no');
+    await user.click(screen.getByRole('button', { name: 'Check structure' }));
+    expect(screen.getByText(/matches the reference/)).toBeInTheDocument();
+  });
+
+  it('accepts a derivation that reuses a rule', async () => {
+    const user = openById('p11-06');
+    const steps = ['S → NP VP', 'NP → Det N', 'Det → the', 'N → cat', 'VP → V NP', 'V → chased', 'NP → Det N', 'Det → a', 'N → dog'];
+    for (const step of steps) await user.click(screen.getByRole('button', { name: step }));
+    await user.click(screen.getByRole('button', { name: 'Check my order' }));
+    expect(screen.getByRole('status')).toHaveTextContent('Correct order');
+  });
+
+  it('completes the parse tree and shows a common mix-up on functional labelling', async () => {
+    const user = openById('p11-07');
+    await user.selectOptions(screen.getByRole('combobox', { name: /part 1/i }), 'NP');
+    await user.click(screen.getByRole('button', { name: 'Check diagram' }));
+    expect(screen.getByRole('status')).toHaveTextContent('1 of 5 parts correct');
+    await user.click(screen.getByRole('link', { name: 'Next' }));
+    await user.click(screen.getByRole('link', { name: 'Next' }));
+    await user.click(reveal(/reveal reference solution/i));
+    expect(screen.getByText('Common mix-up')).toBeInTheDocument();
+    expect(screen.getByText(/object complement/)).toBeInTheDocument();
+  });
+
+  it('lists the new chapters in the practice library in course order', () => {
+    renderAt('/');
+    const list = screen.getByRole('list', { name: 'Practice chapters' });
+    const names = within(list).getAllByRole('link').map((a) => a.textContent ?? '');
+    const order = ['Expert Systems', 'Knowledge Representation', 'Natural Language Processing (Part 1)', 'Natural Language Processing (Part 2)'];
+    const positions = order.map((t) => names.findIndex((n) => n.includes(t)));
+    expect(positions.every((p) => p >= 0)).toBe(true);
+    expect([...positions].sort((a, b) => a - b)).toEqual(positions);
   });
 });
 

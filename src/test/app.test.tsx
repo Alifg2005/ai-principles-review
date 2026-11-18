@@ -200,7 +200,7 @@ describe('multiple-choice clarifications', () => {
   it.each([
     ['ch05-q14', /not unconditional/],
     ['ch05-q18', /assumes the relevant search conditions/],
-    ['ch08-q08', /stricter convention/],
+    ['ch09-q08', /stricter convention/],
   ])('shows the %s clarification only after submission, behind its own control', async (id, text) => {
     const chapter = chapters.find((c) => c.questions.some((q) => q.id === id))!;
     const question = chapter.questions.find((q) => q.id === id)!;

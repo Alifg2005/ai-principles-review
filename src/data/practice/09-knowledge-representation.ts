@@ -9,7 +9,7 @@ export default definePracticeSet({
   chapterId: 'knowledge-representation',
   questions: [
     {
-      id: 'p08-01',
+      id: 'p09-01',
       kind: 'written',
       answerStyle: 'explanation',
       topic: 'Propositional vs first-order',
@@ -33,7 +33,7 @@ export default definePracticeSet({
       },
     },
     {
-      id: 'p08-02',
+      id: 'p09-02',
       kind: 'written',
       answerStyle: 'comparison',
       topic: 'FOL syntax',
@@ -51,7 +51,7 @@ export default definePracticeSet({
       },
     },
     {
-      id: 'p08-03',
+      id: 'p09-03',
       kind: 'written',
       answerStyle: 'definition',
       topic: 'FOL syntax',
@@ -81,7 +81,7 @@ export default definePracticeSet({
       },
     },
     {
-      id: 'p08-04',
+      id: 'p09-04',
       kind: 'written',
       answerStyle: 'explanation',
       topic: 'Quantifiers',
@@ -107,7 +107,7 @@ export default definePracticeSet({
       },
     },
     {
-      id: 'p08-05',
+      id: 'p09-05',
       kind: 'written',
       answerStyle: 'explanation',
       topic: 'Quantifier order',
@@ -127,7 +127,7 @@ export default definePracticeSet({
       },
     },
     {
-      id: 'p08-06',
+      id: 'p09-06',
       kind: 'written',
       answerStyle: 'explanation',
       topic: 'Quantifier duality',
@@ -144,7 +144,7 @@ export default definePracticeSet({
       },
     },
     {
-      id: 'p08-07',
+      id: 'p09-07',
       kind: 'table',
       topic: 'FOL syntax',
       difficulty: 'foundational',
@@ -163,7 +163,7 @@ export default definePracticeSet({
       },
     },
     {
-      id: 'p08-08',
+      id: 'p09-08',
       kind: 'table',
       topic: 'FOL syntax',
       difficulty: 'intermediate',
@@ -190,7 +190,7 @@ export default definePracticeSet({
       },
     },
     {
-      id: 'p08-09',
+      id: 'p09-09',
       kind: 'logic',
       topic: 'Translating to FOL',
       difficulty: 'foundational',
@@ -202,7 +202,7 @@ export default definePracticeSet({
         short: [{ type: 'formula', text: '∀x Surgeon(x) ⇒ Doctor(x)' }] },
     },
     {
-      id: 'p08-10',
+      id: 'p09-10',
       kind: 'logic',
       topic: 'Translating to FOL',
       difficulty: 'foundational',
@@ -214,7 +214,7 @@ export default definePracticeSet({
         short: [{ type: 'formula', text: '∃x Engineer(x) ∧ Poet(x)' }] },
     },
     {
-      id: 'p08-11',
+      id: 'p09-11',
       kind: 'logic',
       topic: 'Translating to FOL',
       difficulty: 'intermediate',
@@ -234,7 +234,7 @@ export default definePracticeSet({
       },
     },
     {
-      id: 'p08-12',
+      id: 'p09-12',
       kind: 'logic',
       topic: 'Translating to FOL',
       difficulty: 'intermediate',
@@ -249,7 +249,7 @@ export default definePracticeSet({
       },
     },
     {
-      id: 'p08-13',
+      id: 'p09-13',
       kind: 'logic',
       topic: 'Translating to FOL',
       difficulty: 'advanced',
@@ -264,7 +264,7 @@ export default definePracticeSet({
       },
     },
     {
-      id: 'p08-14',
+      id: 'p09-14',
       kind: 'logic',
       topic: 'Quantifier duality',
       difficulty: 'intermediate',
@@ -279,7 +279,7 @@ export default definePracticeSet({
       },
     },
     {
-      id: 'p08-15',
+      id: 'p09-15',
       kind: 'logic',
       topic: 'Quantifiers',
       difficulty: 'intermediate',
@@ -294,7 +294,7 @@ export default definePracticeSet({
       },
     },
     {
-      id: 'p08-16',
+      id: 'p09-16',
       kind: 'table',
       topic: 'Quantifier order',
       difficulty: 'advanced',

@@ -10,7 +10,7 @@ Prepared by **Ali Feras Alghanim**.
 
 ## Features
 
-- **Chapter library** generated from a validated data registry: 7 chapters, 140 questions.
+- **Chapter library** generated from a validated data registry: 10 chapters, 200 questions.
 - **20-question reviews** per chapter, one question at a time, with a progress bar, `01 / 20`
   counter, previous/next controls and a question map showing answered and open questions.
 - Answers stay editable until submission; a confirmation step appears if questions are
@@ -19,7 +19,7 @@ Prepared by **Ali Feras Alghanim**.
   per-question score ring, and a full review with your answer, the correct answer, an
   explanation and the source slides. A filter shows only missed questions.
 - **Retry** starts a fresh attempt; switching chapters always starts clean.
-- **Written & Practical Review**: a separate chapter-based bank of 96 questions (see below).
+- **Written & Practical Review**: a separate chapter-based bank of 136 questions (see below).
 - **Light and dark themes**: follows the OS on first visit, remembers your choice, and applies
   the theme before first paint (no flash).
 - Accessible: semantic HTML, native radio groups, visible focus, live announcements,
@@ -180,10 +180,13 @@ course materials are tracked by Git.
   slides. Chapters 3 and 4 are numbered from their filenames ("Week 3…", "Topic-4…"). Chapter
   4's title slide reads "Chapter 3: Solving Problems By Searching, Part 2"; that refers to the
   textbook chapter, not the course lecture number.
-- No Topic 6 deck was supplied, so numbering jumps from 5 to 7. *Knowledge Representation* is
-  unnumbered in its PDF and is listed as chapter 8 because Lecture 7 announces first-order logic
-  as the next lecture. Its outline mentions FOL→CNF conversion, but no CNF slides are present,
-  so CNF is not examined.
+- No Topic 6 deck was supplied, so numbering jumps from 5 to 7. *Expert Systems* is chapter 8 by the
+  course owner's choice; its deck carries no number and its filename says "Week 9". *Knowledge
+  Representation* is unnumbered in its PDF and is listed as chapter 9; it was chapter 8 until
+  Expert Systems took that number, so its question ids changed from ch08/p08 to ch09/p09.
+  Its outline mentions FOL→CNF conversion, but no CNF slides are present, so CNF is not examined.
+- Both NLP decks are titled "Lecture 10". They are listed as chapters 10 and 11, labelled
+  "Lecture 10 · Part 1" and "Lecture 10 · Part 2", because each chapter needs its own number.
 - Fonts load from Google Fonts; offline first loads fall back to system fonts.
 
 ## Screenshots

@@ -12,7 +12,10 @@ import searchStrategies from './03-search-strategies';
 import solvingProblemsBySearching from './04-solving-problems-by-searching';
 import informedSearchAlgorithms from './05-informed-search-algorithms';
 import logicalAgents from './07-logical-agents';
-import knowledgeRepresentation from './08-knowledge-representation';
+import expertSystems from './08-expert-systems';
+import knowledgeRepresentation from './09-knowledge-representation';
+import naturalLanguageProcessing1 from './10-natural-language-processing-1';
+import naturalLanguageProcessing2 from './11-natural-language-processing-2';
 
 export const chapterRegistry = [
   introductionToAi,
@@ -21,5 +24,8 @@ export const chapterRegistry = [
   solvingProblemsBySearching,
   informedSearchAlgorithms,
   logicalAgents,
+  expertSystems,
   knowledgeRepresentation,
+  naturalLanguageProcessing1,
+  naturalLanguageProcessing2,
 ] as const;

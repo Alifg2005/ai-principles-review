@@ -2,14 +2,14 @@ import { defineChapter } from '../../lib/schema';
 
 export default defineChapter({
   id: 'knowledge-representation',
-  number: 8,
+  number: 9,
   title: 'Knowledge Representation: First-Order Logic',
   description:
     'Why propositional logic falls short, the building blocks of first-order logic, universal and existential quantifiers, common translation mistakes, quantifier order and duality.',
   source: { label: 'Knowledge Representation' },
   questions: [
     {
-      id: 'ch08-q01',
+      id: 'ch09-q01',
       question: 'What is the main limitation of propositional logic that first-order logic addresses?',
       options: [
         'Propositional logic cannot make general statements about groups of objects, such as "all students take exams"',
@@ -23,7 +23,7 @@ export default defineChapter({
       difficulty: 'foundational',
     },
     {
-      id: 'ch08-q02',
+      id: 'ch09-q02',
       question: 'How does inference in first-order logic compare with inference in propositional logic?',
       options: [
         'FOL inference is easier because it has variables',
@@ -37,7 +37,7 @@ export default defineChapter({
       difficulty: 'foundational',
     },
     {
-      id: 'ch08-q03',
+      id: 'ch09-q03',
       question: 'What distinguishes a function from a predicate in first-order logic?',
       options: [
         'A function is always unary; a predicate is always binary',
@@ -51,7 +51,7 @@ export default defineChapter({
       difficulty: 'foundational',
     },
     {
-      id: 'ch08-q04',
+      id: 'ch09-q04',
       question: 'Which of the following is best modelled as a function rather than a predicate?',
       options: ['Taller(Omar, Ziad)', 'CapitalOf(France)', 'Even(4)', 'Likes(Sara, Tea)'],
       correctAnswerIndex: 1,
@@ -60,7 +60,7 @@ export default defineChapter({
       difficulty: 'intermediate',
     },
     {
-      id: 'ch08-q05',
+      id: 'ch09-q05',
       question: 'Which expression is a binary predicate expressing a relation between two objects?',
       options: ['Male(x)', 'MotherOf(x)', 'Green', 'Brother(x, y)'],
       correctAnswerIndex: 3,
@@ -69,7 +69,7 @@ export default defineChapter({
       difficulty: 'foundational',
     },
     {
-      id: 'ch08-q06',
+      id: 'ch09-q06',
       question: 'Which of the following is a ground term?',
       options: ['Plus(2, 5)', 'F(x)', 'y', 'MotherOf(z)'],
       correctAnswerIndex: 0,
@@ -77,7 +77,7 @@ export default defineChapter({
       difficulty: 'intermediate',
     },
     {
-      id: 'ch08-q07',
+      id: 'ch09-q07',
       question: 'In the formula ∃z Owns(w, z), which variables are free and which are bound?',
       options: [
         'w is bound and z is free',
@@ -90,7 +90,7 @@ export default defineChapter({
       difficulty: 'intermediate',
     },
     {
-      id: 'ch08-q08',
+      id: 'ch09-q08',
       question: 'In this course, a well-formed formula (sentence) in FOL is one that…',
       options: [
         'uses only the ∧ connective',
@@ -105,7 +105,7 @@ export default defineChapter({
       difficulty: 'foundational',
     },
     {
-      id: 'ch08-q09',
+      id: 'ch09-q09',
       question: 'Which FOL sentence correctly expresses "Every pilot is licensed"?',
       options: [
         '∀x Pilot(x) ∧ Licensed(x)',
@@ -119,7 +119,7 @@ export default defineChapter({
       difficulty: 'intermediate',
     },
     {
-      id: 'ch08-q10',
+      id: 'ch09-q10',
       question: 'What does ∀x Chef(x) ∧ Creative(x) actually assert?',
       options: [
         'Every chef is creative',
@@ -133,7 +133,7 @@ export default defineChapter({
       difficulty: 'advanced',
     },
     {
-      id: 'ch08-q11',
+      id: 'ch09-q11',
       question: 'Which sentence correctly expresses "Some cities are coastal"?',
       options: [
         '∀x City(x) ⇒ Coastal(x)',
@@ -147,7 +147,7 @@ export default defineChapter({
       difficulty: 'intermediate',
     },
     {
-      id: 'ch08-q12',
+      id: 'ch09-q12',
       question: 'Why is ∃x City(x) ⇒ Coastal(x) a poor translation of "Some city is coastal"?',
       options: [
         'It is true as soon as anything is not a city, even if no city is coastal',
@@ -161,7 +161,7 @@ export default defineChapter({
       difficulty: 'advanced',
     },
     {
-      id: 'ch08-q13',
+      id: 'ch09-q13',
       question: 'Over a finite domain, a universally quantified sentence is roughly equivalent to…',
       options: [
         'a disjunction of its instances',
@@ -175,7 +175,7 @@ export default defineChapter({
       difficulty: 'intermediate',
     },
     {
-      id: 'ch08-q14',
+      id: 'ch09-q14',
       question: 'Which statement about the order of quantifiers is correct?',
       options: [
         '∀x ∀y is equivalent to ∀y ∀x, but swapping a ∀ with an ∃ changes the meaning',
@@ -189,7 +189,7 @@ export default defineChapter({
       difficulty: 'intermediate',
     },
     {
-      id: 'ch08-q15',
+      id: 'ch09-q15',
       question:
         'Mentors(a, b) means "a mentors b": the first argument is the mentor and the second is the person being mentored. What does ∀x ∃y Mentors(y, x) state?',
       options: [
@@ -204,7 +204,7 @@ export default defineChapter({
       difficulty: 'advanced',
     },
     {
-      id: 'ch08-q16',
+      id: 'ch09-q16',
       question: 'What is the negation of ∀x Likes(x, Coffee)?',
       options: ['∀x ¬Likes(x, Coffee)', '¬∃x Likes(x, Coffee)', '∃x ¬Likes(x, Coffee)', '∃x Likes(x, Coffee)'],
       correctAnswerIndex: 2,
@@ -213,7 +213,7 @@ export default defineChapter({
       difficulty: 'intermediate',
     },
     {
-      id: 'ch08-q17',
+      id: 'ch09-q17',
       question: 'Using quantifier duality, ∃x Likes(x, Tea) is equivalent to…',
       options: ['¬∀x ¬Likes(x, Tea)', '∀x ¬Likes(x, Tea)', '¬∃x ¬Likes(x, Tea)', '∀x Likes(x, Tea)'],
       correctAnswerIndex: 0,
@@ -222,7 +222,7 @@ export default defineChapter({
       difficulty: 'advanced',
     },
     {
-      id: 'ch08-q18',
+      id: 'ch09-q18',
       question: 'Which sentence expresses "No one likes cold soup"?',
       options: [
         '∃x ¬Likes(x, ColdSoup)',
@@ -236,7 +236,7 @@ export default defineChapter({
       difficulty: 'intermediate',
     },
     {
-      id: 'ch08-q19',
+      id: 'ch09-q19',
       question:
         'Translating "Huda sold the car to Faisal" into FOL, which representation follows the objects-and-relations method?',
       options: [
@@ -251,7 +251,7 @@ export default defineChapter({
       difficulty: 'intermediate',
     },
     {
-      id: 'ch08-q20',
+      id: 'ch09-q20',
       question: 'Which sentence states that there is a single song that everyone sings?',
       options: ['∀x ∃y Sings(x, y)', '∀x ∀y Sings(x, y)', '∃x ∃y Sings(x, y)', '∃y ∀x Sings(x, y)'],
       correctAnswerIndex: 3,

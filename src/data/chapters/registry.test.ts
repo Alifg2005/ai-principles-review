@@ -28,8 +28,8 @@ describe('canonical chapter registry', () => {
     expect(new Set(ids).size).toBe(ids.length);
   });
 
-  it('ch08-q15 defines the Mentors argument order and keys the "mentored by" reading', () => {
-    const q = chapters.flatMap((c) => c.questions).find((item) => item.id === 'ch08-q15');
+  it('ch09-q15 defines the Mentors argument order and keys the "mentored by" reading', () => {
+    const q = chapters.flatMap((c) => c.questions).find((item) => item.id === 'ch09-q15');
     expect(q).toBeDefined();
     expect(q!.question).toContain('Mentors(a, b) means "a mentors b"');
     expect(q!.question).toContain('∀x ∃y Mentors(y, x)');
@@ -39,13 +39,28 @@ describe('canonical chapter registry', () => {
     expect(q!.explanation).toMatch(/y is the mentor and x is the one mentored/);
   });
 
+  it('registers the new chapters once each, with their numbers and titles', () => {
+    const find = (id: string) => chapters.filter((c) => c.id === id);
+    const expected: [string, number, string, string][] = [
+      ['expert-systems', 8, 'Expert Systems', 'Topic 8'],
+      ['knowledge-representation', 9, 'Knowledge Representation: First-Order Logic', 'Knowledge Representation'],
+      ['natural-language-processing-1', 10, 'Natural Language Processing (Part 1)', 'Lecture 10 · Part 1'],
+      ['natural-language-processing-2', 11, 'Natural Language Processing (Part 2)', 'Lecture 10 · Part 2'],
+    ];
+    for (const [id, number, title, label] of expected) {
+      expect(find(id), id).toHaveLength(1);
+      expect(find(id)[0]).toMatchObject({ number, title, source: { label } });
+    }
+    expect(chapters.map((c) => c.number)).toEqual([1, 2, 3, 4, 5, 7, 8, 9, 10, 11]);
+  });
+
   it('keeps the questions that gained a clarification unchanged', () => {
     const all = chapters.flatMap((c) => c.questions);
     const q14 = all.find((item) => item.id === 'ch05-q14')!;
     expect(q14.question).toBe('In the standard summary of A* properties, when is A* optimal?');
     expect(q14.options[q14.correctAnswerIndex]).toBe('When an admissible heuristic is used');
     expect(q14.correctAnswerIndex).toBe(3);
-    const q08 = all.find((item) => item.id === 'ch08-q08')!;
+    const q08 = all.find((item) => item.id === 'ch09-q08')!;
     expect(q08.question).toBe('In this course, a well-formed formula (sentence) in FOL is one that…');
     expect(q08.options[q08.correctAnswerIndex]).toBe('contains no free variables');
     expect(q08.correctAnswerIndex).toBe(2);
@@ -79,7 +94,7 @@ describe('canonical chapter registry', () => {
 
   it('adds clarifications only to the intended questions', () => {
     const ids = chapters.flatMap((c) => c.questions).filter((q) => q.clarification).map((q) => q.id);
-    expect(ids.sort()).toEqual(['ch05-q14', 'ch05-q18', 'ch08-q08']);
+    expect(ids.sort()).toEqual(['ch05-q14', 'ch05-q18', 'ch09-q08']);
   });
 
   it('clarifies A* conditions and the wff convention without implying otherwise', () => {
@@ -88,7 +103,7 @@ describe('canonical chapter registry', () => {
       expect(clarification('ch05-q14')).toContain(phrase);
     }
     for (const phrase of ['stricter convention', 'use that answer here', 'closed formula', 'free variables']) {
-      expect(clarification('ch08-q08')).toContain(phrase);
+      expect(clarification('ch09-q08')).toContain(phrase);
     }
   });
 
@@ -127,7 +142,7 @@ describe('canonical chapter registry', () => {
     it('ships no source metadata', () => {
       expect(Object.keys(chapter.source)).toEqual(['label']);
       for (const q of chapter.questions) expect(q).not.toHaveProperty('sourceReference');
-      expect(JSON.stringify(chapter)).not.toMatch(/\.pdf|\bslides?\b|extraction/i);
+      expect(JSON.stringify(chapter)).not.toMatch(/\.pdf|\bslides?\b|text extraction/i);
     });
   });
 });
